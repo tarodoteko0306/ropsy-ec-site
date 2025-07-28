@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ご注文フォーム - カリウムfor Beauty | &ROPSY</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        .gradient-blue { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
+        .form-container { max-width: 600px; margin: 0 auto; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-blue-600">&ROPSY</h1>
+                    <span class="ml-3 text-sm text-gray-600">公式サイト</span>
+                </div>
+                <a href="index.html" class="text-blue-600 hover:text-blue-800">
+                    <i class="fas fa-arrow-left mr-2"></i>戻る
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="py-12">
+        <div class="form-container px-4">
+            <!-- Product Summary -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 text-center">ご注文フォーム</h2>
+                <div class="border-b pb-4 mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">カリウム for Beauty</h3>
+                    <p class="text-gray-600">女性の美と健康をサポートするサプリメント</p>
+                </div>
+                
+                <!-- Product Options -->
+                <div class="space-y-4 mb-6">
+                    <div class="border rounded-lg p-4">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="product" value="single" class="mr-3" checked>
+                            <div class="flex-1">
+                                <div class="font-bold">単品購入</div>
+                                <div class="text-2xl font-bold text-gray-900">¥1,600 <span class="text-sm text-gray-600">(税込)</span></div>
+                                <div class="text-sm text-gray-500">送料別途500円</div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div class="border rounded-lg p-4 border-blue-500 bg-blue-50">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="product" value="double" class="mr-3">
+                            <div class="flex-1">
+                                <div class="font-bold flex items-center">
+                                    2個セット 
+                                    <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-xs ml-2">10%OFF</span>
+                                </div>
+                                <div class="text-2xl font-bold text-blue-600">¥2,880 <span class="text-sm text-gray-600">(税込)</span></div>
+                                <div class="text-sm text-gray-500">送料無料</div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div class="border rounded-lg p-4">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="product" value="triple" class="mr-3">
+                            <div class="flex-1">
+                                <div class="font-bold flex items-center">
+                                    3個セット 
+                                    <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs ml-2">15%OFF</span>
+                                </div>
+                                <div class="text-2xl font-bold text-red-600">¥4,080 <span class="text-sm text-gray-600">(税込)</span></div>
+                                <div class="text-sm text-gray-500">送料無料</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Form -->
+            <form id="orderForm" class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-900 mb-6">お客様情報</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">お名前 <span class="text-red-500">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                               placeholder="山田">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">　 <span class="text-red-500">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                               placeholder="太郎">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">フリガナ（姓） <span class="text-red-500">*</span></label>
+                        <input type="text" id="lastNameKana" name="lastNameKana" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                               placeholder="ヤマダ">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">フリガナ（名） <span class="text-red-500">*</span></label>
+                        <input type="text" id="firstNameKana" name="firstNameKana" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                               placeholder="タロウ">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
+                    <input type="email" id="email" name="email" required 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                           placeholder="example@email.com">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">電話番号 <span class="text-red-500">*</span></label>
+                    <input type="tel" id="phone" name="phone" required 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                           placeholder="090-1234-5678">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">郵便番号 <span class="text-red-500">*</span></label>
+                    <input type="text" id="zipCode" name="zipCode" required 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                           placeholder="123-4567" maxlength="8">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">都道府県 <span class="text-red-500">*</span></label>
+                    <select id="prefecture" name="prefecture" required 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                        <option value="">選択してください</option>
+                        <option value="北海道">北海道</option>
+                        <option value="青森県">青森県</option>
+                        <option value="岩手県">岩手県</option>
+                        <option value="宮城県">宮城県</option>
+                        <option value="秋田県">秋田県</option>
+                        <option value="山形県">山形県</option>
+                        <option value="福島県">福島県</option>
+                        <option value="茨城県">茨城県</option>
+                        <option value="栃木県">栃木県</option>
+                        <option value="群馬県">群馬県</option>
+                        <option value="埼玉県">埼玉県</option>
+                        <option value="千葉県">千葉県</option>
+                        <option value="東京都">東京都</option>
+                        <option value="神奈川県">神奈川県</option>
+                        <option value="新潟県">新潟県</option>
+                        <option value="富山県">富山県</option>
+                        <option value="石川県">石川県</option>
+                        <option value="福井県">福井県</option>
+                        <option value="山梨県">山梨県</option>
+                        <option value="長野県">長野県</option>
+                        <option value="岐阜県">岐阜県</option>
+                        <option value="静岡県">静岡県</option>
+                        <option value="愛知県">愛知県</option>
+                        <option value="三重県">三重県</option>
+                        <option value="滋賀県">滋賀県</option>
+                        <option value="京都府">京都府</option>
+                        <option value="大阪府">大阪府</option>
+                        <option value="兵庫県">兵庫県</option>
+                        <option value="奈良県">奈良県</option>
+                        <option value="和歌山県">和歌山県</option>
+                        <option value="鳥取県">鳥取県</option>
+                        <option value="島根県">島根県</option>
+                        <option value="岡山県">岡山県</option>
+                        <option value="広島県">広島県</option>
+                        <option value="山口県">山口県</option>
+                        <option value="徳島県">徳島県</option>
+                        <option value="香川県">香川県</option>
+                        <option value="愛媛県">愛媛県</option>
+                        <option value="高知県">高知県</option>
+                        <option value="福岡県">福岡県</option>
+                        <option value="佐賀県">佐賀県</option>
+                        <option value="長崎県">長崎県</option>
+                        <option value="熊本県">熊本県</option>
+                        <option value="大分県">大分県</option>
+                        <option value="宮崎県">宮崎県</option>
+                        <option value="鹿児島県">鹿児島県</option>
+                        <option value="沖縄県">沖縄県</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">市区町村 <span class="text-red-500">*</span></label>
+                    <input type="text" id="city" name="city" required 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                           placeholder="新宿区">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">番地・建物名 <span class="text-red-500">*</span></label>
+                    <input type="text" id="address" name="address" required 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                           placeholder="1-1-1 ○○マンション101">
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">ご要望・お問い合わせ</label>
+                    <textarea id="message" name="message" rows="4" 
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                              placeholder="ご質問やご要望がございましたらお聞かせください"></textarea>
+                </div>
+
+                <div class="mb-6">
+                    <label class="flex items-start cursor-pointer">
+                        <input type="checkbox" id="agreement" name="agreement" required class="mt-1 mr-3">
+                        <span class="text-sm text-gray-700">
+                            <a href="#" class="text-blue-600 underline">プライバシーポリシー</a>および
+                            <a href="#" class="text-blue-600 underline">利用規約</a>に同意します <span class="text-red-500">*</span>
+                        </span>
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full gradient-blue text-white py-4 rounded-lg text-lg font-bold hover:opacity-90 transition-opacity">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    注文を送信する
+                </button>
+
+                <p class="text-sm text-gray-600 text-center mt-4">
+                    送信後、24時間以内にお支払い方法をご案内いたします
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Form submission handling
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const selectedProduct = document.querySelector('input[name="product"]:checked').value;
+            
+            // Show loading
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>送信中...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission (replace with actual endpoint later)
+            setTimeout(() => {
+                alert('ご注文を承りました！\n24時間以内にお支払い方法をメールでご案内いたします。');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                this.reset();
+            }, 2000);
+        });
+
+        // Product selection handling
+        document.querySelectorAll('input[name="product"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Update styling for selected product
+                document.querySelectorAll('input[name="product"]').forEach(r => {
+                    const container = r.closest('.border');
+                    container.classList.remove('border-blue-500', 'bg-blue-50');
+                });
+                
+                if (this.checked) {
+                    const container = this.closest('.border');
+                    container.classList.add('border-blue-500', 'bg-blue-50');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
