@@ -12,7 +12,7 @@
         .gradient-blue { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
         .form-container { max-width: 600px; margin: 0 auto; }
     </style>
-</head>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script></head>
 <body class="bg-gray-50">
     <!-- Header -->
     <header class="bg-white shadow-md">
@@ -277,3 +277,87 @@
     </script>
 </body>
 </html>
+
+    <script src="email-handler.js"></script>
+    <script>
+        // フォーム送信の元々の処理を更新
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // フォームデータ取得
+            const formData = new FormData(this);
+            
+            // バリデーション
+            if (!formData.get('agreement')) {
+                alert('プライバシーポリシーおよび利用規約への同意が必要です。');
+                return;
+            }
+            
+            // ローディング表示
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>送信中...';
+            submitBtn.disabled = true;
+            
+            // 一時的にローカル処理（EmailJS設定前）
+            setTimeout(() => {
+                // 成功処理
+                handleOrderSuccess();
+            }, 2000);
+            
+            // EmailJS実装後は以下のコードを使用
+            /*
+            sendOrder(formData)
+                .then(() => {
+                    handleOrderSuccess();
+                })
+                .catch((error) => {
+                    handleOrderError(error);
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+            */
+        });
+    </script>
+
+    <script src="email-handler.js"></script>
+    <script>
+        // フォーム送信の元々の処理を更新
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // フォームデータ取得
+            const formData = new FormData(this);
+            
+            // バリデーション
+            if (!formData.get('agreement')) {
+                alert('プライバシーポリシーおよび利用規約への同意が必要です。');
+                return;
+            }
+            
+            // ローディング表示
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>送信中...';
+            submitBtn.disabled = true;
+            
+            // 一時的にローカル処理（EmailJS設定前）
+            setTimeout(() => {
+                // 成功処理
+                handleOrderSuccess();
+            }, 2000);
+            
+            // EmailJS実装後は以下のコードを使用
+            /*
+            sendOrder(formData)
+                .then(() => {
+                    handleOrderSuccess();
+                })
+                .catch((error) => {
+                    handleOrderError(error);
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+            */
+        });
+    </script>
