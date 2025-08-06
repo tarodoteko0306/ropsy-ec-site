@@ -321,28 +321,28 @@
             <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg p-8">
                 <h4 class="text-2xl font-bold text-center text-gray-900 mb-6">女性に嬉しい美容成分</h4>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
-                    <div class="text-center">
+                    <div class="usage-image-container">
                         <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/ec92a396-1862-4551-b96b-e89f780708d3" 
                              alt="プラセンタ" 
                              class="w-24 h-24 mx-auto mb-3 rounded-full object-cover">
                         <h5 class="font-bold text-gray-900 text-base">プラセンタ</h5>
                         <p class="text-sm text-gray-600">女性に人気の注目成分</p>
                     </div>
-                    <div class="text-center">
+                    <div class="usage-image-container">
                         <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/32973771-94ee-43af-99b1-0b565740d413" 
                              alt="ヒアルロン酸" 
                              class="w-24 h-24 mx-auto mb-3 rounded-full object-cover">
                         <h5 class="font-bold text-gray-900 text-base">ヒアルロン酸</h5>
                         <p class="text-sm text-gray-600">うるおいをサポート</p>
                     </div>
-                    <div class="text-center">
+                    <div class="usage-image-container">
                         <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/25be2846-b612-4c2e-97ea-b299f346704d" 
                              alt="コラーゲン" 
                              class="w-24 h-24 mx-auto mb-3 rounded-full object-cover">
                         <h5 class="font-bold text-gray-900 text-base">コラーゲン</h5>
                         <p class="text-sm text-gray-600">美容ケアをサポート</p>
                     </div>
-                    <div class="text-center">
+                    <div class="usage-image-container">
                         <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/3c48c683-9b7a-4a39-ac7c-843ea37f6bf9" 
                              alt="マカ" 
                              class="w-24 h-24 mx-auto mb-3 rounded-full object-cover">
@@ -361,9 +361,10 @@
     </section>
 
     <!-- Usage Scene -->
+    <div class="usage-section">
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div class="usage-card p-8">
                     <div class="usage-content">
                         <h4 class="usage-title">
@@ -409,7 +410,7 @@
                         </div>
                         
                         <div class="continuity-note">
-                            <p class="text-lg font-medium flex items-center">
+                            <p class="continuity-text">
                                 <i class="fas fa-lightbulb mr-3 text-yellow-300"></i>
                                 継続することで、より実感していただけます
                             </p>
@@ -417,7 +418,7 @@
                     </div>
                 </div>
                 
-                <div class="text-center">
+                <div class="usage-image-container">
                     <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/cea50ef9-14cb-4531-b831-83bf1c20aa43" 
                          alt="サプリメント摂取シーン" 
                          class="w-full max-w-md mx-auto rounded-2xl box-shadow-lg">
