@@ -81,7 +81,7 @@
     <section class="py-12 gradient-bg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8">
-                <h3 class="text-3xl font-bold text-gray-900 mb-4">現代女性はカリウム不足になりがち</h3>
+                <h3 class="text-3xl section-title mb-4">現代女性はカリウム不足になりがち</h3>
                 <p class="text-lg text-gray-600 mb-6">忙しい毎日で偏りがちな食生活が影響しています</p>
             </div>
 
@@ -143,7 +143,7 @@
     <!-- Hero Section with Product -->
     <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start product-section-grid">
                 <!-- Product Image -->
                 <div class="text-center lg:text-left">
                     <div class="relative inline-block">
@@ -274,7 +274,7 @@
     <section class="py-12 gradient-bg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
-                <h3 class="text-3xl font-bold text-gray-900 mb-4">厳選された配合成分</h3>
+                <h3 class="text-3xl section-title mb-4">厳選された配合成分</h3>
                 <p class="text-lg text-gray-600">女性の美と健康をサポートする成分を贅沢に配合</p>
             </div>
 
@@ -430,7 +430,7 @@
     <section class="py-12 gradient-bg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
-                <h3 class="text-3xl font-bold text-gray-900 mb-4">お得な購入プラン</h3>
+                <h3 class="text-3xl section-title mb-4">お得な購入プラン</h3>
                 <p class="text-lg text-gray-600">継続してお使いいただくことで、より実感していただけます</p>
             </div>
 
@@ -439,7 +439,7 @@
                 <div class="bg-white rounded-lg p-6 box-shadow-lg text-center h-full flex flex-col">
                     <h4 class="text-xl font-bold text-gray-900 mb-4">単品購入</h4>
                     <div class="mb-4 flex-grow">
-                        <span class="text-3xl font-bold text-gray-900">¥1,600</span>
+                        <span class="text-3xl section-title">¥1,600</span>
                         <span class="text-gray-600 ml-2">（税込）</span>
                     </div>
                     <p class="text-gray-600 mb-6">送料別途500円</p>
@@ -505,7 +505,7 @@
     <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
-                <h3 class="text-3xl font-bold text-gray-900 mb-4">お客様の声</h3>
+                <h3 class="text-3xl section-title mb-4">お客様の声</h3>
                 <p class="text-lg text-gray-600">実際にご利用いただいているお客様からのお声をご紹介</p>
             </div>
 
@@ -559,7 +559,7 @@
     <section class="py-12 gradient-bg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
-                <h3 class="text-3xl font-bold text-gray-900 mb-4">安心・安全への取り組み</h3>
+                <h3 class="text-3xl section-title mb-4">安心・安全への取り組み</h3>
                 <p class="text-lg text-gray-600">お客様に安心してお使いいただけるよう、徹底した品質管理を行っています</p>
             </div>
 
@@ -595,7 +595,7 @@
     <section class="py-12 bg-white">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
-                <h3 class="text-3xl font-bold text-gray-900 mb-4">よくあるご質問</h3>
+                <h3 class="text-3xl section-title mb-4">よくあるご質問</h3>
             </div>
 
             <div class="space-y-4">

@@ -190,3 +190,17 @@ body {
     transform: translateY(-10px);
     box-shadow: 0 30px 60px rgba(102, 126, 234, 0.15);
 }
+
+/* Fix product image section balance - minimal change */
+@media (min-width: 1024px) {
+    .product-section-grid {
+        align-items: center;
+    }
+    
+    .product-image-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+    }
+}
