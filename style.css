@@ -345,3 +345,147 @@ body {
         font-size: 1.1rem;
     }
 }
+
+/* Beauty Ingredients Section - Design Consistency */
+.beauty-ingredients-section {
+    background: linear-gradient(135deg, #ffeef8 0%, #f0f9ff 50%, #f8fafc 100%);
+    padding: 4rem 0;
+}
+
+.beauty-section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: var(--secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.beauty-ingredients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.beauty-ingredient-card {
+    background: linear-gradient(135deg, #ffffff 0%, #fef9d7 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+}
+
+.beauty-ingredient-card:hover {
+    transform: translateY(-8px);
+    border-color: #f093fb;
+    box-shadow: 0 25px 50px rgba(240, 147, 251, 0.2);
+}
+
+.beauty-ingredient-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.beauty-ingredient-card:hover .beauty-ingredient-icon {
+    transform: scale(1.1);
+}
+
+.beauty-ingredient-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+    background: var(--primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.beauty-ingredient-description {
+    font-size: 1rem;
+    color: #6b7280;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.beauty-summary {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    margin-top: 3rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.beauty-summary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(240, 147, 251, 0.05) 0%, rgba(79, 172, 254, 0.05) 100%);
+    opacity: 0.5;
+}
+
+.beauty-summary-content {
+    position: relative;
+    z-index: 2;
+}
+
+.beauty-summary-icon {
+    font-size: 2rem;
+    background: var(--secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-right: 1rem;
+}
+
+.beauty-summary-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #374151;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .beauty-section-title {
+        font-size: 2rem;
+    }
+    
+    .beauty-ingredients-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .beauty-ingredient-card {
+        padding: 1.5rem;
+    }
+    
+    .beauty-ingredient-name {
+        font-size: 1.25rem;
+    }
+    
+    .beauty-summary {
+        padding: 2rem;
+    }
+    
+    .beauty-summary-text {
+        font-size: 1.1rem;
+    }
+}
