@@ -1,0 +1,192 @@
+/* Beautiful Modern Color Palette */
+:root {
+    --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --cool: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    --sunset: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+    --ocean: linear-gradient(135deg, #667db6 0%, #0082c8 100%);
+    --forest: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.7;
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, #ffeef8 0%, #f0f9ff 50%, #f8fafc 100%);
+}
+
+.gradient-blue {
+    background: var(--primary);
+}
+
+.gradient-gold {
+    background: var(--warm);
+}
+
+.text-shadow {
+    text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.box-shadow-lg {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.hover-scale {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
+}
+
+.pulse-animation {
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+}
+
+.worry-card {
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, #ffffff 0%, #fef9d7 100%);
+    border-radius: 20px;
+}
+
+.worry-card:hover {
+    border-color: #f093fb;
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(240, 147, 251, 0.2);
+}
+
+.ingredient-card {
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+    border-radius: 20px;
+}
+
+.ingredient-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(79, 172, 254, 0.2);
+}
+
+.product-image-cutout {
+    background: linear-gradient(135deg, #ffffff 0%, #fef9d7 50%, #f0f9ff 100%);
+    border-radius: 30px;
+    padding: 2rem;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+}
+
+.feature-badge {
+    background: var(--secondary);
+    border-radius: 25px;
+    padding: 0.7rem 1.4rem;
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+    display: inline-block;
+    margin: 0.3rem;
+    box-shadow: 0 10px 20px rgba(240, 147, 251, 0.3);
+    transition: all 0.3s ease;
+}
+
+.feature-badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(240, 147, 251, 0.4);
+}
+
+.trust-badge {
+    background: var(--accent);
+    border-radius: 20px;
+    padding: 0.8rem 1.4rem;
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    margin: 0.3rem;
+    box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+    transition: all 0.3s ease;
+}
+
+.benefit-card {
+    background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+    border-radius: 15px;
+    padding: 1.4rem;
+    margin: 0.6rem 0;
+    border-left: 6px solid #667eea;
+    transition: all 0.4s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+}
+
+.benefit-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+}
+
+.stats-number {
+    background: var(--primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+}
+
+.section-title {
+    background: var(--primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+}
+
+.btn-primary {
+    background: var(--primary);
+    border: none;
+    border-radius: 15px;
+    padding: 1.2rem 2.5rem;
+    color: white;
+    font-weight: 600;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+}
+
+.review-card {
+    background: linear-gradient(135deg, #ffffff 0%, #fef9d7 100%);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+.quality-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+    border-radius: 20px;
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+}
+
+.quality-card:hover {
+    border-color: #667eea;
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(102, 126, 234, 0.15);
+}
