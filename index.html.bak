@@ -145,7 +145,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start product-section-grid">
                 <!-- Product Image -->
-                <div class="text-center lg:text-left">
+                <div class="text-center lg:text-left product-image-container">
                     <div class="relative inline-block">
                         <div class="product-image-cutout">
                             <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
@@ -208,19 +208,19 @@
                         <div class="benefit-card">
                             <div class="flex items-center">
                                 <i class="fas fa-heart text-red-500 mr-3"></i>
-                                <span class="font-medium">健康的な毎日をサポート</span>
+                                <span class="step-text">健康的な毎日をサポート</span>
                             </div>
                         </div>
                         <div class="benefit-card">
                             <div class="flex items-center">
                                 <i class="fas fa-sparkles text-purple-500 mr-3"></i>
-                                <span class="font-medium">美容面でのコンディション維持</span>
+                                <span class="step-text">美容面でのコンディション維持</span>
                             </div>
                         </div>
                         <div class="benefit-card">
                             <div class="flex items-center">
                                 <i class="fas fa-balance-scale text-blue-500 mr-3"></i>
-                                <span class="font-medium">体内バランスをサポート</span>
+                                <span class="step-text">体内バランスをサポート</span>
                             </div>
                         </div>
                     </div>
@@ -364,51 +364,51 @@
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="usage-card p-8 text-white relative z-10">
-                    <div class="relative z-10">
-                        <h4 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                <div class="usage-card p-8">
+                    <div class="usage-content">
+                        <h4 class="usage-title">
                             毎朝の<br>
                             <span class="text-yellow-300">習慣</span>に
                         </h4>
-                        <div class="space-y-6 mb-8">
-                            <div class="flex items-center text-xl">
-                                <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <div class="mb-8">
+                            <div class="usage-step">
+                                <div class="step-icon bg-yellow-400">
                                     <i class="fas fa-pills text-purple-800 text-lg"></i>
                                 </div>
-                                <span class="font-medium">1日6粒を目安に</span>
+                                <span class="step-text">1日6粒を目安に</span>
                             </div>
-                            <div class="flex items-center text-xl">
-                                <div class="w-12 h-12 bg-blue-300 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <div class="usage-step">
+                                <div class="step-icon bg-blue-300">
                                     <i class="fas fa-tint text-blue-800 text-lg"></i>
                                 </div>
-                                <span class="font-medium">水またはぬるま湯と一緒に</span>
+                                <span class="step-text">水またはぬるま湯と一緒に</span>
                             </div>
-                            <div class="flex items-center text-xl">
-                                <div class="w-12 h-12 bg-green-300 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                            <div class="usage-step">
+                                <div class="step-icon bg-green-300">
                                     <i class="fas fa-calendar-check text-green-800 text-lg"></i>
                                 </div>
-                                <span class="font-medium">毎日続けることが大切</span>
+                                <span class="step-text">毎日続けることが大切</span>
                             </div>
                         </div>
                         
-                        <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-6 mb-6">
-                            <h5 class="text-2xl font-bold mb-4 text-yellow-300">
+                        <div class="timing-section">
+                            <h5 class="timing-title text-yellow-300">
                                 <i class="fas fa-clock mr-2"></i>
                                 おすすめタイミング
                             </h5>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="flex items-center text-lg">
+                            <div class="timing-grid">
+                                <div class="timing-item">
                                     <i class="fas fa-sun mr-3 text-yellow-300"></i>
                                     <span>朝食後に3粒</span>
                                 </div>
-                                <div class="flex items-center text-lg">
+                                <div class="timing-item">
                                     <i class="fas fa-moon mr-3 text-blue-300"></i>
                                     <span>夕食後に3粒</span>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="bg-yellow-400 bg-opacity-20 backdrop-blur-sm rounded-xl p-4">
+                        <div class="continuity-note">
                             <p class="text-lg font-medium flex items-center">
                                 <i class="fas fa-lightbulb mr-3 text-yellow-300"></i>
                                 継続することで、より実感していただけます
