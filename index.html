@@ -8,7 +8,1159 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Modern Supplement LP - Beautiful Color Palette */
+        :root {
+            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        /* Header */
+        .header-gradient {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .brand-gradient {
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #fefce8 100%);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            color: #1f2937;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .highlight-text {
+            background: var(--secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .badge {
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .badge-gold {
+            background: var(--warm);
+        }
+
+        .badge-blue {
+            background: var(--accent);
+        }
+
+        /* Problem Section */
+        .problem-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fef9d7 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            height: 100%;
+        }
+
+        .problem-card:hover {
+            border-color: #f093fb;
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(240, 147, 251, 0.2);
+        }
+
+        .problem-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .problem-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+
+        .problem-text {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fef7ff 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .info-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            color: #374151;
+        }
+
+        .info-list i {
+            margin-right: 0.75rem;
+            margin-top: 0.125rem;
+            font-size: 0.9rem;
+        }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .conclusion-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 1rem;
+        }
+
+        .conclusion-text {
+            font-size: 1.1rem;
+            color: #78350f;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Product Section */
+        .product-section {
+            min-height: 700px;
+        }
+
+        .product-image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            position: relative;
+            min-height: 600px;
+        }
+
+        .main-product-image {
+            max-width: 100%;
+            max-height: 500px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4);
+            z-index: 10;
+        }
+
+        /* Right Side Carousel */
+        .info-carousel-container {
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-carousel-wrapper {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .info-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.6s ease-in-out;
+            padding: 2.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .info-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-header {
+            margin-bottom: 2rem;
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .slide-subtitle {
+            font-size: 1.1rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .slide-content {
+            flex: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.25rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .benefits-list, .features-list {
+            space-y: 1rem;
+        }
+
+        .benefit-item, .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.75rem;
+        }
+
+        .benefit-item i, .feature-item i {
+            margin-right: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .target-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .target-tag {
+            background: var(--secondary);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(240, 147, 251, 0.2);
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .ingredient-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .ingredient-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .ingredient-info h5 {
+            font-weight: 700;
+            color: #374151;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .ingredient-info p {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .usage-steps {
+            margin-top: 1.5rem;
+        }
+
+        .usage-step {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.25rem;
+            color: white;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .step-yellow {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        }
+
+        .step-blue {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+        }
+
+        .step-green {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+        }
+
+        .step-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .cta-section-slide {
+            margin-top: 2rem;
+        }
+
+        .cta-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 1.25rem 2rem;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .cta-primary i {
+            margin-right: 0.75rem;
+        }
+
+        /* Carousel Navigation */
+        .carousel-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .nav-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 18px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+        }
+
+        .slide-indicator {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        /* Ingredients Section */
+        .ingredients-section {
+            background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #fefce8 100%);
+        }
+
+        .ingredient-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fef9d7 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            height: 100%;
+        }
+
+        .ingredient-card:hover {
+            border-color: #4facfe;
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(79, 172, 254, 0.2);
+        }
+
+        .ingredient-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .ingredient-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredient-amount {
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: var(--accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredient-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .beauty-ingredients {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .beauty-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .beauty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .beauty-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .beauty-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.9);
+        }
+
+        .beauty-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+        }
+
+        .beauty-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .beauty-desc {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .product-section {
+                min-height: auto;
+            }
+            
+            .product-image-container, .info-carousel-container {
+                min-height: 400px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ingredients-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.25rem;
+            }
+            
+            .slide-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .info-slide {
+                padding: 1.5rem;
+            }
+            
+            .target-tags {
+                justify-content: center;
+            }
+        }
+
+        /* Usage Section */
+        .usage-section {
+            background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #fefce8 100%);
+        }
+
+        .usage-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .usage-content {
+            color: #374151;
+        }
+
+        .usage-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .usage-highlight {
+            background: var(--warm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .usage-image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+        }
+
+        .usage-image {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Other existing styles remain the same... */
+        .pricing-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.popular {
+            border-color: #667eea;
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
+        }
+
+        .popular-badge, .discount-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .discount-badge {
+            background: var(--secondary);
+        }
+
+        .pricing-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-old {
+            text-decoration: line-through;
+            color: #9ca3af;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            margin-bottom: 1rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .price-amount {
+            font-size: 2.25rem;
+            font-weight: 900;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .price-tax {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+
+        .pricing-note {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-button {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: auto;
+        }
+
+        .btn-basic {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-basic:hover {
+            background: #4b5563;
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .subscription-card {
+            background: var(--primary);
+            color: white;
+            border-radius: 25px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .subscription-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .subscription-desc {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .subscription-price {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .sub-amount {
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .sub-discount {
+            background: #fbbf24;
+            color: #92400e;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .subscription-button {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .subscription-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        /* Review Cards */
+        .review-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fef9d7 100%);
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer {
+            font-size: 0.85rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .review-text {
+            color: #374151;
+            font-style: italic;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Quality Cards */
+        .quality-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            height: 100%;
+        }
+
+        .quality-card:hover {
+            border-color: #667eea;
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.15);
+        }
+
+        .quality-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .quality-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .quality-text {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: linear-gradient(135deg, #ffffff 0%, #ffeef8 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border-left: 5px solid #f093fb;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.1);
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-answer {
+            color: #374151;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Final CTA */
+        .cta-section {
+            background: var(--primary);
+            color: white;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-main {
+            background: white;
+            color: #667eea;
+            padding: 1.25rem 3rem;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .cta-main i {
+            margin-right: 0.75rem;
+        }
+
+        .timing-box {
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+
+        .timing-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #374151;
+            display: flex;
+            align-items: center;
+        }
+
+        .timing-title i {
+            margin-right: 0.5rem;
+            color: #f59e0b;
+        }
+
+        .timing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .timing-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255,255,255,0.6);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .timing-item i {
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .continuity-note {
+            background: rgba(254, 240, 138, 0.4);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #374151;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .continuity-note i {
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -21,8 +1173,8 @@
                 </div>
                 <div class="flex items-center space-x-4">
                     <span class="text-sm text-gray-600">
-                        <i class="fas fa-phone mr-1"></i>
-                        お客様相談室: 0120-XXX-XXX
+                        <i class="fas fa-shield-check mr-1"></i>
+                        安心・安全の品質保証
                     </span>
                 </div>
             </div>
@@ -147,165 +1299,275 @@
         </div>
     </section>
 
-    <!-- Product Section with Carousel -->
-    <section class="py-16 bg-white">
+    <!-- Enhanced Product Section -->
+    <section class="product-section py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
-                <!-- Image Carousel -->
-                <div class="product-carousel-container">
-                    <div class="carousel-wrapper">
-                        <div class="carousel-item active">
-                            <div class="product-image-frame">
-                                <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
-                                     alt="カリウムfor Beauty商品画像" class="product-image">
-                                <div class="product-badge">人気No.1</div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="quality-highlight-card">
-                                <h5 class="quality-title">品質へのこだわり</h5>
-                                <div class="quality-items">
-                                    <div class="quality-item">
-                                        <i class="fas fa-certificate text-blue-500"></i>
-                                        <span>国内GMP認定工場製造</span>
-                                    </div>
-                                    <div class="quality-item">
-                                        <i class="fas fa-shield-alt text-green-500"></i>
-                                        <span>第三者機関検査済み</span>
-                                    </div>
-                                    <div class="quality-item">
-                                        <i class="fas fa-leaf text-emerald-500"></i>
-                                        <span>厳選原材料使用</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="customer-voice-card">
-                                <h5 class="voice-title">お客様の声</h5>
-                                <div class="voice-content">
-                                    <div class="stars">
-                                        <i class="fas fa-star text-yellow-400"></i>
-                                        <i class="fas fa-star text-yellow-400"></i>
-                                        <i class="fas fa-star text-yellow-400"></i>
-                                        <i class="fas fa-star text-yellow-400"></i>
-                                        <i class="fas fa-star text-yellow-400"></i>
-                                    </div>
-                                    <p class="voice-text">"体調の変化を実感でき、毎日続けやすいです。"</p>
-                                    <span class="voice-author">30代女性</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="carousel-controls">
-                        <button class="carousel-btn active" onclick="showSlide(0)"></button>
-                        <button class="carousel-btn" onclick="showSlide(1)"></button>
-                        <button class="carousel-btn" onclick="showSlide(2)"></button>
-                    </div>
+                <!-- Large Product Image -->
+                <div class="product-image-container">
+                    <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
+                         alt="カリウムfor Beauty商品画像" class="main-product-image">
+                    <div class="product-badge">人気No.1</div>
                 </div>
                 
-                <!-- Product Info -->
-                <div class="product-info-container">
-                    <div class="product-header">
-                        <h2 class="product-title">
-                            カリウム<span class="brand-gradient">for Beauty</span>
-                        </h2>
-                        <div class="product-badges">
-                            <span class="badge badge-gold">
-                                <i class="fas fa-star"></i>
-                                NMN・ビタミンC配合
-                            </span>
-                            <span class="badge badge-blue">
-                                <i class="fas fa-certificate"></i>
-                                栄養機能食品
-                            </span>
+                <!-- Right Side Carousel -->
+                <div class="info-carousel-container">
+                    <div class="info-carousel-wrapper">
+                        <!-- Slide 1: 基本情報 -->
+                        <div class="info-slide active">
+                            <div class="slide-header">
+                                <h2 class="slide-title">
+                                    カリウム<span class="brand-gradient">for Beauty</span>
+                                </h2>
+                                <p class="slide-subtitle">女性の美と健康をサポートする15種類の厳選成分配合</p>
+                            </div>
+                            
+                            <div class="slide-content">
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <div class="stat-number">15</div>
+                                        <div class="stat-label">種類の成分</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-number">1,320</div>
+                                        <div class="stat-label">mgカリウム</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-number">121</div>
+                                        <div class="stat-label">種類の野菜酵素</div>
+                                    </div>
+                                </div>
+
+                                <div class="benefits-list">
+                                    <div class="benefit-item">
+                                        <i class="fas fa-heart text-red-500"></i>
+                                        <span>健康的な毎日をサポート</span>
+                                    </div>
+                                    <div class="benefit-item">
+                                        <i class="fas fa-sparkles text-purple-500"></i>
+                                        <span>美容面でのコンディション維持</span>
+                                    </div>
+                                    <div class="benefit-item">
+                                        <i class="fas fa-balance-scale text-blue-500"></i>
+                                        <span>体内バランスをサポート</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cta-section-slide">
+                                <a href="order.html" class="cta-primary">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    今すぐ注文する
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: 成分情報 -->
+                        <div class="info-slide">
+                            <div class="slide-header">
+                                <h3 class="slide-title">厳選された配合成分</h3>
+                                <p class="slide-subtitle">女性の美と健康をサポートする成分を贅沢に配合</p>
+                            </div>
+                            
+                            <div class="slide-content">
+                                <div class="ingredients-grid">
+                                    <div class="ingredient-item">
+                                        <div class="ingredient-icon">
+                                            <i class="fas fa-gem"></i>
+                                        </div>
+                                        <div class="ingredient-info">
+                                            <h5>カリウム</h5>
+                                            <p>1,320mg配合</p>
+                                        </div>
+                                    </div>
+                                    <div class="ingredient-item">
+                                        <div class="ingredient-icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="ingredient-info">
+                                            <h5>NMN</h5>
+                                            <p>話題の成分</p>
+                                        </div>
+                                    </div>
+                                    <div class="ingredient-item">
+                                        <div class="ingredient-icon">
+                                            <i class="fas fa-lemon"></i>
+                                        </div>
+                                        <div class="ingredient-info">
+                                            <h5>ビタミンC</h5>
+                                            <p>栄養機能食品</p>
+                                        </div>
+                                    </div>
+                                    <div class="ingredient-item">
+                                        <div class="ingredient-icon">
+                                            <i class="fas fa-leaf"></i>
+                                        </div>
+                                        <div class="ingredient-info">
+                                            <h5>野菜発酵酵素</h5>
+                                            <p>121種類配合</p>
+                                        </div>
+                                    </div>
+                                    <div class="ingredient-item">
+                                        <div class="ingredient-icon">
+                                            <i class="fas fa-heart"></i>
+                                        </div>
+                                        <div class="ingredient-info">
+                                            <h5>プラセンタ</h5>
+                                            <p>美容成分</p>
+                                        </div>
+                                    </div>
+                                    <div class="ingredient-item">
+                                        <div class="ingredient-icon">
+                                            <i class="fas fa-droplet"></i>
+                                        </div>
+                                        <div class="ingredient-info">
+                                            <h5>ヒアルロン酸</h5>
+                                            <p>うるおいサポート</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cta-section-slide">
+                                <a href="order.html" class="cta-primary">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    今すぐ注文する
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3: 使用方法・おすすめタイプ -->
+                        <div class="info-slide">
+                            <div class="slide-header">
+                                <h3 class="slide-title">毎日の<span class="usage-highlight">習慣</span>として</h3>
+                                <p class="slide-subtitle">継続することで、より実感していただけます</p>
+                            </div>
+                            
+                            <div class="slide-content">
+                                <div class="usage-steps">
+                                    <div class="usage-step">
+                                        <div class="step-icon step-yellow">
+                                            <i class="fas fa-pills"></i>
+                                        </div>
+                                        <span class="step-text">1日6粒を目安に</span>
+                                    </div>
+                                    <div class="usage-step">
+                                        <div class="step-icon step-blue">
+                                            <i class="fas fa-tint"></i>
+                                        </div>
+                                        <span class="step-text">水またはぬるま湯と一緒に</span>
+                                    </div>
+                                    <div class="usage-step">
+                                        <div class="step-icon step-green">
+                                            <i class="fas fa-calendar-check"></i>
+                                        </div>
+                                        <span class="step-text">毎日続けることが大切</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="timing-box">
+                                    <h5 class="timing-title">
+                                        <i class="fas fa-clock"></i>
+                                        おすすめタイミング
+                                    </h5>
+                                    <div class="timing-grid">
+                                        <div class="timing-item">
+                                            <i class="fas fa-sun text-amber-500"></i>
+                                            <span>朝食後に3粒</span>
+                                        </div>
+                                        <div class="timing-item">
+                                            <i class="fas fa-moon text-indigo-500"></i>
+                                            <span>夕食後に3粒</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="target-tags">
+                                    <span class="target-tag">忙しい毎日を送る女性</span>
+                                    <span class="target-tag">美容を気にする方</span>
+                                    <span class="target-tag">健康維持したい方</span>
+                                    <span class="target-tag">栄養バランスが気になる方</span>
+                                </div>
+                            </div>
+
+                            <div class="cta-section-slide">
+                                <a href="order.html" class="cta-primary">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    今すぐ注文する
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Slide 4: 品質・信頼性 -->
+                        <div class="info-slide">
+                            <div class="slide-header">
+                                <h3 class="slide-title">安心・安全への取り組み</h3>
+                                <p class="slide-subtitle">お客様に安心してお使いいただけるよう、徹底した品質管理</p>
+                            </div>
+                            
+                            <div class="slide-content">
+                                <div class="features-list">
+                                    <div class="feature-item">
+                                        <i class="fas fa-certificate text-blue-500"></i>
+                                        <span>国内GMP認定工場で製造</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-shield-alt text-green-500"></i>
+                                        <span>第三者機関による品質検査済み</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-leaf text-emerald-500"></i>
+                                        <span>厳選原材料のみを使用</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-truck text-blue-600"></i>
+                                        <span>2個セット以上で送料無料</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-undo text-green-600"></i>
+                                        <span>30日間返金保証</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-credit-card text-purple-500"></i>
+                                        <span>各種決済対応</span>
+                                    </div>
+                                </div>
+
+                                <div class="continuity-note">
+                                    <i class="fas fa-lightbulb text-amber-500"></i>
+                                    <span>継続することで、より実感していただけます</span>
+                                </div>
+                            </div>
+
+                            <div class="cta-section-slide">
+                                <a href="order.html" class="cta-primary">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    今すぐ注文する
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="product-description">
-                        <p class="description-text">
-                            女性の美と健康をサポートする<br>
-                            <span class="font-bold text-blue-600">15種類の厳選成分配合</span>
-                        </p>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <div class="stat-number">15</div>
-                                <div class="stat-label">種類の成分</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">1,320</div>
-                                <div class="stat-label">mgカリウム</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">121</div>
-                                <div class="stat-label">種類の野菜酵素</div>
-                            </div>
+                    <!-- Carousel Navigation -->
+                    <div class="carousel-navigation">
+                        <button class="nav-button" onclick="previousSlide()">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        
+                        <div class="nav-dots">
+                            <button class="nav-dot active" onclick="showInfoSlide(0)"></button>
+                            <button class="nav-dot" onclick="showInfoSlide(1)"></button>
+                            <button class="nav-dot" onclick="showInfoSlide(2)"></button>
+                            <button class="nav-dot" onclick="showInfoSlide(3)"></button>
                         </div>
+                        
+                        <button class="nav-button" onclick="nextSlide()">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
 
-                    <div class="benefits-section">
-                        <h5 class="benefits-title">
-                            <i class="fas fa-gem text-purple-600"></i>
-                            期待できるサポート
-                        </h5>
-                        <div class="benefits-list">
-                            <div class="benefit-item">
-                                <i class="fas fa-heart text-red-500"></i>
-                                <span>健康的な毎日をサポート</span>
-                            </div>
-                            <div class="benefit-item">
-                                <i class="fas fa-sparkles text-purple-500"></i>
-                                <span>美容面でのコンディション維持</span>
-                            </div>
-                            <div class="benefit-item">
-                                <i class="fas fa-balance-scale text-blue-500"></i>
-                                <span>体内バランスをサポート</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="target-section">
-                        <h5 class="target-title">
-                            <i class="fas fa-users text-pink-600"></i>
-                            このような方におすすめ
-                        </h5>
-                        <div class="target-tags">
-                            <span class="target-tag">忙しい毎日を送る女性</span>
-                            <span class="target-tag">美容を気にする方</span>
-                            <span class="target-tag">健康維持したい方</span>
-                            <span class="target-tag">栄養バランスが気になる方</span>
-                            <span class="target-tag">外食が多い方</span>
-                            <span class="target-tag">野菜不足を感じる方</span>
-                        </div>
-                    </div>
-
-                    <div class="trust-signals">
-                        <div class="trust-item">
-                            <i class="fas fa-truck text-green-600"></i>
-                            <div>
-                                <div class="trust-title">送料無料</div>
-                                <div class="trust-subtitle">2個セット以上</div>
-                            </div>
-                        </div>
-                        <div class="trust-item">
-                            <i class="fas fa-shield-alt text-blue-600"></i>
-                            <div>
-                                <div class="trust-title">返金保証</div>
-                                <div class="trust-subtitle">30日間安心保証</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="cta-section">
-                        <a href="order.html" class="cta-primary">
-                            <i class="fas fa-shopping-cart"></i>
-                            今すぐ注文する
-                        </a>
-                        <div class="cta-info">
-                            <span><i class="fas fa-clock text-blue-500"></i>注文から3-5日でお届け</span>
-                            <span><i class="fas fa-credit-card text-green-500"></i>各種決済対応</span>
-                        </div>
+                    <div class="slide-indicator">
+                        <span id="slideCounter">1 / 4</span>
                     </div>
                 </div>
             </div>
@@ -651,25 +1913,58 @@
     </footer>
 
     <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-item');
-        const buttons = document.querySelectorAll('.carousel-btn');
+        let currentInfoSlide = 0;
+        const infoSlides = document.querySelectorAll('.info-slide');
+        const navDots = document.querySelectorAll('.nav-dot');
+        const slideCounter = document.getElementById('slideCounter');
+        const totalSlides = infoSlides.length;
 
-        function showSlide(index) {
-            slides[currentSlide].classList.remove('active');
-            buttons[currentSlide].classList.remove('active');
+        function showInfoSlide(index) {
+            // Remove active class from current slide and dot
+            infoSlides[currentInfoSlide].classList.remove('active');
+            navDots[currentInfoSlide].classList.remove('active');
             
-            currentSlide = index;
+            // Update current slide index
+            currentInfoSlide = index;
             
-            slides[currentSlide].classList.add('active');
-            buttons[currentSlide].classList.add('active');
+            // Add active class to new slide and dot
+            infoSlides[currentInfoSlide].classList.add('active');
+            navDots[currentInfoSlide].classList.add('active');
+            
+            // Update slide counter
+            slideCounter.textContent = `${currentInfoSlide + 1} / ${totalSlides}`;
         }
 
-        // Auto-slide every 5 seconds
-        setInterval(() => {
-            const nextSlide = (currentSlide + 1) % slides.length;
-            showSlide(nextSlide);
-        }, 5000);
+        function nextSlide() {
+            const nextIndex = (currentInfoSlide + 1) % totalSlides;
+            showInfoSlide(nextIndex);
+        }
+
+        function previousSlide() {
+            const prevIndex = (currentInfoSlide - 1 + totalSlides) % totalSlides;
+            showInfoSlide(prevIndex);
+        }
+
+        // Optional: Auto-slide every 8 seconds (uncomment if desired)
+        // setInterval(nextSlide, 8000);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                previousSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
     </script>
 </body>
 </html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDlYeD%2FVaKyTsJ8c022ziYDkWWGOqRzWkckzjaO2hbZCNRCRMW17WBbb4TFFrqWEq%2FuGG9zkSr3O37IBqTBGG%2FotyCrjMDdKvUHp4Xa4a4UcnGIkaAoYnpffK%2FF9WqXsi4l%2BC0dRL9qvyc1FaJENxE2AucOc4JtbXDf%2BmHzqKzotXMxj5j3qB9wpdMvPZ3OvSfcKWbJ%2BpAuD%2FUPHjTr12IN6jY2jF2buFWpRrppcSkoOeyGQWA5tFlT0NrU7Xg7wGQWUVnMPZr27cPQXscwTqk0BZtb8XDOxPOpgtWAOwf0uLKW11XgZM2sjClGibi2Fhs0J2kSjCoauwzre2b14K1YyUUG8%2B2L4EMLf6shrqCFkl2HGJcS%2B63qLCftOiM7%2BxcWC5rRttHJJyCQWT1mRSHjd7aZFmOhxOjSr1mphYV%2Bj4zXmdOopfxha3fFJTeozUbJSQcWNrQwegw9zRV0Rvl%2BQVSAzdP1h6nZ1%2B9%2BZVZXOHCGGSr6i0MW2a5aeqGngeU3KDMdk0spZtzHiyzH9FQ2o%3D";
+        window.__genspark_locale = "ja-JP";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDlYeD/VaKyTsJ8c022ziYDkWWGOqRzWkckzjaO2hbZCNRCRMW17WBbb4TFFrqWEq/uGG9zkSr3O37IBqTBGG/otyCrjMDdKvUHp4Xa4a4UcnGIkaAoYnpffK/F9WqXsi4l+C0dRL9qvyc1FaJENxE2AucOc4JtbXDf+mHzqKzotXMxj5j3qB9wpdMvPZ3OvSfcKWbJ+pAuD/UPHjTr12IN6jY2jF2buFWpRrppcSkoOeyGQWA5tFlT0NrU7Xg7wGQWUVnMPZr27cPQXscwTqk0BZtb8XDOxPOpgtWAOwf0uLKW11XgZM2sjClGibi2Fhs0J2kSjCoauwzre2b14K1YyUUG8+2L4EMLf6shrqCFkl2HGJcS+63qLCftOiM7+xcWC5rRttHJJyCQWT1mRSHjd7aZFmOhxOjSr1mphYV+j4zXmdOopfxha3fFJTeozUbJSQcWNrQwegw9zRV0Rvl+QVSAzdP1h6nZ1+9+ZVZXOHCGGSr6i0MW2a5aeqGngeU3KDMdk0spZtzHiyzH9FQ2o=";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    
