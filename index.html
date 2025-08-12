@@ -1,3 +1,888 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.
-RequestId:068c3f43-001e-0003-7c9f-0b7be5000000
-Time:2025-08-12T15:43:15.7946256Z</Message></Error>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【公式】カリウムfor Beauty - 美と健康をサポートする女性のためのサプリメント | &ROPSY</title>
+    <meta name="description" content="女性の美と健康をサポートするカリウムサプリメント。15種類の厳選美容成分配合で毎日の栄養バランスを整えます。">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warning: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .brand-gradient {
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #fefce8 100%);
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fef9d7 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            height: 100%;
+        }
+
+        .problem-card:hover {
+            border-color: #f093fb;
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(240, 147, 251, 0.2);
+        }
+
+        .problem-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .product-section {
+            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .product-image {
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .usage-scene {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .usage-scene:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .usage-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .ingredient-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fef9d7 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+
+        .ingredient-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(79, 172, 254, 0.2);
+        }
+
+        .ingredient-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .beauty-ingredient {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .beauty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .beauty-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .beauty-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.9);
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.popular {
+            border-color: #667eea;
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 1.25rem 2rem;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            width: 100%;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .guarantee-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 3px solid #f59e0b;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.2);
+        }
+
+        .free-shipping-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 3px solid #10b981;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.2);
+        }
+
+        .mechanism-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #fef7ff 100%);
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .mechanism-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin: 0 auto;
+            display: block;
+        }
+
+        .subscription-card {
+            background: #1f2937;
+            color: white;
+            border-radius: 25px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(31, 41, 55, 0.3);
+            margin-top: 2rem;
+        }
+
+        .subscription-button {
+            background: white;
+            color: #1f2937;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .subscription-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+            color: #1f2937;
+            text-decoration: none;
+        }
+
+        .final-cta {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .final-cta-button {
+            background: white;
+            color: #667eea;
+            padding: 1.5rem 4rem;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            display: inline-block;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .final-cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .review-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fef9d7 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            height: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .review-text {
+            color: #374151;
+            font-style: italic;
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .product-section {
+                padding: 2rem;
+            }
+            
+            .usage-image {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold brand-gradient">&ROPSY</h1>
+                    <span class="ml-3 text-sm text-gray-600">公式サイト</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Problem Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="section-title">このようなお悩みはありませんか？</h2>
+                <p class="text-lg text-gray-600">多くの女性が気になる、日常のポイント</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="problem-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/dc6f262f-3d56-4f05-9580-a30a43f6424f" 
+                         alt="足の重さ" class="problem-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">足の重さ</h4>
+                    <p class="text-gray-600">夕方になると足が重く感じる</p>
+                </div>
+
+                <div class="problem-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/573b779d-e686-4ecd-8495-b80cbc07a879" 
+                         alt="朝の顔のコンディション" class="problem-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">朝の顔</h4>
+                    <p class="text-gray-600">朝起きた時の顔のコンディション</p>
+                </div>
+
+                <div class="problem-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/ff005e2a-1973-4e33-b679-502483952ec3" 
+                         alt="体重管理" class="problem-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">体重管理</h4>
+                    <p class="text-gray-600">理想の体型を維持したい</p>
+                </div>
+
+                <div class="problem-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/60ae21f6-3d9d-4eff-8194-a33b4d7efd68" 
+                         alt="すっきりしない毎日" class="problem-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">すっきりしない</h4>
+                    <p class="text-gray-600">なんとなくすっきりしない毎日</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div class="bg-red-50 border-2 border-red-200 rounded-xl p-6 max-w-2xl mx-auto">
+                    <i class="fas fa-exclamation-circle text-red-500 text-3xl mb-4"></i>
+                    <p class="text-xl font-bold text-red-600 mb-2">ひとつでも当てはまる方は要注目！</p>
+                    <p class="text-lg text-gray-700">その原因、<span class="font-bold text-red-500">栄養バランスの偏り</span>の可能性があります</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-16 bg-gradient-to-br from-purple-50 to-pink-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="section-title">現代女性は栄養バランスが偏りがち</h3>
+                <p class="text-lg text-gray-600 mb-8">忙しい毎日で偏りがちな食生活が影響しています</p>
+            </div>
+
+            <div class="bg-yellow-50 border-2 border-yellow-300 rounded-xl p-8 text-center max-w-4xl mx-auto">
+                <h4 class="text-2xl font-bold text-yellow-800 mb-4">だからこそ、バランスの良い栄養補給が重要です</h4>
+                <p class="text-lg text-yellow-700">毎日の食事だけでは不足しがちな栄養素を、効率的に補うことが健康的な毎日への第一歩です。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mechanism Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mechanism-section">
+                <h3 class="section-title mb-8">カリウムの重要な働き</h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/dff7cc15-b0cd-4837-8d63-60d8b64012da" 
+                             alt="カリウムのメカニズム" class="mechanism-image">
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-2xl font-bold text-gray-800 mb-6">体内でのカリウムの役割</h4>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-exchange-alt text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-lg text-gray-800">ナトリウム-カリウムポンプ</h5>
+                                    <p class="text-gray-600">細胞膜を通じてイオンバランスを維持し、正常な細胞機能をサポート</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-tint text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-lg text-gray-800">水分バランスの調整</h5>
+                                    <p class="text-gray-600">体内の水分分布を適切に保ち、健やかな状態を維持</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-heart text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-lg text-gray-800">健康的な毎日をサポート</h5>
+                                    <p class="text-gray-600">美と健康の基盤となる重要なミネラル栄養素</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="product-section">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-center">
+                        <div class="relative inline-block">
+                            <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
+                                 alt="カリウムfor Beauty商品画像" class="product-image mx-auto">
+                            <div class="absolute -top-4 -right-4 bg-red-500 text-white px-4 py-2 rounded-full font-bold text-sm">
+                                人気No.1
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                            カリウム<span class="brand-gradient">for Beauty</span>
+                        </h2>
+                        
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-bold text-sm">
+                                <i class="fas fa-star mr-1"></i>15種類の厳選美容成分配合
+                            </span>
+                            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-bold text-sm">
+                                <i class="fas fa-certificate mr-1"></i>栄養機能食品
+                            </span>
+                        </div>
+                        
+                        <p class="text-xl text-gray-700 mb-6">
+                            女性の美と健康をサポートする<br>
+                            <span class="font-bold text-blue-600">15種類の厳選美容成分配合</span>
+                        </p>
+                        
+                        <div class="bg-white rounded-xl p-6 mb-6 shadow-lg">
+                            <h5 class="text-lg font-bold text-gray-800 mb-4">
+                                <i class="fas fa-gem text-purple-600 mr-2"></i>期待できるサポート
+                            </h5>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-check text-blue-500 mr-3"></i>
+                                    <span>体内の水分バランス維持をサポート</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-check text-purple-500 mr-3"></i>
+                                    <span>美容面でのコンディション維持に寄与</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    <span>健康的な毎日の基盤づくりに貢献</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-check text-red-500 mr-3"></i>
+                                    <span>栄養バランスの調整をサポート</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="order.html" class="cta-button">
+                            <i class="fas fa-shopping-cart mr-2"></i>今すぐ注文する
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Scenes -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="section-title">様々なシーンでご利用いただけます</h3>
+                <p class="text-lg text-gray-600">毎日の習慣として、お好きなタイミングでお召し上がりください</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="usage-scene">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/1bbe0bc6-370f-4b52-8222-91a2530a1f7f" 
+                         alt="朝のキッチンで" class="usage-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">朝のキッチンで</h4>
+                    <p class="text-gray-600">1日のスタートに3粒</p>
+                </div>
+
+                <div class="usage-scene">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/0af7915b-41d6-4301-a63b-4c5a0fc85cff" 
+                         alt="お水と一緒に" class="usage-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">お水と一緒に</h4>
+                    <p class="text-gray-600">飲みやすい小粒タブレット</p>
+                </div>
+
+                <div class="usage-scene">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/8ab29cf0-724a-4297-a4a5-aaf5a7e32698" 
+                         alt="リラックスタイムに" class="usage-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">リラックスタイムに</h4>
+                    <p class="text-gray-600">夕食後に3粒</p>
+                </div>
+
+                <div class="usage-scene">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/7af99483-810a-4ff7-a2f7-501b9a71a2d8" 
+                         alt="ワークアウト後に" class="usage-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">ワークアウト後に</h4>
+                    <p class="text-gray-600">運動後の栄養補給に</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ingredients Section -->
+    <section class="py-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="section-title">厳選された配合成分</h3>
+                <p class="text-lg text-gray-600">女性の美と健康をサポートする成分を贅沢に配合</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="ingredient-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/4521e5a2-05f9-4cc6-b065-8be832b68375" 
+                         alt="カリウム豊富な食材" class="ingredient-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">カリウム</h4>
+                    <p class="text-lg font-bold text-blue-600 mb-2">1,320mg</p>
+                    <p class="text-gray-600">健康的な毎日をサポート</p>
+                </div>
+
+                <div class="ingredient-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/7420dbe7-392d-4a59-85b7-69d4cc6f68ed" 
+                         alt="NMN成分イメージ" class="ingredient-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">NMN</h4>
+                    <p class="text-lg font-bold text-purple-600 mb-2">話題の成分</p>
+                    <p class="text-gray-600">健やかさをサポート</p>
+                </div>
+
+                <div class="ingredient-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/352b9eba-15bd-4adf-bf5d-1f5206d95545" 
+                         alt="ビタミンC（レモン）" class="ingredient-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">ビタミンC</h4>
+                    <p class="text-lg font-bold text-orange-600 mb-2">栄養機能食品</p>
+                    <p class="text-gray-600">健やかな毎日をサポート</p>
+                </div>
+
+                <div class="ingredient-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/11508765-5f68-4c5f-89ed-911b3416126b" 
+                         alt="野菜発酵酵素" class="ingredient-image">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">野菜発酵酵素</h4>
+                    <p class="text-lg font-bold text-green-600 mb-2">121種類</p>
+                    <p class="text-gray-600">内側からのケアをサポート</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+                <h4 class="text-2xl font-bold text-center text-gray-800 mb-6">女性に嬉しい美容成分</h4>
+                <div class="beauty-grid">
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/ec92a396-1862-4551-b96b-e89f780708d3" 
+                             alt="プラセンタ" class="beauty-ingredient">
+                        <h5 class="font-bold text-gray-800">プラセンタ</h5>
+                    </div>
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/32973771-94ee-43af-99b1-0b565740d413" 
+                             alt="ヒアルロン酸" class="beauty-ingredient">
+                        <h5 class="font-bold text-gray-800">ヒアルロン酸</h5>
+                    </div>
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/25be2846-b612-4c2e-97ea-b299f346704d" 
+                             alt="コラーゲン" class="beauty-ingredient">
+                        <h5 class="font-bold text-gray-800">コラーゲン</h5>
+                    </div>
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/3c48c683-9b7a-4a39-ac7c-843ea37f6bf9" 
+                             alt="マカ" class="beauty-ingredient">
+                        <h5 class="font-bold text-gray-800">マカ</h5>
+                    </div>
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/05eae04b-4617-45de-b637-9f40676b215d" 
+                             alt="アサイー" class="beauty-ingredient">
+                        <h5 class="font-bold text-gray-800">アサイー</h5>
+                    </div>
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/e4df24f9-49e9-4a48-9909-028c9faee78a" 
+                             alt="ブドウ" class="beauty-ingredient">
+                        <h5 class="font-bold text-gray-800">ブドウ</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Instructions -->
+    <section class="py-16 bg-gradient-to-br from-yellow-50 to-orange-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-500 mb-4">
+                    毎日の習慣として
+                </h3>
+                <p class="text-xl text-gray-700">継続してお使いいただくことで、より実感していただけます</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white rounded-2xl p-8 shadow-xl text-center border-4 border-yellow-200">
+                    <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-pills text-4xl text-yellow-600"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-800 mb-2">1日6粒を目安に</h4>
+                    <p class="text-gray-600">小粒で飲みやすいタブレット錠</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-xl text-center border-4 border-blue-200">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tint text-4xl text-blue-600"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-800 mb-2">水またはぬるま湯と</h4>
+                    <p class="text-gray-600">お好きなタイミングで</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-xl text-center border-4 border-green-200">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-calendar-check text-4xl text-green-600"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-800 mb-2">毎日続けることが大切</h4>
+                    <p class="text-gray-600">継続が実感の鍵です</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-16 bg-gradient-to-br from-purple-50 to-pink-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="section-title">お得な購入プラン</h3>
+                <p class="text-lg text-gray-600">継続してお使いいただくことで、より実感していただけます</p>
+            </div>
+
+            <div class="free-shipping-box">
+                <h4 class="text-2xl font-bold text-green-800 mb-2">
+                    <i class="fas fa-truck text-3xl mr-3"></i>送料無料
+                </h4>
+                <p class="text-lg text-green-700">2個セット以上のご注文で送料無料！</p>
+            </div>
+
+            <div class="guarantee-box">
+                <h4 class="text-2xl font-bold text-yellow-800 mb-2">
+                    <i class="fas fa-shield-alt text-3xl mr-3"></i>30日間返金保証
+                </h4>
+                <p class="text-lg text-yellow-700">ご満足いただけない場合は全額返金いたします</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="pricing-card">
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">単品購入</h4>
+                    <div class="text-3xl font-bold text-gray-900 mb-2">¥1,600 <span class="text-sm text-gray-600">(税込)</span></div>
+                    <p class="text-gray-600 mb-6">送料別途500円</p>
+                    <a href="order.html" class="cta-button">注文する</a>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="popular-badge">10%OFF</div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">2個セット</h4>
+                    <div class="text-sm text-gray-500 line-through mb-1">¥3,200</div>
+                    <div class="text-3xl font-bold text-blue-600 mb-2">¥2,880 <span class="text-sm text-gray-600">(税込)</span></div>
+                    <p class="text-gray-600 mb-6">送料無料</p>
+                    <a href="order.html" class="cta-button">注文する</a>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="popular-badge" style="background: #f59e0b;">15%OFF</div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">3個セット</h4>
+                    <div class="text-sm text-gray-500 line-through mb-1">¥4,800</div>
+                    <div class="text-3xl font-bold text-red-600 mb-2">¥4,080 <span class="text-sm text-gray-600">(税込)</span></div>
+                    <p class="text-gray-600 mb-6">送料無料・15%OFF</p>
+                    <a href="order.html" class="cta-button">注文する</a>
+                </div>
+            </div>
+
+            <div class="subscription-card">
+                <h4 class="text-2xl font-bold mb-4">定期購入で更にお得</h4>
+                <p class="text-lg mb-6">毎月自動でお届け。いつでも変更・停止可能です。</p>
+                <div class="flex items-center justify-center gap-4 mb-6">
+                    <span class="text-3xl font-bold">¥1,440</span>
+                    <span class="bg-yellow-500 text-black px-3 py-1 rounded-full font-bold">10%OFF</span>
+                </div>
+                <a href="order.html" class="subscription-button">定期購入を申し込む</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="section-title">お客様の声</h3>
+                <p class="text-lg text-gray-600">実際にご利用いただいているお客様からのお声をご紹介</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="review-card">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 font-medium">40代女性</span>
+                    </div>
+                    <p class="review-text">"夕方の足の重さが気にならなくなりました。小粒で飲みやすく、毎日続けやすいのも嬉しいです。"</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 font-medium">30代女性</span>
+                    </div>
+                    <p class="review-text">"朝起きた時のコンディションが良くなった気がします。NMNとビタミンCも一緒に摂れて一石二鳥です。"</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 font-medium">50代女性</span>
+                    </div>
+                    <p class="review-text">"体のだるさが軽減され、毎日すっきりと過ごせています。野菜酵素も入っているのが魅力的。"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Section -->
+    <section class="py-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="section-title">安心・安全への取り組み</h3>
+                <p class="text-lg text-gray-600">お客様に安心してお使いいただけるよう、徹底した品質管理を行っています</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-certificate text-3xl text-blue-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">GMP認定工場</h4>
+                    <p class="text-gray-600">国内のGMP認定工場で製造し、厳格な品質管理のもと生産しています。</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg text-center">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-leaf text-3xl text-green-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">厳選原材料</h4>
+                    <p class="text-gray-600">品質にこだわった厳選した原材料のみを使用しています。</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg text-center">
+                    <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-microscope text-3xl text-purple-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">品質検査</h4>
+                    <p class="text-gray-600">第三者機関による厳しい品質検査をクリアした製品をお届けします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 class="text-4xl font-bold mb-4">健康的な毎日を始めませんか</h3>
+            <p class="text-xl mb-8 opacity-90">カリウムfor Beautyで、理想の自分へ</p>
+            <a href="order.html" class="final-cta-button">
+                <i class="fas fa-shopping-cart mr-3"></i>今すぐ注文する
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="mb-4">※本品は、特定保健用食品と異なり、消費者庁長官による個別審査を受けたものではありません。</p>
+                <p class="mb-4">※食生活は、主食、主菜、副菜を基本に、食事のバランスを。</p>
+                <p class="text-sm text-gray-400">© 2024 &ROPSY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDu4VKRxG9sa%2B8wqcVJ1pk0x3oOfMe5F9Ron8BmK%2BX1uNB4Z1nHasin3Ye2X%2FZUluTGRSRbg9Ou4VZL%2BITuNklMo69chyngoJZTDP19IEWy9Tyfb8kUfD4Os1amX0xDbbIjXvUB77YMIZ5kYGS7dbDUaLSN7ZOTqspt8RZiY9RcU0%2Bw2Zr75eCEhnqubr4FXAy%2B8fmfcmuFosZSTyeSywaHtb5aFwvl2XBy4klDsADAIEL9t43LbWjgGp2%2FHkwyjfaVnmUtEbvAuQavJXASiyv9kQrAoLxnU2zYVfJdLQGYjut1%2FstIvp6lcNIcIgR5Gygt7UDye1tcdwLXkHgqgGQkDchC8ZMleda83I723ZD4Cy9IcjqmXEhlyhrLJhL%2Bnt7f%2FhvGbPhXxag0EbRVUOvlupx8IUECcmcuYl3Ac%2FyaWZJ61sRlRzmXfccGkb3dhLPYerMf2cqkdzdB6U7fHvT%2BtGMB6jDBt1OZrBW1vb5C3b%2Fc0h1QRimwf5fNzF9uVYIIAdoVjLk7jCDxj5vMO8AZQ%3D";
+        window.__genspark_locale = "ja-JP";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDu4VKRxG9sa+8wqcVJ1pk0x3oOfMe5F9Ron8BmK+X1uNB4Z1nHasin3Ye2X/ZUluTGRSRbg9Ou4VZL+ITuNklMo69chyngoJZTDP19IEWy9Tyfb8kUfD4Os1amX0xDbbIjXvUB77YMIZ5kYGS7dbDUaLSN7ZOTqspt8RZiY9RcU0+w2Zr75eCEhnqubr4FXAy+8fmfcmuFosZSTyeSywaHtb5aFwvl2XBy4klDsADAIEL9t43LbWjgGp2/HkwyjfaVnmUtEbvAuQavJXASiyv9kQrAoLxnU2zYVfJdLQGYjut1/stIvp6lcNIcIgR5Gygt7UDye1tcdwLXkHgqgGQkDchC8ZMleda83I723ZD4Cy9IcjqmXEhlyhrLJhL+nt7f/hvGbPhXxag0EbRVUOvlupx8IUECcmcuYl3Ac/yaWZJ61sRlRzmXfccGkb3dhLPYerMf2cqkdzdB6U7fHvT+tGMB6jDBt1OZrBW1vb5C3b/c0h1QRimwf5fNzF9uVYIIAdoVjLk7jCDxj5vMO8AZQ=";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    
