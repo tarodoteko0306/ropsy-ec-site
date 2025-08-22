@@ -246,3 +246,81 @@
     </script>
 </body>
 </html>
+
+<script>
+// カード入力欄の修正（追加）
+document.addEventListener('DOMContentLoaded', function() {
+    const cardNumber = document.getElementById('cardNumber');
+    const cardExpiry = document.getElementById('cardExpiry');
+    const cardCVC = document.getElementById('cardCVC');
+    
+    // 全ての入力制限を解除
+    [cardNumber, cardExpiry, cardCVC].forEach(input => {
+        if (input) {
+            // 既存の入力イベントを削除
+            input.replaceWith(input.cloneNode(true));
+        }
+    });
+    
+    // 新しい要素を取得
+    const newCardNumber = document.getElementById('cardNumber');
+    const newCardExpiry = document.getElementById('cardExpiry');
+    const newCardCVC = document.getElementById('cardCVC');
+    
+    // カード番号入力（数字とスペースのみ許可）
+    newCardNumber.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/[^\d\s]/g, ''); // 数字とスペースのみ
+        let numbers = value.replace(/\s/g, ''); // スペース削除
+        let formatted = numbers.replace(/(.{4})/g, '$1 ').trim(); // 4桁ごとにスペース
+        if (formatted.length <= 19) {
+            e.target.value = formatted;
+        }
+    });
+    
+    // 有効期限入力（数字とスラッシュのみ許可）
+    newCardExpiry.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/[^\d\/]/g, ''); // 数字とスラッシュのみ
+        let numbers = value.replace(/\D/g, ''); // 数字のみ抽出
+        if (numbers.length <= 4) {
+            if (numbers.length >= 2) {
+                e.target.value = numbers.substring(0,2) + '/' + numbers.substring(2);
+            } else {
+                e.target.value = numbers;
+            }
+        }
+    });
+    
+    // CVC入力（数字のみ許可）
+    newCardCVC.addEventListener('input', function(e) {
+        e.target.value = e.target.value.replace(/\D/g, ''); // 数字のみ
+    });
+    
+    // キーダウンイベントも追加（より確実に）
+    newCardNumber.addEventListener('keydown', function(e) {
+        // 数字、バックスペース、デリート、矢印キー、タブを許可
+        if (![8, 9, 37, 38, 39, 40, 46].includes(e.keyCode) && 
+            (e.keyCode < 48 || e.keyCode > 57) && 
+            (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+    
+    newCardExpiry.addEventListener('keydown', function(e) {
+        // 数字、バックスペース、デリート、矢印キー、タブ、スラッシュを許可
+        if (![8, 9, 37, 38, 39, 40, 46, 191].includes(e.keyCode) && 
+            (e.keyCode < 48 || e.keyCode > 57) && 
+            (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+    
+    newCardCVC.addEventListener('keydown', function(e) {
+        // 数字、バックスペース、デリート、矢印キー、タブを許可
+        if (![8, 9, 37, 38, 39, 40, 46].includes(e.keyCode) && 
+            (e.keyCode < 48 || e.keyCode > 57) && 
+            (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+});
+</script>
