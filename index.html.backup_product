@@ -941,8 +941,9 @@
     <section class="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="product-section">
-                <!-- 商品ヘッダー -->
                 <div class="product-image-container">
+                    <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
+                         alt="カリウムfor Beauty商品画像" class="product-image">
                     <div class="product-badge">人気No.1</div>
                 </div>
 
@@ -963,18 +964,19 @@
                 
                 <!-- 2カラムレイアウト -->
                 <div class="product-two-column">
-                    <!-- 左側：商品画像（適切なサイズ） -->
+                    <!-- 左側：商品画像 -->
                     <div class="product-left">
                         <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
                              alt="カリウムfor Beauty" class="product-main-image">
                     </div>
 
-                    <!-- 右側：詳細な商品情報 -->
+                    <!-- 右側：商品詳細 -->
                     <div class="product-right">
                         <div class="product-description">
-                            <h3 class="description-title">女性の美と健康をサポートする</h3>
-                            <p class="description-subtitle">15種類の厳選美容成分配合</p>
-                            
+                            <p class="description-text">
+                                女性の美と健康をサポートする<br>
+                                <span class="font-bold text-blue-600">15種類の厳選美容成分配合</span>
+                            </p>
                             <div class="stats-grid">
                                 <div class="stat-item">
                                     <div class="stat-number">15</div>
@@ -1028,7 +1030,8 @@
         </div>
     </section>
 
-    <!-- Usage Scenes Section -->            
+    <!-- Usage Scenes Section -->            <p class="text-center text-lg text-gray-600 mb-8">毎日の習慣として、お好きなタイミングでお召し上がりください</p>
+            
             <div class="usage-scenes">
                 <div class="usage-scene">
                     <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/1bbe0bc6-370f-4b52-8222-91a2530a1f7f" 
