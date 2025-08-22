@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="config.js"></script>
+    <script src="email-config.js"></script>
     
     <style>
         body { 
@@ -361,9 +363,16 @@
     </div>
 
     <script>
-        // 環境変数からStripe公開キーを取得
+        // 環境変数から設定を取得
         const STRIPE_PUBLIC_KEY = window.STRIPE_CONFIG?.publicKey || 'YOUR_STRIPE_PUBLISHABLE_KEY_HERE';
         const stripe = Stripe(STRIPE_PUBLIC_KEY);
+
+        // EmailJS初期化
+        const EMAIL_SERVICE_ID = window.EMAIL_CONFIG?.serviceId || 'service_ropsy_ec';
+        const EMAIL_TEMPLATE_ID = window.EMAIL_CONFIG?.templateId || 'template_purchase_thanks';
+        const EMAIL_PUBLIC_KEY = window.EMAIL_CONFIG?.publicKey || 'YOUR_EMAILJS_PUBLIC_KEY_HERE';
+
+        emailjs.init(EMAIL_PUBLIC_KEY);
 
         function selectProduct(productType) {
             document.querySelectorAll('.product-option').forEach(option => {
@@ -391,6 +400,42 @@
             }
         }
 
+        // サンクスメール送信
+        async function sendThankYouEmail(orderData) {
+            try {
+                const emailParams = {
+                    to_email: orderData.email,
+                    to_name: `${orderData.lastName} ${orderData.firstName}`,
+                    order_number: orderData.orderNumber || `ROPSY-${Date.now()}`,
+                    order_date: new Date().toLocaleDateString('ja-JP', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }),
+                    product_name: orderData.productName,
+                    product_quantity: '1',
+                    product_price: `¥${orderData.amount.toLocaleString()}`,
+                    total_amount: `¥${orderData.amount.toLocaleString()}`,
+                    customer_name: `${orderData.lastName} ${orderData.firstName}`,
+                    customer_kana: `${orderData.lastNameKana} ${orderData.firstNameKana}`,
+                    customer_email: orderData.email,
+                    customer_phone: orderData.phone,
+                    delivery_address: `〒${orderData.zipCode} ${orderData.prefecture}${orderData.city}${orderData.address}`,
+                    customer_message: orderData.message || 'なし',
+                    company_name: '合同会社ピュアラボ',
+                    company_phone: '050-5897-5020',
+                    company_address: '〒104-0061 東京都中央区銀座1丁目22番11号 銀座大竹ビジデンス2F'
+                };
+
+                await emailjs.send(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, emailParams);
+                console.log('サンクスメールが送信されました');
+            } catch (error) {
+                console.error('サンクスメール送信エラー:', error);
+            }
+        }
+
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -409,17 +454,17 @@
 
             // 商品価格設定
             const products = {
-                single: { amount: 2600, name: 'カリウムfor Beauty 単品' }, // 2100 + 500送料
+                single: { amount: 2600, name: 'カリウムfor Beauty 単品' },
                 double: { amount: 2880, name: 'カリウムfor Beauty 2個セット' },
                 triple: { amount: 4080, name: 'カリウムfor Beauty 3個セット' }
             };
 
             const selectedProductData = products[selectedProduct];
 
-            // Google Sheetsに顧客情報を送信
+            // 注文データ作成
             const orderData = {
                 timestamp: new Date().toLocaleString('ja-JP'),
-                product: selectedProductData.name,
+                productName: selectedProductData.name,
                 amount: selectedProductData.amount,
                 lastName: formData.get('lastName'),
                 firstName: formData.get('firstName'),
@@ -434,10 +479,14 @@
                 message: formData.get('message') || ''
             };
 
-            await sendToGoogleSheets(orderData);
-            
             try {
-                // Stripe決済処理
+                // 1. Google Sheetsに顧客情報を送信
+                await sendToGoogleSheets(orderData);
+                
+                // 2. サンクスメールを送信
+                await sendThankYouEmail(orderData);
+                
+                // 3. Stripe決済処理
                 const { error } = await stripe.redirectToCheckout({
                     lineItems: [{
                         price_data: {
@@ -470,8 +519,8 @@
                     alert('決済処理でエラーが発生しました。しばらく時間をおいて再度お試しください。');
                 }
             } catch (error) {
-                console.error('Payment error:', error);
-                alert('決済処理でエラーが発生しました。しばらく時間をおいて再度お試しください。');
+                console.error('Order processing error:', error);
+                alert('注文処理でエラーが発生しました。しばらく時間をおいて再度お試しください。');
             } finally {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
