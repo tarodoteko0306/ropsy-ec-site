@@ -3,135 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ご注文ありがとうございます - ANDROPSY</title>
+    <title>ご注文完了 - カリウムfor Beauty | &ROPSY</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         }
-        
+
         body {
-            font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 20px;
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #fefce8 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-container {
+            max-width: 600px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .test-badge {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .success-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .success-text {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
             line-height: 1.6;
         }
-        
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 10px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        
-        .success-icon {
-            font-size: 60px;
-            color: #28a745;
-            margin-bottom: 20px;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-        
-        .message {
-            color: #6c757d;
-            line-height: 1.8;
-            margin-bottom: 30px;
-            font-size: 16px;
-        }
-        
-        .btn {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 6px;
-            display: inline-block;
-            margin: 10px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        
-        .btn-secondary {
-            background-color: #6c757d;
-        }
-        
-        .btn-secondary:hover {
-            background-color: #545b62;
-        }
-        
+
         .order-info {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: left;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid #10b981;
         }
-        
-        .info-title {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
+
+        .order-id {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #047857;
+            margin-bottom: 0.5rem;
         }
-        
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                padding: 20px;
-            }
-            
-            .btn {
-                display: block;
-                margin: 10px 0;
-            }
+
+        .order-detail {
+            color: #065f46;
+            font-size: 0.95rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .back-button i {
+            margin-right: 0.5rem;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">ANDROPSY</div>
-        <div class="success-icon">✓</div>
-        <h1>ご注文ありがとうございます！</h1>
-        
-        <div class="message">
-            ご注文を正常に承りました。<br>
-            確認メールをお送りいたしましたので、ご確認ください。<br><br>
-            
-            <strong>今後の流れ：</strong><br>
-            1. 確認メールの受信をご確認ください<br>
-            2. 商品は順次発送させていただきます<br>
-            3. 発送時に追跡番号をお知らせいたします<br><br>
-            
-            お届けまで今しばらくお待ちください。
+    <div class="success-container">
+        <div id="testBadge" class="test-badge" style="display: none;">
+            <i class="fas fa-flask mr-1"></i>
+            テストモード
         </div>
+        
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        
+        <h1 class="success-title">ご注文ありがとうございます！</h1>
+        
+        <p class="success-text" id="successMessage">
+            ご注文を承りました。<br>
+            確認メールをお送りしておりますので、ご確認ください。
+        </p>
         
         <div class="order-info">
-            <div class="info-title">📧 重要なお知らせ</div>
-            確認メールが届かない場合は、迷惑メールフォルダをご確認いただくか、<br>
-            お問い合わせください。
+            <div class="order-id" id="orderId">注文ID: 読み込み中...</div>
+            <div class="order-detail">
+                商品の発送準備が完了次第、配送状況をメールでお知らせいたします。
+            </div>
         </div>
         
-        <a href="order.html" class="btn">新しい注文をする</a>
-        <a href="/" class="btn btn-secondary">トップページに戻る</a>
+        <a href="index.html" class="back-button">
+            <i class="fas fa-home"></i>
+            トップページに戻る
+        </a>
     </div>
+
+    <script>
+        // URLパラメータから注文情報を取得
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('order');
+        const isTest = urlParams.get('test') === 'true';
+        
+        if (isTest) {
+            document.getElementById('testBadge').style.display = 'block';
+            document.getElementById('successMessage').innerHTML = 
+                'テスト注文を承りました。<br>' +
+                '実際の決済は発生していません。<br>' +
+                '本番環境では実際の決済が行われ、商品が発送されます。';
+        }
+        
+        if (orderId) {
+            document.getElementById('orderId').textContent = `注文ID: ${orderId}`;
+        } else {
+            document.getElementById('orderId').textContent = '注文ID: 不明';
+        }
+    </script>
 </body>
 </html>
