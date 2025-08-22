@@ -3,194 +3,407 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ご注文フォーム - &ROPSY</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <title>ANDROPSY - ご注文</title>
     <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="config.js"></script>
+    <script src="email-config.js"></script>
     <style>
-        body { font-family: 'Noto Sans JP', sans-serif; }
-        .gradient-blue { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
-        .form-container { max-width: 800px; margin: 0 auto; }
-        .product-option { transition: all 0.3s ease; cursor: pointer; }
-        .product-option:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .product-option.selected { border-color: #3b82f6 !important; background: #eff6ff !important; }
-        .badge { padding: 0.4rem 0.8rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; color: white; }
-        .badge-popular { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
-        .badge-discount { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        
+        .price-display {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .price-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .price-label {
+            font-weight: bold;
+            color: #495057;
+        }
+        
+        .price-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .discount-info {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .total-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #dc3545;
+            text-align: center;
+            padding: 15px;
+            background-color: #fff3cd;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        
+        .btn-primary:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .customer-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .info-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .price-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
-<body class="bg-gray-50">
-    <header class="bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-blue-600">&ROPSY</h1>
-                    <span class="ml-3 text-sm text-gray-600">公式サイト</span>
-                </div>
-                <a href="index.html" class="text-blue-600 hover:text-blue-800">
-                    <i class="fas fa-arrow-left mr-2"></i>商品ページに戻る
-                </a>
-            </div>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">ANDROPSY</div>
+            <div class="subtitle">公式オンラインストア</div>
         </div>
-    </header>
-
-    <div class="py-8">
-        <div class="form-container px-4">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">ご注文フォーム</h2>
-                <p class="text-lg text-gray-600">カリウムfor Beauty をお選びいただき、ありがとうございます</p>
+        
+        <form id="orderForm">
+            <!-- 商品選択 -->
+            <div class="form-group">
+                <label for="quantity">商品・個数を選択</label>
+                <select id="quantity" name="quantity" required>
+                    <option value="">選択してください</option>
+                    <option value="single">1個（通常価格 ¥2,100）</option>
+                    <option value="double">2個セット（通常価格 ¥2,880）</option>
+                    <option value="triple">3個セット（通常価格 ¥4,080）</option>
+                </select>
             </div>
-
-            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-                <h3 class="text-xl font-bold text-gray-900 mb-6 text-center">
-                    <i class="fas fa-shopping-cart text-blue-600 mr-2"></i>商品をお選びください
-                </h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="product-option border-2 border-gray-200 rounded-lg p-4" onclick="selectProduct('single')">
-                        <input type="radio" name="product" value="single" id="single" class="sr-only">
-                        <div class="text-center">
-                            <h4 class="font-bold text-lg mb-3">単品購入</h4>
-                            <div class="text-3xl font-bold text-gray-900 mb-2">¥2,100<span class="text-sm text-gray-600">(税込)</span></div>
-                            <div class="text-sm text-red-500 mb-2">送料別途500円</div>
-                            <div class="text-xs text-gray-500">通常価格でのお試し</div>
-                        </div>
-                    </div>
-
-                    <div class="product-option border-2 border-blue-400 rounded-lg p-4 selected" onclick="selectProduct('double')">
-                        <input type="radio" name="product" value="double" id="double" class="sr-only" checked>
-                        <div class="text-center">
-                            <div class="mb-3"><span class="badge badge-popular">おすすめ</span></div>
-                            <h4 class="font-bold text-lg mb-3">2個セット</h4>
-                            <div class="text-sm text-gray-400 line-through mb-1">¥4,200</div>
-                            <div class="text-3xl font-bold text-blue-600 mb-2">¥2,880<span class="text-sm text-gray-600">(税込)</span></div>
-                            <div class="text-sm text-green-600 font-bold mb-2">送料無料・10%OFF</div>
-                            <div class="text-xs text-gray-500">1個あたり¥1,440</div>
-                        </div>
-                    </div>
-
-                    <div class="product-option border-2 border-gray-200 rounded-lg p-4" onclick="selectProduct('triple')">
-                        <input type="radio" name="product" value="triple" id="triple" class="sr-only">
-                        <div class="text-center">
-                            <div class="mb-3"><span class="badge badge-discount">最大15%OFF</span></div>
-                            <h4 class="font-bold text-lg mb-3">3個セット</h4>
-                            <div class="text-sm text-gray-400 line-through mb-1">¥6,300</div>
-                            <div class="text-3xl font-bold text-red-600 mb-2">¥4,080<span class="text-sm text-gray-600">(税込)</span></div>
-                            <div class="text-sm text-green-600 font-bold mb-2">送料無料・15%OFF</div>
-                            <div class="text-xs text-gray-500">1個あたり¥1,360</div>
-                        </div>
-                    </div>
+            
+            <!-- 購入タイプ選択 -->
+            <div class="form-group">
+                <label for="frequency">お届け頻度を選択</label>
+                <select id="frequency" name="frequency" required>
+                    <option value="">まず商品を選択してください</option>
+                </select>
+            </div>
+            
+            <!-- 料金表示 -->
+            <div class="price-display" id="priceDisplay" style="display: none;">
+                <div class="price-info">
+                    <span class="price-label">通常価格:</span>
+                    <span class="price-value" id="regularPrice">¥0</span>
+                </div>
+                <div class="price-info" id="discountRow" style="display: none;">
+                    <span class="price-label">割引:</span>
+                    <span class="price-value" id="discountAmount">¥0</span>
+                </div>
+                <div class="price-info" id="subscriptionInfo" style="display: none;">
+                    <span class="price-label">お届け頻度:</span>
+                    <span class="price-value" id="deliveryFrequency">-</span>
+                </div>
+                <div class="total-price" id="finalPrice">合計: ¥0</div>
+                <div class="discount-info" id="discountMessage" style="display: none;"></div>
+            </div>
+            
+            <!-- お客様情報 -->
+            <div class="customer-info">
+                <div class="info-title">お客様情報</div>
+                
+                <div class="form-group">
+                    <label for="name">お名前</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">メールアドレス</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">電話番号</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">お届け先住所</label>
+                    <input type="text" id="address" name="address" required placeholder="〒000-0000 都道府県市区町村番地">
                 </div>
             </div>
-
-            <form id="orderForm" class="bg-white rounded-xl shadow-lg p-6 mb-8">
-                <h3 class="text-xl font-bold text-gray-900 mb-6">
-                    <i class="fas fa-user text-blue-600 mr-2"></i>お客様情報
-                </h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">お名前（姓） <span class="text-red-500">*</span></label>
-                        <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="山田">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">お名前（名） <span class="text-red-500">*</span></label>
-                        <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="太郎">
-                    </div>
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-sm font-bold text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
-                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="example@email.com">
-                </div>
-
-                <div class="mb-4">
-                    <label class="block text-sm font-bold text-gray-700 mb-2">電話番号 <span class="text-red-500">*</span></label>
-                    <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="090-1234-5678">
-                </div>
-
-                <div class="mb-6">
-                    <label class="flex items-start">
-                        <input type="checkbox" id="agreement" name="agreement" required class="mt-1 mr-3">
-                        <span class="text-sm text-gray-700">
-                            <a href="#" class="text-blue-600 underline">プライバシーポリシー</a>および
-                            <a href="#" class="text-blue-600 underline">利用規約</a>に同意します 
-                            <span class="text-red-500">*</span>
-                        </span>
-                    </label>
-                </div>
-
-                <button type="submit" class="w-full gradient-blue text-white py-4 rounded-lg text-lg font-bold hover:opacity-90 transition-opacity">
-                    <i class="fas fa-credit-card mr-2"></i>決済に進む
-                </button>
-            </form>
-        </div>
+            
+            <button type="submit" class="btn-primary" id="submitBtn" disabled>
+                ご注文を確定する
+            </button>
+        </form>
     </div>
 
     <script>
-        const STRIPE_PUBLIC_KEY = window.STRIPE_CONFIG?.publicKey || 'pk_test_51RvKXDGI8VZNBwirTa5gW9MQIQXDexSsCn1Kq5ksN8XMgfbguRYu9Lay3Bu4dQJXqp9CIKX7CFpLFdF3TBp1FXwX00HgnIhQGU';
-        const stripe = Stripe(STRIPE_PUBLIC_KEY);
-
-        function selectProduct(productType) {
-            document.querySelectorAll('.product-option').forEach(option => {
-                option.classList.remove('selected', 'border-blue-400');
-                option.classList.add('border-gray-200');
-            });
-            event.currentTarget.classList.add('selected', 'border-blue-400');
-            event.currentTarget.classList.remove('border-gray-200');
-            document.querySelector(`#${productType}`).checked = true;
+        // 料金設定
+        const pricing = {
+            single: { base: 2100, subscriptionDiscounts: { monthly: 0.25, bimonthly: 0.20, quarterly: 0.15 }},
+            double: { base: 2880, subscriptionDiscounts: { monthly: 0.30, bimonthly: 0.25, quarterly: 0.20 }},
+            triple: { base: 4080, subscriptionDiscounts: { monthly: 0.35, bimonthly: 0.30, quarterly: 0.25 }}
+        };
+        
+        const frequencyOptions = {
+            oneTime: '単品購入（1回のみ）',
+            monthly: '毎月お届け',
+            bimonthly: '2ヶ月に1回お届け',
+            quarterly: '3ヶ月に1回お届け'
+        };
+        
+        let currentSelection = {
+            quantity: '',
+            frequency: '',
+            price: 0,
+            isSubscription: false
+        };
+        
+        // 商品選択時の処理
+        document.getElementById('quantity').addEventListener('change', function() {
+            const selectedQuantity = this.value;
+            const frequencySelect = document.getElementById('frequency');
+            
+            // 頻度選択肢をリセット
+            frequencySelect.innerHTML = '<option value="">お届け頻度を選択してください</option>';
+            
+            if (selectedQuantity) {
+                // 頻度選択肢を追加
+                Object.entries(frequencyOptions).forEach(([key, label]) => {
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = label;
+                    frequencySelect.appendChild(option);
+                });
+                
+                currentSelection.quantity = selectedQuantity;
+                updatePriceDisplay();
+            } else {
+                document.getElementById('priceDisplay').style.display = 'none';
+                currentSelection.quantity = '';
+            }
+            
+            validateForm();
+        });
+        
+        // 頻度選択時の処理
+        document.getElementById('frequency').addEventListener('change', function() {
+            currentSelection.frequency = this.value;
+            currentSelection.isSubscription = this.value !== 'oneTime';
+            updatePriceDisplay();
+            validateForm();
+        });
+        
+        // 料金表示の更新
+        function updatePriceDisplay() {
+            if (!currentSelection.quantity || !currentSelection.frequency) {
+                document.getElementById('priceDisplay').style.display = 'none';
+                return;
+            }
+            
+            const basePrice = pricing[currentSelection.quantity].base;
+            let finalPrice = basePrice;
+            let discount = 0;
+            
+            // 定期購入の場合の割引計算
+            if (currentSelection.isSubscription) {
+                const discountRate = pricing[currentSelection.quantity].subscriptionDiscounts[currentSelection.frequency];
+                discount = Math.round(basePrice * discountRate);
+                finalPrice = basePrice - discount;
+            }
+            
+            // 表示を更新
+            document.getElementById('regularPrice').textContent = `¥${basePrice.toLocaleString()}`;
+            document.getElementById('finalPrice').textContent = `合計: ¥${finalPrice.toLocaleString()}`;
+            
+            // 割引情報の表示
+            const discountRow = document.getElementById('discountRow');
+            const discountMessage = document.getElementById('discountMessage');
+            const subscriptionInfo = document.getElementById('subscriptionInfo');
+            
+            if (currentSelection.isSubscription) {
+                discountRow.style.display = 'flex';
+                discountMessage.style.display = 'block';
+                subscriptionInfo.style.display = 'flex';
+                
+                document.getElementById('discountAmount').textContent = `-¥${discount.toLocaleString()}`;
+                document.getElementById('deliveryFrequency').textContent = frequencyOptions[currentSelection.frequency];
+                
+                const discountPercent = Math.round((discount / basePrice) * 100);
+                discountMessage.textContent = `定期購入で${discountPercent}%OFF！毎回¥${finalPrice.toLocaleString()}でお届けします`;
+            } else {
+                discountRow.style.display = 'none';
+                discountMessage.style.display = 'none';
+                subscriptionInfo.style.display = 'none';
+            }
+            
+            document.getElementById('priceDisplay').style.display = 'block';
+            currentSelection.price = finalPrice;
         }
-
+        
+        // フォームバリデーション
+        function validateForm() {
+            const requiredFields = ['quantity', 'frequency', 'name', 'email', 'phone', 'address'];
+            const allFilled = requiredFields.every(field => {
+                const element = document.getElementById(field);
+                return element && element.value.trim() !== '';
+            });
+            
+            document.getElementById('submitBtn').disabled = !allFilled;
+        }
+        
+        // 入力フィールドの監視
+        ['name', 'email', 'phone', 'address'].forEach(fieldId => {
+            document.getElementById(fieldId).addEventListener('input', validateForm);
+        });
+        
+        // フォーム送信処理
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const formData = new FormData(this);
-            if (!formData.get('agreement')) {
-                alert('プライバシーポリシーおよび利用規約への同意が必要です。');
-                return;
-            }
-
-            const submitBtn = this.querySelector('button[type="submit"]');
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>決済処理中...';
+            const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
-
-            const selectedProduct = document.querySelector('input[name="product"]:checked').value;
-            const products = {
-                single: { amount: 2600, name: 'カリウムfor Beauty 単品' },
-                double: { amount: 2880, name: 'カリウムfor Beauty 2個セット' },
-                triple: { amount: 4080, name: 'カリウムfor Beauty 3個セット' }
-            };
-
+            submitBtn.textContent = '処理中...';
+            
             try {
-                const selectedProductData = products[selectedProduct];
-                const { error } = await stripe.redirectToCheckout({
-                    lineItems: [{
-                        price_data: {
-                            currency: 'jpy',
-                            product_data: {
-                                name: selectedProductData.name,
-                                description: '女性の美と健康をサポートするサプリメント'
-                            },
-                            unit_amount: selectedProductData.amount
-                        },
-                        quantity: 1
-                    }],
-                    mode: 'payment',
-                    successUrl: window.location.origin + '/success.html',
-                    cancelUrl: window.location.href,
-                    customerEmail: formData.get('email')
+                // 顧客情報の取得
+                const customerInfo = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value
+                };
+                
+                // 注文情報をコンソールに表示（デバッグ用）
+                console.log('注文情報:', {
+                    customer: customerInfo,
+                    product: currentSelection,
+                    price: currentSelection.price
                 });
                 
-                if (error) {
-                    alert('決済処理でエラーが発生しました。');
-                }
+                // 成功メッセージ
+                alert(`ご注文ありがとうございます！\n商品: ${pricing[currentSelection.quantity] ? '選択された商品' : '不明'}\nお届け: ${frequencyOptions[currentSelection.frequency]}\n料金: ¥${currentSelection.price.toLocaleString()}`);
+                
+                // 成功ページにリダイレクト
+                window.location.href = 'success.html';
+                
             } catch (error) {
-                alert('決済処理でエラーが発生しました。');
+                console.error('エラー:', error);
+                alert('エラーが発生しました。もう一度お試しください。');
             } finally {
-                submitBtn.innerHTML = '<i class="fas fa-credit-card mr-2"></i>決済に進む';
                 submitBtn.disabled = false;
+                submitBtn.textContent = 'ご注文を確定する';
             }
         });
     </script>

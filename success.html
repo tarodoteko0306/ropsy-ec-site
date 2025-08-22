@@ -3,60 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ご注文完了 - &ROPSY</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
+    <title>ご注文ありがとうございます - ANDROPSY</title>
     <style>
-        body { font-family: 'Noto Sans JP', sans-serif; }
-        .gradient-blue { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
-        .gradient-green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .success-icon {
+            font-size: 60px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .message {
+            color: #6c757d;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+        
+        .order-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .info-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px 0;
+            }
+        }
     </style>
 </head>
-
-<body class="bg-gray-50">
-    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full space-y-8">
-            <div class="text-center">
-                <div class="mx-auto flex items-center justify-center h-24 w-24 rounded-full gradient-green mb-6">
-                    <i class="fas fa-check text-white text-3xl"></i>
-                </div>
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                    ご注文ありがとうございます！
-                </h2>
-                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4">
-                        <i class="fas fa-envelope text-blue-600 mr-2"></i>
-                        ご注文確認メールを送信いたしました
-                    </h3>
-                    <div class="text-sm text-gray-600 space-y-2">
-                        <p>• ご入力いただいたメールアドレスに注文確認メールをお送りしました</p>
-                        <p>• 商品は2-3営業日以内に発送予定です</p>
-                        <p>• 発送時に配送業者と追跡番号をご連絡いたします</p>
-                    </div>
-                </div>
-                
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                    <h4 class="font-bold text-blue-800 mb-2">
-                        <i class="fas fa-phone text-blue-600 mr-2"></i>
-                        お困りの際は
-                    </h4>
-                    <div class="text-sm text-blue-700">
-                        <p>お客様相談室: <span class="font-bold">050-5897-5020</span></p>
-                        <p>受付時間: 平日 10:00-17:00</p>
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <a href="index.html" class="w-full gradient-blue text-white py-3 px-6 rounded-lg font-bold hover:opacity-90 transition-opacity inline-block">
-                        <i class="fas fa-home mr-2"></i>
-                        トップページに戻る
-                    </a>
-                </div>
-            </div>
+<body>
+    <div class="container">
+        <div class="logo">ANDROPSY</div>
+        <div class="success-icon">✓</div>
+        <h1>ご注文ありがとうございます！</h1>
+        
+        <div class="message">
+            ご注文を正常に承りました。<br>
+            確認メールをお送りいたしましたので、ご確認ください。<br><br>
+            
+            <strong>今後の流れ：</strong><br>
+            1. 確認メールの受信をご確認ください<br>
+            2. 商品は順次発送させていただきます<br>
+            3. 発送時に追跡番号をお知らせいたします<br><br>
+            
+            お届けまで今しばらくお待ちください。
         </div>
+        
+        <div class="order-info">
+            <div class="info-title">📧 重要なお知らせ</div>
+            確認メールが届かない場合は、迷惑メールフォルダをご確認いただくか、<br>
+            お問い合わせください。
+        </div>
+        
+        <a href="order.html" class="btn">新しい注文をする</a>
+        <a href="/" class="btn btn-secondary">トップページに戻る</a>
     </div>
 </body>
 </html>
