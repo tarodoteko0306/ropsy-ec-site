@@ -10,160 +10,596 @@
     <style>
         :root {
             --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             --success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         }
 
         body {
             font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.7;
+            color: #333;
             background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #fefce8 100%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        }
+
+        .header-gradient {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .brand-gradient {
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .success-container {
-            max-width: 600px;
+            max-width: 800px;
+            margin: 0 auto;
             background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             border-radius: 25px;
             padding: 3rem;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            text-align: center;
         }
 
         .success-icon {
-            width: 80px;
-            height: 80px;
+            width: 120px;
+            height: 120px;
             background: var(--success);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 2rem;
-            font-size: 2rem;
+            font-size: 3rem;
             color: white;
+            box-shadow: 0 20px 40px rgba(17, 153, 142, 0.3);
+            animation: successPulse 2s infinite;
         }
 
-        .test-badge {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: inline-block;
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .success-title {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            color: #1f2937;
+            text-align: center;
             margin-bottom: 1rem;
+            background: var(--success);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .success-text {
-            color: #6b7280;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            line-height: 1.6;
+        .success-subtitle {
+            font-size: 1.25rem;
+            color: #059669;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 500;
         }
 
-        .order-info {
+        .order-summary-card {
             background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-            border-radius: 15px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 2rem;
             margin-bottom: 2rem;
             border: 2px solid #10b981;
         }
 
-        .order-id {
-            font-size: 1.2rem;
+        .order-title {
+            font-size: 1.5rem;
             font-weight: 700;
             color: #047857;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .order-title i {
+            margin-right: 0.5rem;
+        }
+
+        .order-details {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .product-image-small {
+            width: 120px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .product-info {
+            background: rgba(255,255,255,0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+        }
+
+        .product-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
             margin-bottom: 0.5rem;
         }
 
-        .order-detail {
-            color: #065f46;
-            font-size: 0.95rem;
+        .product-plan {
+            color: #059669;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
-        .back-button {
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .delivery-info-card {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px solid #3b82f6;
+        }
+
+        .delivery-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .delivery-title i {
+            margin-right: 0.5rem;
+        }
+
+        .delivery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .delivery-item {
+            background: rgba(255,255,255,0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #bfdbfe;
+        }
+
+        .delivery-label {
+            font-weight: 600;
+            color: #1e40af;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .delivery-value {
+            color: #1f2937;
+            font-weight: 500;
+        }
+
+        .support-section {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .support-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #92400e;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .support-item {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .support-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .support-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--warm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .support-item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .support-item-text {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .support-contact {
+            color: #92400e;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             background: var(--primary);
             color: white;
             padding: 1rem 2rem;
-            border-radius: 15px;
+            border-radius: 12px;
+            font-weight: 700;
             text-decoration: none;
-            font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            text-align: center;
         }
 
-        .back-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
             color: white;
             text-decoration: none;
         }
 
-        .back-button i {
-            margin-right: 0.5rem;
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            color: #374151;
+            border: 2px solid #667eea;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+        }
+
+        .next-steps {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .steps-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .steps-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .step-item {
+            background: rgba(255,255,255,0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .step-text {
+            font-size: 0.9rem;
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .success-container {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .success-title {
+                font-size: 2rem;
+            }
+            
+            .order-details {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .delivery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="success-container">
-        <div id="testBadge" class="test-badge" style="display: none;">
-            <i class="fas fa-flask mr-1"></i>
-            テストモード
-        </div>
-        
-        <div class="success-icon">
-            <i class="fas fa-check"></i>
-        </div>
-        
-        <h1 class="success-title">ご注文ありがとうございます！</h1>
-        
-        <p class="success-text" id="successMessage">
-            ご注文を承りました。<br>
-            確認メールをお送りしておりますので、ご確認ください。
-        </p>
-        
-        <div class="order-info">
-            <div class="order-id" id="orderId">注文ID: 読み込み中...</div>
-            <div class="order-detail">
-                商品の発送準備が完了次第、配送状況をメールでお知らせいたします。
+    <!-- Header -->
+    <header class="header-gradient sticky top-0 z-50 shadow-lg backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold brand-gradient">&ROPSY</h1>
+                    <span class="ml-3 text-sm text-gray-600">公式サイト</span>
+                </div>
             </div>
         </div>
-        
-        <a href="index.html" class="back-button">
-            <i class="fas fa-home"></i>
-            トップページに戻る
-        </a>
+    </header>
+
+    <div class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="success-container">
+                <!-- Success Icon -->
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+
+                <!-- Success Message -->
+                <h1 class="success-title">ご注文ありがとうございます！</h1>
+                <p class="success-subtitle">ご注文を正常に受け付けいたしました。確認メールをお送りしておりますのでご確認ください。</p>
+
+                <!-- Order Summary -->
+                <div class="order-summary-card">
+                    <h2 class="order-title">
+                        <i class="fas fa-receipt"></i>
+                        ご注文内容
+                    </h2>
+                    
+                    <div class="order-details">
+                        <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
+                             alt="カリウムfor Beauty" class="product-image-small">
+                        
+                        <div class="product-info">
+                            <div class="product-name">カリウムfor Beauty</div>
+                            <div class="product-plan" id="orderPlan">単品購入</div>
+                            <div class="product-price" id="orderPrice">¥2,100</div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                        <p style="color: #047857; font-weight: 600; margin: 0;">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            注文ID: <span id="orderId">ROH-" + Date.now()</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Delivery Information -->
+                <div class="delivery-info-card">
+                    <h2 class="delivery-title">
+                        <i class="fas fa-truck"></i>
+                        配送・お支払い情報
+                    </h2>
+                    
+                    <div class="delivery-grid">
+                        <div class="delivery-item">
+                            <div class="delivery-label">お届け予定日</div>
+                            <div class="delivery-value" id="deliveryDate">2-3営業日以内</div>
+                        </div>
+                        <div class="delivery-item">
+                            <div class="delivery-label">お支払い方法</div>
+                            <div class="delivery-value">クレジットカード</div>
+                        </div>
+                        <div class="delivery-item">
+                            <div class="delivery-label">決済状況</div>
+                            <div class="delivery-value" style="color: #059669; font-weight: 600;">
+                                <i class="fas fa-check-circle mr-1"></i>決済完了
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Information -->
+                <div class="support-section">
+                    <h2 class="support-title">サポート・お問い合わせ</h2>
+                    
+                    <div class="support-grid">
+                        <div class="support-item">
+                            <div class="support-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="support-item-title">お電話でのお問い合わせ</div>
+                            <div class="support-item-text">平日 9:00-18:00</div>
+                            <div class="support-contact">050-5897-5020</div>
+                        </div>
+                        
+                        <div class="support-item">
+                            <div class="support-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="support-item-title">メールでのお問い合わせ</div>
+                            <div class="support-item-text">24時間受付（返信は営業時間内）</div>
+                            <div class="support-contact">support@andropsy.com</div>
+                        </div>
+                        
+                        <div class="support-item">
+                            <div class="support-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="support-item-title">30日間返金保証</div>
+                            <div class="support-item-text">ご満足いただけない場合</div>
+                            <div class="support-contact">全額返金いたします</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="next-steps">
+                    <h3 class="steps-title">今後の流れ</h3>
+                    
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-text">
+                                <strong>確認メール送信</strong><br>
+                                ご注文の詳細をメールでお送りします
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-text">
+                                <strong>商品発送</strong><br>
+                                1-2営業日以内に発送いたします
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-text">
+                                <strong>お届け</strong><br>
+                                2-3営業日でお手元にお届け
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <div class="step-text">
+                                <strong>ご利用開始</strong><br>
+                                毎日の美と健康をサポート開始
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="index.html" class="btn-secondary">
+                        <i class="fas fa-home mr-2"></i>
+                        トップページに戻る
+                    </a>
+                    <a href="order.html" class="btn-primary">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        追加注文する
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // URLパラメータから注文情報を取得
-        const urlParams = new URLSearchParams(window.location.search);
-        const orderId = urlParams.get('order');
-        const isTest = urlParams.get('test') === 'true';
-        
-        if (isTest) {
-            document.getElementById('testBadge').style.display = 'block';
-            document.getElementById('successMessage').innerHTML = 
-                'テスト注文を承りました。<br>' +
-                '実際の決済は発生していません。<br>' +
-                '本番環境では実際の決済が行われ、商品が発送されます。';
+        // URLパラメータから注文情報を取得して表示
+        function displayOrderInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // 注文プラン
+            const plan = urlParams.get('plan');
+            if (plan) {
+                const planElement = document.getElementById('orderPlan');
+                const priceElement = document.getElementById('orderPrice');
+                
+                switch(plan) {
+                    case 'single':
+                        planElement.textContent = '単品購入';
+                        priceElement.textContent = '¥2,100';
+                        break;
+                    case 'double':
+                        planElement.textContent = '2個セット（10%OFF）';
+                        priceElement.textContent = '¥2,880';
+                        break;
+                    case 'triple':
+                        planElement.textContent = '3個セット（15%OFF）';
+                        priceElement.textContent = '¥4,080';
+                        break;
+                }
+            }
+            
+            // 配送予定日
+            const deliveryDate = urlParams.get('delivery');
+            if (deliveryDate) {
+                document.getElementById('deliveryDate').textContent = deliveryDate;
+            }
+            
+            // 注文ID生成
+            const orderId = urlParams.get('orderId') || 'ROH-' + Date.now();
+            document.getElementById('orderId').textContent = orderId;
         }
-        
-        if (orderId) {
-            document.getElementById('orderId').textContent = `注文ID: ${orderId}`;
-        } else {
-            document.getElementById('orderId').textContent = '注文ID: 不明';
-        }
+
+        // ページ読み込み時に実行
+        document.addEventListener('DOMContentLoaded', displayOrderInfo);
     </script>
 </body>
 </html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDr6BehpkUYDeiV9fOtSSgBzvXZPi665jeNgG8Ns5pzVyfVlbOTtI4h49atMNxWkSqtsMlaYhgG4DA%2FBowUcnTXnH%2FJSFIwXFTr%2BwofdRqT1alx3C8WFLvxGSdDRKt7iR3GPJtts1XQ0LBPTyuNy%2B50HRlhsk0iuleUxhydecps8PsxD8CEqKKOLIeNdwuUEBF4820kVJGcvDgWpgcU0QJ7SKRSElH1TIt7EhN5k2L6e5o4O6zLb2qdOlrmAJ1T7247k3XwvpNgNeVpWaYsEC2boGu7kVQatD%2BqzdC4vj3P06PTVwtYQKcvQ2X1N3o2Y%2FGATEwKfBlxGaNWDnOiw7UXrsi8yb3wFjGjI0zLan5xDMJHLJay2pcpfOuuVpsfCElny2XVu2sGjvT7CIdVb7UA5A7IsHFB7%2BJKMMu8KnFjHgv%2BeUtixDRQTCFmXZoJpKKu8wdInVbR1ERPpiLMwpVBSlLqTe%2BRgN7CLsfqEPXqKQa3k5l2YbCQG29iRo9NSlWg%3D%3D";
+        window.__genspark_locale = "ja-JP";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDr6BehpkUYDeiV9fOtSSgBzvXZPi665jeNgG8Ns5pzVyfVlbOTtI4h49atMNxWkSqtsMlaYhgG4DA/BowUcnTXnH/JSFIwXFTr+wofdRqT1alx3C8WFLvxGSdDRKt7iR3GPJtts1XQ0LBPTyuNy+50HRlhsk0iuleUxhydecps8PsxD8CEqKKOLIeNdwuUEBF4820kVJGcvDgWpgcU0QJ7SKRSElH1TIt7EhN5k2L6e5o4O6zLb2qdOlrmAJ1T7247k3XwvpNgNeVpWaYsEC2boGu7kVQatD+qzdC4vj3P06PTVwtYQKcvQ2X1N3o2Y/GATEwKfBlxGaNWDnOiw7UXrsi8yb3wFjGjI0zLan5xDMJHLJay2pcpfOuuVpsfCElny2XVu2sGjvT7CIdVb7UA5A7IsHFB7+JKMMu8KnFjHgv+eUtixDRQTCFmXZoJpKKu8wdInVbR1ERPpiLMwpVBSlLqTe+RgN7CLsfqEPXqKQa3k5l2YbCQG29iRo9NSlWg==";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    
