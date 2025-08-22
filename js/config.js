@@ -1,13 +1,13 @@
 // ROPSY ECサイト設定
 window.ROPSY_CONFIG = {
-    // Stripe設定（テストキーに変更）
+    // Stripe設定（テストキー）
     stripe: {
         publishableKey: 'pk_test_51RvKWh673l6kt5LxMbqybBzwob98vno1yBNYcZxqEL6xxz0gJJCHwOPGa4FLfW7ICaCgqNvqvUjUBLISkDXGK6CA007vAI7Uuw'
     },
     
-    // Google Apps Script API エンドポイント
+    // Google Apps Script API エンドポイント（新URL）
     api: {
-        endpoint: 'https://script.google.com/macros/s/AKfycbyse0ODBiFc2VKlnIUYUOkDA293KDm1n1MO0JOWWXGH-qC2q8vpT8OulDM-ZgzvG2QEyQ/exec'
+        endpoint: 'https://script.google.com/macros/s/AKfycbzBzgRDpNB6m9bJ4yqiSoMPZIMflsOUyW9RwSKn2SRreX_QkvVodaJ2kuPe-aF_TVae/exec'
     },
     
     // EmailJS設定
