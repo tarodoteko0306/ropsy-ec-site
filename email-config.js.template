@@ -1,0 +1,5 @@
+// EmailJS設定ファイル
+// 実際の設定値を入力してemail-config.js作成してください
+window.EMAILJS_SERVICE_ID = 'your_service_id';
+window.EMAILJS_TEMPLATE_ID = 'your_template_id';
+window.EMAILJS_PUBLIC_KEY = 'your_public_key';

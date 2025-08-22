@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【公式】カリウムfor Beauty - 美と健康をサポートする女性のためのサプリメント | &ROPSY</title>
+    <meta name="description" content="女性の美と健康をサポートするカリウムサプリメント。15種類の厳選美容成分配合で毎日の栄養バランスを整えます。">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .header-gradient {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .brand-gradient {
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #fefce8 100%);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            color: #1f2937;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .highlight-text {
+            background: var(--secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .badge {
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .badge-gold {
+            background: var(--warm);
+        }
+
+        .badge-blue {
+            background: var(--accent);
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fef9d7 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            height: 100%;
+        }
+
+        .problem-card:hover {
+            border-color: #f093fb;
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(240, 147, 251, 0.2);
+        }
+
+        .problem-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .problem-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+
+        .problem-text {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fef7ff 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .info-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            color: #374151;
+        }
+
+        .info-list i {
+            margin-right: 0.75rem;
+            margin-top: 0.125rem;
+            font-size: 0.9rem;
+        }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .conclusion-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 1rem;
+        }
+
+        .conclusion-text {
+            font-size: 1.1rem;
+            color: #78350f;
+            line-height: 1.6;
+        }
+
+        .product-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .product-image-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .product-image {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .product-badge {
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.875rem;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .product-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .product-description {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #eff6ff 0%, #fef7ff 100%);
+            border-radius: 15px;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            color: #374151;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .benefits-section {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .benefits-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benefits-title i {
+            margin-right: 0.5rem;
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #374151;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .benefit-item i {
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .usage-scenes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .usage-scene {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .usage-scene:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.12);
+        }
+
+        .usage-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .usage-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .usage-text {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .ingredient-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fef9d7 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .ingredient-card:hover {
+            border-color: #4facfe;
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(79, 172, 254, 0.2);
+        }
+
+        .ingredient-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .ingredient-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredient-amount {
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: var(--accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredient-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .beauty-ingredients {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .beauty-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .beauty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .beauty-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .beauty-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.9);
+        }
+
+        .beauty-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+        }
+
+        .beauty-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .mechanism-section {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .mechanism-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 20px;
+            margin: 2rem auto;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .mechanism-explanation {
+            background: linear-gradient(135deg, #f0f9ff 0%, #fef7ff 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .mechanism-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .mechanism-point {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .mechanism-point h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .mechanism-point p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            background: var(--primary);
+            color: white;
+            padding: 3rem;
+            border-radius: 25px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: #667eea;
+            padding: 1.25rem 3rem;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .cta-primary i {
+            margin-right: 0.75rem;
+        }
+
+        .pricing-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #fef7ff 100%);
+            padding: 3rem;
+            border-radius: 25px;
+            margin: 3rem 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .pricing-card.popular {
+            border-color: #667eea;
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
+        }
+
+        .popular-badge, .discount-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .discount-badge {
+            background: var(--secondary);
+        }
+
+        .pricing-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-old {
+            text-decoration: line-through;
+            color: #9ca3af;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            margin-bottom: 1rem;
+        }
+
+        .price-amount {
+            font-size: 2.25rem;
+            font-weight: 900;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .price-tax {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+
+        .pricing-note {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-button {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: var(--primary);
+            color: white;
+        }
+
+        .pricing-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .guarantee-section {
+            background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid #10b981;
+        }
+
+        .guarantee-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #047857;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .guarantee-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .guarantee-item {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .guarantee-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .guarantee-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #047857;
+            margin-bottom: 0.5rem;
+        }
+
+        .guarantee-desc {
+            color: #059669;
+            font-size: 0.9rem;
+        }
+
+        .company-info {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .company-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+        }
+
+        .company-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            text-align: left;
+        }
+
+        .company-item {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .company-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-value {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.25rem;
+            }
+            
+            .product-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-gradient sticky top-0 z-50 shadow-lg backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold brand-gradient">&ROPSY</h1>
+                    <span class="ml-3 text-sm text-gray-600">公式サイト</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Problem Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="section-title mb-4">このようなお悩みはありませんか？</h2>
+                <p class="text-lg text-gray-600">多くの女性が気になる、日常のポイント</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="problem-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/dc6f262f-3d56-4f05-9580-a30a43f6424f" 
+                         alt="足の重さ" class="problem-image">
+                    <h4 class="problem-title">足の重さ</h4>
+                    <p class="problem-text">夕方になると足が重く感じる</p>
+                </div>
+
+                <div class="problem-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/573b779d-e686-4ecd-8495-b80cbc07a879" 
+                         alt="朝の顔のコンディション" class="problem-image">
+                    <h4 class="problem-title">朝の顔</h4>
+                    <p class="problem-text">朝起きた時の顔のコンディション</p>
+                </div>
+
+                <div class="problem-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/ff005e2a-1973-4e33-b679-502483952ec3" 
+                         alt="体重管理" class="problem-image">
+                    <h4 class="problem-title">体重管理</h4>
+                    <p class="problem-text">理想の体型を維持したい</p>
+                </div>
+
+                <div class="problem-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/60ae21f6-3d9d-4eff-8194-a33b4d7efd68" 
+                         alt="すっきりしない毎日" class="problem-image">
+                    <h4 class="problem-title">すっきりしない</h4>
+                    <p class="problem-text">なんとなくすっきりしない毎日</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div class="alert-box">
+                    <i class="fas fa-exclamation-circle text-red-500 text-2xl mb-2"></i>
+                    <p class="text-xl font-bold text-red-600 mb-2">ひとつでも当てはまる方は要注目！</p>
+                    <p class="text-lg text-gray-700">その原因、<span class="font-bold text-red-500">栄養バランスの偏り</span>の可能性があります</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-16 bg-gradient-to-br from-purple-50 to-pink-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="section-title mb-4">現代女性は栄養バランスが偏りがち</h3>
+                <p class="text-lg text-gray-600 mb-8">忙しい毎日で偏りがちな食生活が影響しています</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="info-card">
+                    <div class="info-header">
+                        <div class="info-icon bg-red-100">
+                            <i class="fas fa-exclamation-triangle text-red-500"></i>
+                        </div>
+                        <h4 class="info-title">栄養バランスの偏りの背景</h4>
+                    </div>
+                    <ul class="info-list">
+                        <li><i class="fas fa-check text-red-500"></i>外食や加工食品の摂取機会が増加</li>
+                        <li><i class="fas fa-check text-red-500"></i>野菜や果物の摂取量が不足</li>
+                        <li><i class="fas fa-check text-red-500"></i>忙しいライフスタイルによる食事の偏り</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-header">
+                        <div class="info-icon bg-blue-100">
+                            <i class="fas fa-heart text-blue-500"></i>
+                        </div>
+                        <h4 class="info-title">カリウムの大切な働き</h4>
+                    </div>
+                    <ul class="info-list">
+                        <li><i class="fas fa-check text-blue-500"></i>体内の水分バランスをサポート</li>
+                        <li><i class="fas fa-check text-blue-500"></i>健康的な毎日に欠かせない栄養素</li>
+                        <li><i class="fas fa-check text-blue-500"></i>美と健康の基盤をサポート</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="conclusion-box">
+                <h4 class="conclusion-title">だからこそ、バランスの良い栄養補給が重要です</h4>
+                <p class="conclusion-text">毎日の食事だけでは不足しがちな栄養素を、効率的に補うことが健康的な毎日への第一歩です。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mechanism Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mechanism-section">
+                <h3 class="section-title mb-4">カリウムの重要な働き</h3>
+                
+                <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/dff7cc15-b0cd-4837-8d63-60d8b64012da" 
+                     alt="カリウムのメカニズム" class="mechanism-image">
+                
+                <div class="mechanism-explanation">
+                    <h4 class="text-xl font-bold text-center mb-4 text-gray-800">体内でのカリウムの役割</h4>
+                    <div class="mechanism-points">
+                        <div class="mechanism-point">
+                            <h4>ナトリウム-カリウムポンプ</h4>
+                            <p>細胞膜を通じてイオンバランスを維持し、正常な細胞機能をサポート</p>
+                        </div>
+                        <div class="mechanism-point">
+                            <h4>水分バランスの調整</h4>
+                            <p>体内の水分分布を適切に保ち、健やかな状態を維持</p>
+                        </div>
+                        <div class="mechanism-point">
+                            <h4>健康的な毎日をサポート</h4>
+                            <p>美と健康の基盤となる重要なミネラル栄養素</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="product-section-unified">
+                <!-- 商品ヘッダー -->
+                <div class="text-center mb-8">
+                    <div class="product-badge">人気No.1</div>
+                    <h2 class="product-title">
+                        カリウム<span class="brand-gradient">for Beauty</span>
+                    </h2>
+                    <div class="flex justify-center space-x-4 mb-6">
+                        <span class="badge badge-gold">
+                            <i class="fas fa-star mr-1"></i>
+                            15種類の厳選美容成分配合
+                        </span>
+                        <span class="badge badge-blue">
+                            <i class="fas fa-certificate mr-1"></i>
+                            栄養機能食品
+                        </span>
+                    </div>
+                </div>
+
+                <!-- メインコンテンツ：2カラム -->
+                <div class="product-main-grid">
+                    <!-- 左側：商品画像 -->
+                    <div class="product-image-section-unified">
+                        <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
+                             alt="カリウムfor Beauty商品画像" class="product-image-unified">
+                    </div>
+
+                    <!-- 右側：商品詳細 -->
+                    <div class="product-info-section">
+                        <!-- 商品説明 -->
+                        <div class="product-desc-unified">
+                            <p class="desc-text-unified">
+                                女性の美と健康をサポートする<br>
+                                <span class="font-bold">15種類の厳選美容成分配合</span>
+                            </p>
+                        </div>
+
+                        <!-- 数値情報 -->
+                        <div class="stats-unified">
+                            <div class="stat-unified">
+                                <div class="stat-number">15</div>
+                                <div class="stat-label">種類の美容成分</div>
+                            </div>
+                            <div class="stat-unified">
+                                <div class="stat-number">1,320</div>
+                                <div class="stat-label">mgカリウム</div>
+                            </div>
+                            <div class="stat-unified">
+                                <div class="stat-number">121</div>
+                                <div class="stat-label">種類の野菜酵素</div>
+                            </div>
+                        </div>
+
+                        <!-- 効果・サポート -->
+                        <div class="benefits-unified">
+                            <h5 class="benefits-title-unified">
+                                <i class="fas fa-gem mr-2"></i>期待できるサポート
+                            </h5>
+                            <div class="benefits-grid">
+                                <div class="benefit-unified">
+                                    <i class="fas fa-balance-scale"></i>
+                                    <span>体内の水分バランス維持をサポート</span>
+                                </div>
+                                <div class="benefit-unified">
+                                    <i class="fas fa-sparkles"></i>
+                                    <span>美容面でのコンディション維持に寄与</span>
+                                </div>
+                                <div class="benefit-unified">
+                                    <i class="fas fa-heart"></i>
+                                    <span>健康的な毎日の基盤づくりに貢献</span>
+                                </div>
+                                <div class="benefit-unified">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>栄養バランスの調整をサポート</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CTA -->
+                        <div class="text-center">
+                            <a href="order.html" class="cta-unified">
+                                <i class="fas fa-shopping-cart mr-2"></i>
+                                今すぐ注文する
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Scenes Section -->        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="section-title mb-4">様々なシーンでご利用いただけます</h3>
+            <p class="text-center text-lg text-gray-600 mb-8">毎日の習慣として、お好きなタイミングでお召し上がりください</p>
+            
+            <div class="usage-scenes">
+                <div class="usage-scene">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/1bbe0bc6-370f-4b52-8222-91a2530a1f7f" 
+                         alt="朝のキッチンで" class="usage-image">
+                    <h4 class="usage-title">朝のキッチンで</h4>
+                    <p class="usage-text">1日のスタートに3粒</p>
+                </div>
+
+                <div class="usage-scene">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/0af7915b-41d6-4301-a63b-4c5a0fc85cff" 
+                         alt="お水と一緒に" class="usage-image">
+                    <h4 class="usage-title">お水と一緒に</h4>
+                    <p class="usage-text">飲みやすい小粒タブレット</p>
+                </div>
+
+                <div class="usage-scene">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/8ab29cf0-724a-4297-a4a5-aaf5a7e32698" 
+                         alt="リラックスタイムに" class="usage-image">
+                    <h4 class="usage-title">リラックスタイムに</h4>
+                    <p class="usage-text">夕食後に3粒</p>
+                </div>
+
+                <div class="usage-scene">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/7af99483-810a-4ff7-a2f7-501b9a71a2d8" 
+                         alt="ワークアウト後に" class="usage-image">
+                    <h4 class="usage-title">ワークアウト後に</h4>
+                    <p class="usage-text">運動後の栄養補給に</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ingredients Section -->
+    <section class="py-16 bg-gradient-to-br from-purple-50 to-pink-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="section-title mb-4">厳選された配合成分</h3>
+                <p class="text-lg text-gray-600">女性の美と健康をサポートする成分を贅沢に配合</p>
+            </div>
+
+            <div class="ingredients-grid">
+                <div class="ingredient-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/4521e5a2-05f9-4cc6-b065-8be832b68375" 
+                         alt="カリウム豊富な食材" class="ingredient-image">
+                    <h4 class="ingredient-name">カリウム</h4>
+                    <p class="ingredient-amount">1,320mg</p>
+                    <p class="ingredient-description">健康的な毎日をサポート</p>
+                </div>
+
+                <div class="ingredient-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/7420dbe7-392d-4a59-85b7-69d4cc6f68ed" 
+                         alt="NMN成分イメージ" class="ingredient-image">
+                    <h4 class="ingredient-name">NMN</h4>
+                    <p class="ingredient-amount">話題の成分</p>
+                    <p class="ingredient-description">健やかさをサポート</p>
+                </div>
+
+                <div class="ingredient-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/352b9eba-15bd-4adf-bf5d-1f5206d95545" 
+                         alt="ビタミンC（レモン）" class="ingredient-image">
+                    <h4 class="ingredient-name">ビタミンC</h4>
+                    <p class="ingredient-amount">栄養機能食品</p>
+                    <p class="ingredient-description">健やかな毎日をサポート</p>
+                </div>
+
+                <div class="ingredient-card">
+                    <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/11508765-5f68-4c5f-89ed-911b3416126b" 
+                         alt="野菜発酵酵素" class="ingredient-image">
+                    <h4 class="ingredient-name">野菜発酵酵素</h4>
+                    <p class="ingredient-amount">121種類</p>
+                    <p class="ingredient-description">サラシア、高麗人参、ブラックベリー、ブルーベリー、ブロッコリー、ほうれん草、生姜、みかん、パイナップル、りんご、メロンなど</p>
+                </div>
+            </div>
+
+            <div class="beauty-ingredients">
+                <h4 class="beauty-title">女性に嬉しい美容成分</h4>
+                <div class="beauty-grid">
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/ec92a396-1862-4551-b96b-e89f780708d3" 
+                             alt="プラセンタ" class="beauty-image">
+                        <h5 class="beauty-name">プラセンタ</h5>
+                    </div>
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/32973771-94ee-43af-99b1-0b565740d413" 
+                             alt="ヒアルロン酸" class="beauty-image">
+                        <h5 class="beauty-name">ヒアルロン酸</h5>
+                    </div>
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/25be2846-b612-4c2e-97ea-b299f346704d" 
+                             alt="コラーゲン" class="beauty-image">
+                        <h5 class="beauty-name">コラーゲン</h5>
+                    </div>
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/22_generated/3c48c683-9b7a-4a39-ac7c-843ea37f6bf9" 
+                             alt="マカ" class="beauty-image">
+                        <h5 class="beauty-name">マカ</h5>
+                    </div>
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/05eae04b-4617-45de-b637-9f40676b215d" 
+                             alt="アサイー" class="beauty-image">
+                        <h5 class="beauty-name">アサイー</h5>
+                    </div>
+                    <div class="beauty-item">
+                        <img src="https://cdn1.genspark.ai/user-upload-image/gpt_image_generated/e4df24f9-49e9-4a48-9909-028c9faee78a" 
+                             alt="ブドウ" class="beauty-image">
+                        <h5 class="beauty-name">ブドウ</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Instructions -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="section-title mb-8">毎日の習慣として</h3>
+            <p class="text-center text-lg text-gray-600 mb-12">継続してお使いいただくことで、より実感していただけます</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">1日6粒を目安に</h4>
+                    <p class="text-gray-600">朝食後3粒、夕食後3粒が推奨</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">水またはぬるま湯と一緒に</h4>
+                    <p class="text-gray-600">飲みやすい小粒タブレット</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">毎日続けることが大切</h4>
+                    <p class="text-gray-600">継続することで実感していただけます</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h3 class="section-title mb-4">お得な購入プラン</h3>
+                <p class="text-lg text-gray-600">継続してお使いいただくことで、より実感していただけます</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h4 class="pricing-title">単品購入</h4>
+                    <div class="pricing-price">
+                        <span class="price-amount">¥1,600</span>
+                        <span class="price-tax">（税込）</span>
+                    </div>
+                    <p class="pricing-note">送料別途500円</p>
+                    <a href="order.html" class="pricing-button">注文する</a>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="popular-badge">10%OFF</div>
+                    <h4 class="pricing-title">2個セット</h4>
+                    <div class="pricing-old">¥3,200</div>
+                    <div class="pricing-price">
+                        <span class="price-amount">¥2,880</span>
+                        <span class="price-tax">（税込）</span>
+                    </div>
+                    <p class="pricing-note">送料無料</p>
+                    <a href="order.html" class="pricing-button">注文する</a>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="discount-badge">15%OFF</div>
+                    <h4 class="pricing-title">3個セット</h4>
+                    <div class="pricing-old">¥4,800</div>
+                    <div class="pricing-price">
+                        <span class="price-amount">¥4,080</span>
+                        <span class="price-tax">（税込）</span>
+                    </div>
+                    <p class="pricing-note">送料無料</p>
+                    <a href="order.html" class="pricing-button">注文する</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="guarantee-section">
+                <h3 class="guarantee-title">安心の保証制度</h3>
+                <div class="guarantee-content">
+                    <div class="guarantee-item">
+                        <div class="guarantee-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <div class="guarantee-text">送料無料</div>
+                        <div class="guarantee-desc">2個セット以上で送料無料</div>
+                    </div>
+                    <div class="guarantee-item">
+                        <div class="guarantee-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="guarantee-text">30日間返金保証</div>
+                        <div class="guarantee-desc">ご満足いただけない場合は全額返金</div>
+                    </div>
+                    <div class="guarantee-item">
+                        <div class="guarantee-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="guarantee-text">迅速配送</div>
+                        <div class="guarantee-desc">3-5営業日以内に発送</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="section-title mb-4">お客様の声</h3>
+                <p class="text-lg text-gray-600">実際にご利用いただいているお客様からのお声をご紹介</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 text-sm">40代女性</span>
+                    </div>
+                    <p class="text-gray-700">"夕方の足の重さが気にならなくなりました。小粒で飲みやすく、毎日続けやすいのも嬉しいです。"</p>
+                </div>
+
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 text-sm">30代女性</span>
+                    </div>
+                    <p class="text-gray-700">"朝起きた時のコンディションが良くなった気がします。NMNとビタミンCも一緒に摂れて一石二鳥です。"</p>
+                </div>
+
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 text-sm">50代女性</span>
+                    </div>
+                    <p class="text-gray-700">"体のだるさが軽減され、毎日すっきりと過ごせています。野菜酵素も入っているのが魅力的。"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Section -->
+    <section class="py-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="section-title mb-4">安心・安全への取り組み</h3>
+                <p class="text-lg text-gray-600">お客様に安心してお使いいただけるよう、徹底した品質管理を行っています</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg p-6 text-center shadow-lg">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-certificate text-blue-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">GMP認定工場</h4>
+                    <p class="text-gray-600">国内のGMP認定工場で製造し、厳格な品質管理のもと生産しています。</p>
+                </div>
+
+                <div class="bg-white rounded-lg p-6 text-center shadow-lg">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-leaf text-green-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">厳選原材料</h4>
+                    <p class="text-gray-600">品質にこだわった厳選した原材料のみを使用しています。</p>
+                </div>
+
+                <div class="bg-white rounded-lg p-6 text-center shadow-lg">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-microscope text-purple-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">品質検査</h4>
+                    <p class="text-gray-600">第三者機関による厳しい品質検査をクリアした製品をお届けします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="section-title mb-4">よくあるご質問</h3>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg p-6 border-l-4 border-pink-400">
+                    <h4 class="text-lg font-bold mb-2">Q. 1日にどのくらい飲めばよいですか？</h4>
+                    <p class="text-gray-700">A. 1日6粒を目安に、水またはぬるま湯と一緒にお召し上がりください。</p>
+                </div>
+
+                <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg p-6 border-l-4 border-pink-400">
+                    <h4 class="text-lg font-bold mb-2">Q. いつ飲むのがおすすめですか？</h4>
+                    <p class="text-gray-700">A. 食後に分けて飲むことをおすすめします。朝食後3粒、夕食後3粒が目安です。</p>
+                </div>
+
+                <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg p-6 border-l-4 border-pink-400">
+                    <h4 class="text-lg font-bold mb-2">Q. どのような成分が含まれていますか？</h4>
+                    <p class="text-gray-700">A. カリウムをはじめ、NMN、ビタミンC、121種類の野菜発酵酵素、プラセンタ、ヒアルロン酸、コラーゲンなどの美容成分を配合しています。</p>
+                </div>
+
+                <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg p-6 border-l-4 border-pink-400">
+                    <h4 class="text-lg font-bold mb-2">Q. 他のサプリメントと一緒に飲んでも大丈夫ですか？</h4>
+                    <p class="text-gray-700">A. 基本的には問題ありませんが、心配な場合は医師や薬剤師にご相談ください。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Info Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="company-info">
+                <h3 class="company-title">会社情報</h3>
+                <div class="company-details">
+                    <div class="company-item">
+                        <div class="company-label">会社名</div>
+                        <div class="company-value">合同会社ピュアラボ</div>
+                    </div>
+                    <div class="company-item">
+                        <div class="company-label">所在地</div>
+                        <div class="company-value">〒104-0061<br>東京都中央区銀座1丁目22番11号<br>銀座大竹ビジデンス2F</div>
+                    </div>
+                    <div class="company-item">
+                        <div class="company-label">お客様相談室</div>
+                        <div class="company-value">050-5897-5020<br>受付時間：平日 9:00-18:00</div>
+                    </div>
+                    <div class="company-item">
+                        <div class="company-label">法人番号</div>
+                        <div class="company-value">4010003041664</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="cta-section">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="cta-title">健康的な毎日を始めませんか</h3>
+            <p class="cta-subtitle">カリウムfor Beautyで、理想の自分へ</p>
+            <a href="order.html" class="cta-primary">
+                <i class="fas fa-shopping-cart"></i>
+                今すぐ注文する
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="mb-4">※本品は、特定保健用食品と異なり、消費者庁長官による個別審査を受けたものではありません。</p>
+                <p class="mb-4">※食生活は、主食、主菜、副菜を基本に、食事のバランスを。</p>
+                <p class="text-sm text-gray-400">© 2024 &ROPSY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Stripe Integration -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        // Initialize Stripe with live publishable key
+        const stripe = Stripe('pk_live_51RvKWh673l6kt5LxH6Tyz46zGR5KbC9JkWvD5UR0Tkt0Ofobap7qptE8OkPVLFo08KvqbcEwy4T1l96k3xAVaVaO00vqUtav39');
+        
+        // Google Sheets Integration for Customer Management
+        const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1yfQzbzw5QHRvZt3CvLxukTjJtZJav3nshNaY4Fxl8z8/edit?gid=0#gid=0';
+        
+        // Customer data logging function
+        function logCustomerData(customerData) {
+            // This would be implemented with Google Apps Script or backend service
+            console.log('Customer data logged:', customerData);
+            
+            // Send data to Google Sheets via Apps Script Web App
+            // fetch('YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(customerData)
+            // });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Analytics tracking for button clicks
+        document.querySelectorAll('a[href="order.html"]').forEach(button => {
+            button.addEventListener('click', function() {
+                // Track conversion events
+                console.log('Order button clicked');
+                
+                // Google Analytics event (if integrated)
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'click', {
+                        'event_category': 'CTA',
+                        'event_label': 'Order Button'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDkkBMNcx0AckKAjLjV%2BDFCuTYAuk5qzoZNWsE4rukmsQXjGza%2Fuch4v%2F5p3Eoh5JNv25dfmJ00u962nJyisj3xo1JwBf91mFgADS9ASKN3Tzuxfus3F4sSxGoKwHhK8LaUr1dwxYeyu5QPw8hJf4ucsskTJHWiII30j46nHZ9ns51y1flF9z4j4Pe3lZv0w0uFmsNt303KO6%2BcLa08lh2KkwTcuLSUSCL238d%2FFpMVGvH0Wx0U3xeBbH4PX%2B%2FOyctt2vnBktZ9XIoWxMdLFN%2Fvt7J9fnABraNfVMmcN3mDMZ8f24s5ySbXWxQhCXoPhxmqhDy%2FnX68VzlxU86Br0uCo1NmLNZwuGHBqBYI%2FRLe1ct%2FKmNzV4fYnfy9l5mmJ24WC%2BQP84m%2FI4V1o%2Ft%2B7o2vSpxPQckRLEbDV%2B7OxQqbQd332lJf1GjtWml0fZnM7g32oMucby4lvWBV6woa5g6S1hsKgDqgrKdBS2CpL5ZPR6x7tNoaaGplBqr%2BBE0yLEwTVPCUD0ar6Tq5Bufy4HgLc%3D";
+        window.__genspark_locale = "ja-JP";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDkkBMNcx0AckKAjLjV+DFCuTYAuk5qzoZNWsE4rukmsQXjGza/uch4v/5p3Eoh5JNv25dfmJ00u962nJyisj3xo1JwBf91mFgADS9ASKN3Tzuxfus3F4sSxGoKwHhK8LaUr1dwxYeyu5QPw8hJf4ucsskTJHWiII30j46nHZ9ns51y1flF9z4j4Pe3lZv0w0uFmsNt303KO6+cLa08lh2KkwTcuLSUSCL238d/FpMVGvH0Wx0U3xeBbH4PX+/Oyctt2vnBktZ9XIoWxMdLFN/vt7J9fnABraNfVMmcN3mDMZ8f24s5ySbXWxQhCXoPhxmqhDy/nX68VzlxU86Br0uCo1NmLNZwuGHBqBYI/RLe1ct/KmNzV4fYnfy9l5mmJ24WC+QP84m/I4V1o/t+7o2vSpxPQckRLEbDV+7OxQqbQd332lJf1GjtWml0fZnM7g32oMucby4lvWBV6woa5g6S1hsKgDqgrKdBS2CpL5ZPR6x7tNoaaGplBqr+BE0yLEwTVPCUD0ar6Tq5Bufy4HgLc=";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    

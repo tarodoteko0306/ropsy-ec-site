@@ -1,0 +1,209 @@
+<!-- 商品紹介部分の修正版 - index.htmlの該当部分と置き換え -->
+<section class="product-showcase">
+    <div class="product-container">
+        <div class="product-header">
+            <div class="badge">人気No.1</div>
+            <h2 class="product-title">カリウムfor Beauty</h2>
+            <p class="product-subtitle">15種類の厳選美容成分配合 栄養機能食品</p>
+            <p class="product-description">女性の美と健康をサポートする 15種類の厳選美容成分配合</p>
+        </div>
+        
+        <div class="product-content">
+            <div class="product-image-section">
+                <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" alt="カリウムfor Beauty" class="product-image">
+            </div>
+            
+            <div class="product-details-section">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-number">15</div>
+                        <div class="feature-text">種類の美容成分</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-number">1,320</div>
+                        <div class="feature-text">mgカリウム</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-number">121</div>
+                        <div class="feature-text">種類の野菜酵素</div>
+                    </div>
+                </div>
+                
+                <div class="benefits-section">
+                    <h4 class="benefits-title">期待できるサポート</h4>
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">💧</span>
+                            <span>体内の水分バランス維持をサポート</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">✨</span>
+                            <span>美容面でのコンディション維持に寄与</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">❤️</span>
+                            <span>健康的な毎日の基盤づくりに貢献</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🌿</span>
+                            <span>栄養バランスの調整をサポート</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.product-showcase {
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f8f9ff 0%, #e6f3ff 100%);
+}
+
+.product-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.product-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.badge {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.product-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.product-subtitle {
+    font-size: 18px;
+    color: #667eea;
+    margin-bottom: 8px;
+}
+
+.product-description {
+    font-size: 16px;
+    color: #666;
+}
+
+.product-content {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+.product-image-section {
+    display: flex;
+    justify-content: center;
+}
+
+.product-image {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.product-details-section {
+    padding-left: 20px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 20px 15px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+}
+
+.feature-number {
+    font-size: 32px;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 8px;
+    line-height: 1;
+}
+
+.feature-text {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+.benefits-section {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.benefits-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.benefits-list {
+    display: grid;
+    gap: 12px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #555;
+    padding: 10px 0;
+}
+
+.benefit-icon {
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+@media (max-width: 768px) {
+    .product-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .product-details-section {
+        padding-left: 0;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .product-title {
+        font-size: 28px;
+    }
+}
+</style>
