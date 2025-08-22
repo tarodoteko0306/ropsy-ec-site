@@ -1,4 +1,4 @@
-// Stripe設定
+// Stripe設定（本番用）
 window.STRIPE_CONFIG = {
     publishableKey: 'pk_live_51RvKWh673l6kt5LxH6Tyz46zGR5KbC9JkWvD5UR0Tkt0Ofobap7qptE8OkPVLFo08KvqbcEwy4T1l96k3xAVaO00vqUtav39',
     webhookEndpoint: 'https://script.google.com/macros/s/AKfycbypzzmH-SsoK8urIOLJfV6msGEiQo53GcRSYPBioO865VYXf3aHsffYl8GwyoBjuWZgGQ/exec'

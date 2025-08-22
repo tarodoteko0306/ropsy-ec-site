@@ -7,137 +7,446 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        :root {
+            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #fefce8 100%);
+            min-height: 100vh;
+        }
+
+        .header-gradient {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .brand-gradient {
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .order-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .product-summary {
+            background: linear-gradient(135deg, #eff6ff 0%, #fef7ff 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .product-image {
+            width: 150px;
+            height: auto;
+            margin: 0 auto 1rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 0.5rem;
+            color: #667eea;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .option-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .option-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+        }
+
+        .option-card .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .frequency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .frequency-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .frequency-card:hover {
+            border-color: #10b981;
+            transform: translateY(-2px);
+        }
+
+        .frequency-card.selected {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #10b98110 0%, #34d39910 100%);
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .delivery-info {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid #10b981;
+        }
+
+        .order-summary {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .order-button {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 1.25rem 2rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .order-button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .order-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .order-container {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .option-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .frequency-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<body style="font-family: 'Noto Sans JP', sans-serif; background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #fefce8 100%); min-height: 100vh;">
-    
+<body>
     <!-- Header -->
-    <header style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.2); position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        <div style="max-width: 1280px; margin: 0 auto; padding: 0 1rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; height: 64px;">
-                <div style="display: flex; align-items: center;">
-                    <h1 style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">&ROPSY</h1>
-                    <span style="margin-left: 0.75rem; font-size: 0.875rem; color: #6b7280;">公式サイト</span>
+    <header class="header-gradient sticky top-0 z-50 shadow-lg backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold brand-gradient">&ROPSY</h1>
+                    <span class="ml-3 text-sm text-gray-600">公式サイト</span>
                 </div>
-                <a href="index.html" style="color: #6b7280; text-decoration: none; transition: color 0.3s;">
-                    <i class="fas fa-arrow-left" style="margin-right: 0.25rem;"></i>戻る
+                <a href="index.html" class="text-gray-600 hover:text-purple-600 transition-colors">
+                    <i class="fas fa-arrow-left mr-1"></i>戻る
                 </a>
             </div>
         </div>
     </header>
 
-    <div style="padding: 4rem 0;">
-        <div style="max-width: 800px; margin: 0 auto; padding: 0 1rem;">
-            <div style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border-radius: 25px; padding: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
-                
+    <div class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="order-container">
                 <!-- 商品サマリー -->
-                <div style="background: linear-gradient(135deg, #eff6ff 0%, #fef7ff 100%); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; text-align: center;">
-                    <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" alt="カリウムfor Beauty" style="width: 150px; height: auto; margin: 0 auto 1rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+                <div class="product-summary">
+                    <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
+                         alt="カリウムfor Beauty" class="product-image">
                     <h2 style="font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">カリウムfor Beauty</h2>
                     <p style="color: #6b7280;">15種類の厳選美容成分配合</p>
                 </div>
 
                 <form id="orderForm">
                     <!-- 商品オプション選択 -->
-                    <div style="margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem; display: flex; align-items: center;">
-                            <i class="fas fa-shopping-bag" style="margin-right: 0.5rem; color: #667eea;"></i>
+                    <div class="mb-8">
+                        <h3 class="section-title">
+                            <i class="fas fa-shopping-bag"></i>
                             商品プランを選択
                         </h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;" id="productOptions">
-                            <div class="option-card" data-plan="single" data-price="1600" data-shipping="500" data-total="2100" style="background: rgba(255, 255, 255, 0.8); border: 2px solid #e5e7eb; border-radius: 15px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                        <div class="option-grid" id="productOptions">
+                            <div class="option-card" data-plan="single" data-price="1600" data-shipping="500" data-original="1600">
                                 <div style="font-size: 1.1rem; font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">単品購入</div>
-                                <div style="font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">¥1,600</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; background: var(--primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">¥1,600</div>
                                 <div style="color: #6b7280; font-size: 0.85rem;">送料別途¥500</div>
                             </div>
-                            <div class="option-card" data-plan="double" data-price="2880" data-shipping="0" data-total="2880" style="background: rgba(255, 255, 255, 0.8); border: 2px solid #e5e7eb; border-radius: 15px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s ease; position: relative;">
-                                <div style="position: absolute; top: -8px; right: -8px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; font-weight: bold;">10%OFF</div>
+                            <div class="option-card" data-plan="double" data-price="2880" data-shipping="0" data-original="3200">
+                                <div class="badge">10%OFF</div>
                                 <div style="font-size: 1.1rem; font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">2個セット</div>
                                 <div style="text-decoration: line-through; color: #9ca3af; font-size: 0.9rem; margin-bottom: 0.25rem;">¥3,200</div>
-                                <div style="font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">¥2,880</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; background: var(--primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">¥2,880</div>
                                 <div style="color: #6b7280; font-size: 0.85rem;">送料無料</div>
                             </div>
-                            <div class="option-card" data-plan="triple" data-price="4080" data-shipping="0" data-total="4080" style="background: rgba(255, 255, 255, 0.8); border: 2px solid #e5e7eb; border-radius: 15px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s ease; position: relative;">
-                                <div style="position: absolute; top: -8px; right: -8px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; font-weight: bold;">15%OFF</div>
+                            <div class="option-card" data-plan="triple" data-price="4080" data-shipping="0" data-original="4800">
+                                <div class="badge">15%OFF</div>
                                 <div style="font-size: 1.1rem; font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">3個セット</div>
                                 <div style="text-decoration: line-through; color: #9ca3af; font-size: 0.9rem; margin-bottom: 0.25rem;">¥4,800</div>
-                                <div style="font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">¥4,080</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; background: var(--primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">¥4,080</div>
                                 <div style="color: #6b7280; font-size: 0.85rem;">送料無料</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 定期購入オプション -->
+                    <div class="mb-8" id="subscriptionSection" style="display: none;">
+                        <h3 class="section-title">
+                            <i class="fas fa-sync-alt"></i>
+                            配送頻度を選択（定期購入でさらにお得）
+                        </h3>
+                        <div class="frequency-grid" id="frequencyOptions">
+                            <div class="frequency-card" data-frequency="monthly" data-discount="0.75">
+                                <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">毎月</div>
+                                <div style="color: #10b981; font-weight: 600; font-size: 0.9rem;">25% OFF</div>
+                            </div>
+                            <div class="frequency-card" data-frequency="bimonthly" data-discount="0.8">
+                                <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">2ヶ月毎</div>
+                                <div style="color: #10b981; font-weight: 600; font-size: 0.9rem;">20% OFF</div>
+                            </div>
+                            <div class="frequency-card" data-frequency="quarterly" data-discount="0.85">
+                                <div style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">3ヶ月毎</div>
+                                <div style="color: #10b981; font-weight: 600; font-size: 0.9rem;">15% OFF</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- 配送情報 -->
-                    <div style="background: rgba(255, 255, 255, 0.5); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem; display: flex; align-items: center;">
-                            <i class="fas fa-truck" style="margin-right: 0.5rem; color: #667eea;"></i>
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-truck"></i>
                             配送情報
                         </h3>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                            <div>
-                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">お名前（姓）*</label>
-                                <input type="text" id="lastName" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="form-group">
+                                <label class="form-label">お名前（姓）*</label>
+                                <input type="text" class="form-input" id="lastName" required>
                             </div>
-                            <div>
-                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">お名前（名）*</label>
-                                <input type="text" id="firstName" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">お名前（名）*</label>
+                                <input type="text" class="form-input" id="firstName" required>
                             </div>
-                        </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                            <div>
-                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">メールアドレス*</label>
-                                <input type="email" id="email" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">メールアドレス*</label>
+                                <input type="email" class="form-input" id="email" required>
                             </div>
-                            <div>
-                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">電話番号*</label>
-                                <input type="tel" id="phone" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">電話番号*</label>
+                                <input type="tel" class="form-input" id="phone" required>
                             </div>
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">郵便番号*</label>
-                            <input type="text" id="zipCode" placeholder="例：123-4567" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
-                        </div>
-                        <div>
-                            <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">住所*</label>
-                            <input type="text" id="address" placeholder="都道府県市区町村番地建物名" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                            <div class="form-group md:col-span-2">
+                                <label class="form-label">郵便番号*</label>
+                                <input type="text" class="form-input" id="zipCode" placeholder="例：123-4567" required>
+                            </div>
+                            <div class="form-group md:col-span-2">
+                                <label class="form-label">住所*</label>
+                                <input type="text" class="form-input" id="address" placeholder="都道府県市区町村番地建物名" required>
+                            </div>
                         </div>
                     </div>
 
                     <!-- お支払い情報 -->
-                    <div style="background: rgba(255, 255, 255, 0.5); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
-                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem; display: flex; align-items: center;">
-                            <i class="fas fa-credit-card" style="margin-right: 0.5rem; color: #667eea;"></i>
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-credit-card"></i>
                             お支払い情報
                         </h3>
-                        <div style="margin-bottom: 1rem;">
-                            <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">カード番号*</label>
-                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">カード番号*</label>
+                            <input type="text" class="form-input" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
                         </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                            <div>
-                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">有効期限*</label>
-                                <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="form-group">
+                                <label class="form-label">有効期限*</label>
+                                <input type="text" class="form-input" id="cardExpiry" placeholder="MM/YY" maxlength="5" required>
                             </div>
-                            <div>
-                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">セキュリティコード*</label>
-                                <input type="text" id="cardCVC" placeholder="123" maxlength="4" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">セキュリティコード*</label>
+                                <input type="text" class="form-input" id="cardCVC" placeholder="123" maxlength="4" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 配達予定日 -->
+                    <div class="delivery-info">
+                        <div style="font-weight: 700; color: #047857; margin-bottom: 1rem; display: flex; align-items: center; font-size: 1.1rem;">
+                            <i class="fas fa-calendar-alt" style="margin-right: 0.5rem;"></i>
+                            お届け予定日
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;" id="deliverySchedule">
+                            <div style="background: rgba(255, 255, 255, 0.8); padding: 1rem; border-radius: 10px; border: 1px solid #d1fae5;">
+                                <div style="font-weight: 600; color: #065f46; font-size: 0.9rem; margin-bottom: 0.25rem;">初回お届け</div>
+                                <div style="color: #047857; font-weight: 500;" id="firstDelivery">商品を選択してください</div>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.8); padding: 1rem; border-radius: 10px; border: 1px solid #d1fae5; display: none;" id="nextDeliveryItem">
+                                <div style="font-weight: 600; color: #065f46; font-size: 0.9rem; margin-bottom: 0.25rem;">次回お届け</div>
+                                <div style="color: #047857; font-weight: 500;" id="nextDelivery">-</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- 注文サマリー -->
-                    <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                    <div class="order-summary">
                         <h3 style="font-size: 1.25rem; font-weight: 700; color: #92400e; margin-bottom: 1rem;">ご注文内容</h3>
                         <div id="orderSummaryContent">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <div class="summary-row">
                                 <span>商品を選択してください</span>
                                 <span>¥0</span>
                             </div>
                         </div>
                     </div>
 
+                    <!-- ローディング -->
+                    <div class="loading" id="loadingSection">
+                        <div class="spinner"></div>
+                        <p>決済処理中です...</p>
+                        <p style="font-size: 0.9rem; color: #6b7280;">しばらくお待ちください</p>
+                    </div>
+
                     <!-- 注文ボタン -->
-                    <button type="submit" id="orderButton" disabled style="width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.25rem 2rem; border: none; border-radius: 15px; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3); opacity: 0.5;">
-                        <i class="fas fa-credit-card" style="margin-right: 0.5rem;"></i>
+                    <button type="submit" class="order-button" id="orderButton" disabled>
+                        <i class="fas fa-credit-card mr-2"></i>
                         ご注文を確定する
                     </button>
                 </form>
@@ -146,44 +455,179 @@
     </div>
 
     <script>
-        // 商品選択機能
-        document.querySelectorAll('.option-card').forEach(card => {
+        // 設定
+        const CONFIG = {
+            stripe: {
+                publishableKey: 'pk_live_51RvKWh673l6kt5LxH6Tyz46zGR5KbC9JkWvD5UR0Tkt0Ofobap7qptE8OkPVLFo08KvqbcEwy4T1l96k3xAVaO00vqUtav39',
+                webhookEndpoint: 'https://script.google.com/macros/s/AKfycbypzzmH-SsoK8urIOLJfV6msGEiQo53GcRSYPBioO865VYXf3aHsffYl8GwyoBjuWZgGQ/exec'
+            },
+            emailjs: {
+                serviceId: 'service_l3e47bc',
+                templateId: 'template_bzk9mpf',
+                userId: 'bJTa6D-K4-MainZRn'
+            }
+        };
+
+        // Stripe初期化
+        const stripe = Stripe(CONFIG.stripe.publishableKey);
+
+        // EmailJS初期化
+        emailjs.init(CONFIG.emailjs.userId);
+
+        // 商品プラン選択
+        document.querySelectorAll('#productOptions .option-card').forEach(card => {
             card.addEventListener('click', function() {
-                document.querySelectorAll('.option-card').forEach(c => {
-                    c.style.borderColor = '#e5e7eb';
-                    c.style.background = 'rgba(255, 255, 255, 0.8)';
+                // 他の選択を解除
+                document.querySelectorAll('#productOptions .option-card').forEach(c => {
+                    c.classList.remove('selected');
                 });
-                this.style.borderColor = '#667eea';
-                this.style.background = 'linear-gradient(135deg, #667eea10 0%, #764ba210 100%)';
+                
+                // 現在のカードを選択
                 this.classList.add('selected');
+                
+                // 定期購入セクションを表示
+                const subscriptionSection = document.getElementById('subscriptionSection');
+                subscriptionSection.style.display = 'block';
+                
+                // 配達予定日と注文サマリーを更新
+                updateDeliveryDates();
                 updateOrderSummary();
             });
         });
 
-        // 注文サマリー更新
-        function updateOrderSummary() {
-            const selectedProduct = document.querySelector('.option-card.selected');
-            if (!selectedProduct) return;
+        // 配送頻度選択
+        document.querySelectorAll('#frequencyOptions .frequency-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // 既に選択されている場合は解除
+                if (this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                } else {
+                    // 他の選択を解除
+                    document.querySelectorAll('#frequencyOptions .frequency-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    // 現在のカードを選択
+                    this.classList.add('selected');
+                }
+                
+                // 配達予定日と注文サマリーを更新
+                updateDeliveryDates();
+                updateOrderSummary();
+            });
+        });
 
-            const price = parseInt(selectedProduct.dataset.price);
-            const shipping = parseInt(selectedProduct.dataset.shipping);
-            const total = parseInt(selectedProduct.dataset.total);
-            const plan = selectedProduct.dataset.plan;
-
-            let summaryHTML = `<div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1);"><span>商品代金</span><span>¥${price.toLocaleString()}</span></div>`;
-            
-            if (shipping > 0) {
-                summaryHTML += `<div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1);"><span>送料</span><span>¥${shipping}</span></div>`;
+        // 配達予定日の計算
+        function updateDeliveryDates() {
+            const selectedProduct = document.querySelector('#productOptions .option-card.selected');
+            if (!selectedProduct) {
+                document.getElementById('firstDelivery').textContent = '商品を選択してください';
+                return;
             }
             
-            summaryHTML += `<div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem;"><span>合計金額</span><span>¥${total.toLocaleString()}</span></div>`;
-
-            document.getElementById('orderSummaryContent').innerHTML = summaryHTML;
+            const selectedFrequency = document.querySelector('#frequencyOptions .frequency-card.selected');
             
-            const orderButton = document.getElementById('orderButton');
-            orderButton.disabled = false;
-            orderButton.style.opacity = '1';
-            orderButton.style.cursor = 'pointer';
+            // 初回配達日（2-3日後）
+            const today = new Date();
+            const firstDelivery = new Date(today);
+            const randomDays = Math.floor(Math.random() * 2) + 2;
+            firstDelivery.setDate(today.getDate() + randomDays);
+            
+            // 土日を避ける
+            while (firstDelivery.getDay() === 0 || firstDelivery.getDay() === 6) {
+                firstDelivery.setDate(firstDelivery.getDate() + 1);
+            }
+            
+            const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+            const firstDeliveryText = firstDelivery.toLocaleDateString('ja-JP', options);
+            document.getElementById('firstDelivery').textContent = firstDeliveryText;
+            
+            // 次回配達日（定期購入の場合）
+            const nextDeliveryItem = document.getElementById('nextDeliveryItem');
+            
+            if (selectedFrequency) {
+                const nextDelivery = new Date(firstDelivery);
+                const frequency = selectedFrequency.dataset.frequency;
+                
+                switch(frequency) {
+                    case 'monthly':
+                        nextDelivery.setMonth(nextDelivery.getMonth() + 1);
+                        break;
+                    case 'bimonthly':
+                        nextDelivery.setMonth(nextDelivery.getMonth() + 2);
+                        break;
+                    case 'quarterly':
+                        nextDelivery.setMonth(nextDelivery.getMonth() + 3);
+                        break;
+                }
+                
+                // 土日を避ける
+                while (nextDelivery.getDay() === 0 || nextDelivery.getDay() === 6) {
+                    nextDelivery.setDate(nextDelivery.getDate() + 1);
+                }
+                
+                const nextDeliveryText = nextDelivery.toLocaleDateString('ja-JP', options);
+                document.getElementById('nextDelivery').textContent = nextDeliveryText;
+                nextDeliveryItem.style.display = 'block';
+                
+                // グリッドを2カラムに戻す
+                document.getElementById('deliverySchedule').style.gridTemplateColumns = '1fr 1fr';
+            } else {
+                nextDeliveryItem.style.display = 'none';
+                // グリッドを1カラムに変更
+                document.getElementById('deliverySchedule').style.gridTemplateColumns = '1fr';
+            }
+        }
+
+        // 注文サマリー更新
+        function updateOrderSummary() {
+            const selectedProduct = document.querySelector('#productOptions .option-card.selected');
+            const selectedFrequency = document.querySelector('#frequencyOptions .frequency-card.selected');
+            
+            if (!selectedProduct) {
+                document.getElementById('orderSummaryContent').innerHTML = '<div class="summary-row"><span>商品を選択してください</span><span>¥0</span></div>';
+                document.getElementById('orderButton').disabled = true;
+                return;
+            }
+            
+            const basePrice = parseInt(selectedProduct.dataset.price);
+            const originalPrice = parseInt(selectedProduct.dataset.original);
+            const shipping = parseInt(selectedProduct.dataset.shipping);
+            const plan = selectedProduct.dataset.plan;
+            
+            let finalPrice = basePrice + shipping;
+            let summaryHTML = '';
+            
+            // 商品代金表示
+            summaryHTML += `<div class="summary-row"><span>商品代金</span><span>¥${basePrice.toLocaleString()}</span></div>`;
+            
+            // 送料表示
+            if (shipping > 0) {
+                summaryHTML += `<div class="summary-row"><span>送料</span><span>¥${shipping.toLocaleString()}</span></div>`;
+            }
+            
+            // セット割引表示（定期購入でない場合）
+            if (!selectedFrequency && originalPrice > basePrice) {
+                const setDiscount = originalPrice - basePrice;
+                summaryHTML += `<div class="summary-row"><span>セット割引</span><span>-¥${setDiscount.toLocaleString()}</span></div>`;
+            }
+            
+            // 定期購入割引
+            if (selectedFrequency) {
+                const discount = parseFloat(selectedFrequency.dataset.discount);
+                const discountedPrice = Math.round(finalPrice * discount);
+                const discountAmount = finalPrice - discountedPrice;
+                const discountPercent = Math.round((1 - discount) * 100);
+                const frequencyText = selectedFrequency.querySelector('div').textContent;
+                
+                summaryHTML += `<div class="summary-row"><span>定期購入割引（${frequencyText}）${discountPercent}%OFF</span><span>-¥${discountAmount.toLocaleString()}</span></div>`;
+                finalPrice = discountedPrice;
+            }
+            
+            // 合計金額
+            summaryHTML += `<div class="summary-row"><span>合計金額</span><span>¥${finalPrice.toLocaleString()}</span></div>`;
+            
+            document.getElementById('orderSummaryContent').innerHTML = summaryHTML;
+            document.getElementById('orderButton').disabled = false;
         }
 
         // カード番号フォーマット
@@ -210,117 +654,107 @@
         });
 
         // フォーム送信
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const selectedProduct = document.querySelector('.option-card.selected');
+            const selectedProduct = document.querySelector('#productOptions .option-card.selected');
             if (!selectedProduct) {
                 alert('商品を選択してください');
                 return;
             }
 
-            const formData = {
-                lastName: document.getElementById('lastName').value,
-                firstName: document.getElementById('firstName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                zipCode: document.getElementById('zipCode').value,
-                address: document.getElementById('address').value,
-                cardNumber: document.getElementById('cardNumber').value,
-                cardExpiry: document.getElementById('cardExpiry').value,
-                cardCVC: document.getElementById('cardCVC').value,
-                productPlan: selectedProduct.dataset.plan,
-                amount: parseInt(selectedProduct.dataset.total)
-            };
-
             // 入力チェック
-            for (let field in formData) {
-                if (!formData[field]) {
-                    alert('全ての項目を入力してください');
-                    return;
+            const requiredFields = ['lastName', 'firstName', 'email', 'phone', 'zipCode', 'address', 'cardNumber', 'cardExpiry', 'cardCVC'];
+            const emptyFields = [];
+            
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    const label = field.previousElementSibling.textContent;
+                    emptyFields.push(label);
                 }
+            });
+            
+            if (emptyFields.length > 0) {
+                alert(`以下の項目を入力してください：\n${emptyFields.join('\n')}`);
+                return;
             }
 
-            alert(`テスト注文完了！\n\nお客様: ${formData.lastName} ${formData.firstName}\n商品: ${selectedProduct.querySelector('div').textContent}\n金額: ¥${formData.amount.toLocaleString()}\n\n※これはテスト画面です`);
+            // ローディング表示
+            document.getElementById('loadingSection').style.display = 'block';
+            document.getElementById('orderButton').style.display = 'none';
+
+            try {
+                // 注文データの準備
+                const selectedFrequency = document.querySelector('#frequencyOptions .frequency-card.selected');
+                const orderData = {
+                    customerName: document.getElementById('lastName').value + ' ' + document.getElementById('firstName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    zipCode: document.getElementById('zipCode').value,
+                    address: document.getElementById('address').value,
+                    productName: selectedProduct.querySelector('div').textContent,
+                    amount: parseInt(document.getElementById('orderSummaryContent').querySelector('.summary-row:last-child span:last-child').textContent.replace(/[¥,]/g, '')),
+                    frequency: selectedFrequency ? selectedFrequency.querySelector('div').textContent : '単品購入',
+                    deliveryDate: document.getElementById('firstDelivery').textContent,
+                    nextDelivery: selectedFrequency ? document.getElementById('nextDelivery').textContent : '',
+                    orderDate: new Date().toLocaleString('ja-JP')
+                };
+
+                // Google Spreadsheet記録
+                const spreadsheetResponse = await fetch(CONFIG.stripe.webhookEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                // EmailJS自動メール送信
+                await emailjs.send(
+                    CONFIG.emailjs.serviceId,
+                    CONFIG.emailjs.templateId,
+                    {
+                        to_name: orderData.customerName.split(' ')[1],
+                        email: orderData.email,
+                        customer_name: orderData.customerName,
+                        product_name: orderData.productName,
+                        amount: orderData.amount.toLocaleString(),
+                        frequency: orderData.frequency,
+                        delivery_date: orderData.deliveryDate,
+                        payment_id: 'TEST_' + Date.now(),
+                        order_date: orderData.orderDate,
+                        address: orderData.address
+                    }
+                );
+
+                // サンクスページへリダイレクト
+                setTimeout(() => {
+                    window.location.href = 'success.html?order=' + Date.now();
+                }, 2000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loadingSection').style.display = 'none';
+                document.getElementById('orderButton').style.display = 'block';
+                alert('決済処理中にエラーが発生しました。もう一度お試しください。');
+            }
+        });
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDeliveryDates();
+            updateOrderSummary();
         });
     </script>
 </body>
 </html>
-
-<script>
-// カード入力欄の修正（追加）
-document.addEventListener('DOMContentLoaded', function() {
-    const cardNumber = document.getElementById('cardNumber');
-    const cardExpiry = document.getElementById('cardExpiry');
-    const cardCVC = document.getElementById('cardCVC');
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDs764nq0by4Vpg5xeoQctXCL0dW1JVflei8A4ClqErr9C9315nNJYw%2B7XVrDdt0FVw7Dc4zGfsYzyPIXqREnJ0INc2Hs72ZLYHAUAtvd3BF%2Fptj5SmvCF%2Fa49v4s5LxbnpokzpHoCzxBHcyRRK3DN0CwMdAdi%2B%2FWA2hQPVcF77Dd%2B085mVKF2HIMI4%2BusyFgo2WbkLwpkTGwYmulEdJosumsVvaOAlEbd3Igd59AnpH%2BlTdzf3PqUC4OpsVzOjC%2F0yMkOt2nh2I6zSD%2B3MTso4HLWcEtRohTj%2FOR9U8C4yLZt28fb0UiRaIY67LuuiYh1Ka0b6S%2BP6ixWgqppCB4OM7vnaok%2F4J5oxt7EIvb5rnV%2F%2FV1bs7Y9i%2FQKTj5UxLxNzmgrhuK3HDJochdueJT5V0GknpHg8duVxkPqDjOS1HtsIeuJZIqQfz6IYzvQCUi4%2BDgs5JV0AutxQLSaQnn9A95ZdSwu7TnfnQ8J40AJ1Mi8eJRt6mlTzSOtGlN%2FsjS%2Bycrx9zVG5l2V9BZ5U%2F%2B4OI%3D";
+        window.__genspark_locale = "ja-JP";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDs764nq0by4Vpg5xeoQctXCL0dW1JVflei8A4ClqErr9C9315nNJYw+7XVrDdt0FVw7Dc4zGfsYzyPIXqREnJ0INc2Hs72ZLYHAUAtvd3BF/ptj5SmvCF/a49v4s5LxbnpokzpHoCzxBHcyRRK3DN0CwMdAdi+/WA2hQPVcF77Dd+085mVKF2HIMI4+usyFgo2WbkLwpkTGwYmulEdJosumsVvaOAlEbd3Igd59AnpH+lTdzf3PqUC4OpsVzOjC/0yMkOt2nh2I6zSD+3MTso4HLWcEtRohTj/OR9U8C4yLZt28fb0UiRaIY67LuuiYh1Ka0b6S+P6ixWgqppCB4OM7vnaok/4J5oxt7EIvb5rnV//V1bs7Y9i/QKTj5UxLxNzmgrhuK3HDJochdueJT5V0GknpHg8duVxkPqDjOS1HtsIeuJZIqQfz6IYzvQCUi4+Dgs5JV0AutxQLSaQnn9A95ZdSwu7TnfnQ8J40AJ1Mi8eJRt6mlTzSOtGlN/sjS+ycrx9zVG5l2V9BZ5U/+4OI=";
+    </script>
     
-    // 全ての入力制限を解除
-    [cardNumber, cardExpiry, cardCVC].forEach(input => {
-        if (input) {
-            // 既存の入力イベントを削除
-            input.replaceWith(input.cloneNode(true));
-        }
-    });
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
     
-    // 新しい要素を取得
-    const newCardNumber = document.getElementById('cardNumber');
-    const newCardExpiry = document.getElementById('cardExpiry');
-    const newCardCVC = document.getElementById('cardCVC');
-    
-    // カード番号入力（数字とスペースのみ許可）
-    newCardNumber.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/[^\d\s]/g, ''); // 数字とスペースのみ
-        let numbers = value.replace(/\s/g, ''); // スペース削除
-        let formatted = numbers.replace(/(.{4})/g, '$1 ').trim(); // 4桁ごとにスペース
-        if (formatted.length <= 19) {
-            e.target.value = formatted;
-        }
-    });
-    
-    // 有効期限入力（数字とスラッシュのみ許可）
-    newCardExpiry.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/[^\d\/]/g, ''); // 数字とスラッシュのみ
-        let numbers = value.replace(/\D/g, ''); // 数字のみ抽出
-        if (numbers.length <= 4) {
-            if (numbers.length >= 2) {
-                e.target.value = numbers.substring(0,2) + '/' + numbers.substring(2);
-            } else {
-                e.target.value = numbers;
-            }
-        }
-    });
-    
-    // CVC入力（数字のみ許可）
-    newCardCVC.addEventListener('input', function(e) {
-        e.target.value = e.target.value.replace(/\D/g, ''); // 数字のみ
-    });
-    
-    // キーダウンイベントも追加（より確実に）
-    newCardNumber.addEventListener('keydown', function(e) {
-        // 数字、バックスペース、デリート、矢印キー、タブを許可
-        if (![8, 9, 37, 38, 39, 40, 46].includes(e.keyCode) && 
-            (e.keyCode < 48 || e.keyCode > 57) && 
-            (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-    
-    newCardExpiry.addEventListener('keydown', function(e) {
-        // 数字、バックスペース、デリート、矢印キー、タブ、スラッシュを許可
-        if (![8, 9, 37, 38, 39, 40, 46, 191].includes(e.keyCode) && 
-            (e.keyCode < 48 || e.keyCode > 57) && 
-            (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-    
-    newCardCVC.addEventListener('keydown', function(e) {
-        // 数字、バックスペース、デリート、矢印キー、タブを許可
-        if (![8, 9, 37, 38, 39, 40, 46].includes(e.keyCode) && 
-            (e.keyCode < 48 || e.keyCode > 57) && 
-            (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-});
-</script>
