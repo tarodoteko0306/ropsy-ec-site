@@ -1,27 +1,23 @@
-# API Keys and Configuration
+# 設定ファイル（機密情報）
 config.js
 email-config.js
 
-# Node modules
+# Node.js
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Environment variables
-.env
-.env.local
-.env.production
+# MacOS
+.DS_Store
 
-# IDE files
+# Windows
+Thumbs.db
+
+# IDE
 .vscode/
 .idea/
 
-# OS files
-.DS_Store
-Thumbs.db
-
-# Logs
+# 一時ファイル
+*.tmp
 *.log
-npm-debug.log*
-
-# Build output
-dist/
-build/
