@@ -799,6 +799,80 @@
                 grid-template-columns: 1fr;
             }
         }
+    
+        .product-container {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 3rem;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .product-left {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .product-right {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .product-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .product-stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+
+        .product-benefits {
+            background: rgba(255,255,255,0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .product-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .product-benefit-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr !important;
+                gap: 2rem;
+                padding: 2rem;
+            }
+            .product-stats {
+                grid-template-columns: 1fr !important;
+            }
+            .product-benefits-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -957,31 +1031,31 @@
                 </div>
             </div>
             
-            <!-- 2カラムレイアウト（インラインスタイル） -->
-            <div style="display: grid; grid-template-columns: 350px 1fr; gap: 3rem; align-items: start; max-width: 1100px; margin: 0 auto;">
+            <!-- 美しい2カラムレイアウト -->
+            <div class="product-container">
                 <!-- 左側：商品画像 -->
-                <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 20px; padding: 2rem; text-align: center;">
+                <div class="product-left">
                     <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
-                         alt="カリウムfor Beauty" style="width: 100%; max-width: 280px; height: auto; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+                         alt="カリウムfor Beauty" style="width: 100%; max-width: 320px; height: auto; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
                 </div>
                 
                 <!-- 右側：商品詳細 -->
-                <div style="display: flex; flex-direction: column; gap: 2rem;">
+                <div class="product-right">
                     <!-- 商品説明 -->
                     <div style="background: linear-gradient(135deg, #eff6ff 0%, #fef7ff 100%); padding: 2rem; border-radius: 15px;">
                         <h3 style="font-size: 1.3rem; font-weight: 700; color: #374151; margin-bottom: 0.5rem;">女性の美と健康をサポートする</h3>
                         <p style="font-size: 1.1rem; color: #4f46e5; font-weight: 600; margin-bottom: 1.5rem;">15種類の厳選美容成分配合</p>
                         
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
-                            <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.8); border-radius: 12px;">
+                        <div class="product-stats">
+                            <div class="product-stat-item">
                                 <div style="font-size: 1.75rem; font-weight: 900; color: #667eea; margin-bottom: 0.5rem;">15</div>
                                 <div style="font-size: 0.8rem; color: #6b7280;">種類の美容成分</div>
                             </div>
-                            <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.8); border-radius: 12px;">
+                            <div class="product-stat-item">
                                 <div style="font-size: 1.75rem; font-weight: 900; color: #667eea; margin-bottom: 0.5rem;">1,320</div>
                                 <div style="font-size: 0.8rem; color: #6b7280;">mgカリウム</div>
                             </div>
-                            <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.8); border-radius: 12px;">
+                            <div class="product-stat-item">
                                 <div style="font-size: 1.75rem; font-weight: 900; color: #667eea; margin-bottom: 0.5rem;">121</div>
                                 <div style="font-size: 0.8rem; color: #6b7280;">種類の野菜酵素</div>
                             </div>
@@ -989,24 +1063,24 @@
                     </div>
                     
                     <!-- 期待できるサポート -->
-                    <div style="background: rgba(255,255,255,0.9); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <div class="product-benefits">
                         <h5 style="font-size: 1.3rem; font-weight: 700; color: #374151; margin-bottom: 1.5rem; text-align: center;">
                             <i class="fas fa-gem" style="margin-right: 0.5rem; color: #8b5cf6;"></i>期待できるサポート
                         </h5>
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
-                            <div style="display: flex; align-items: center; padding: 0.8rem; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                        <div class="product-benefits-grid">
+                            <div class="product-benefit-item">
                                 <i class="fas fa-balance-scale" style="margin-right: 0.8rem; color: #3b82f6; width: 20px;"></i>
                                 <span style="font-size: 0.95rem; color: #374151;">体内の水分バランス維持をサポート</span>
                             </div>
-                            <div style="display: flex; align-items: center; padding: 0.8rem; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                            <div class="product-benefit-item">
                                 <i class="fas fa-sparkles" style="margin-right: 0.8rem; color: #8b5cf6; width: 20px;"></i>
                                 <span style="font-size: 0.95rem; color: #374151;">美容面でのコンディション維持に寄与</span>
                             </div>
-                            <div style="display: flex; align-items: center; padding: 0.8rem; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                            <div class="product-benefit-item">
                                 <i class="fas fa-heart" style="margin-right: 0.8rem; color: #ef4444; width: 20px;"></i>
                                 <span style="font-size: 0.95rem; color: #374151;">健康的な毎日の基盤づくりに貢献</span>
                             </div>
-                            <div style="display: flex; align-items: center; padding: 0.8rem; background: rgba(102, 126, 234, 0.05); border-radius: 8px;">
+                            <div class="product-benefit-item">
                                 <i class="fas fa-leaf" style="margin-right: 0.8rem; color: #10b981; width: 20px;"></i>
                                 <span style="font-size: 0.95rem; color: #374151;">栄養バランスの調整をサポート</span>
                             </div>
@@ -1022,21 +1096,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- レスポンシブ対応 -->
-            <style>
-            @media (max-width: 768px) {
-                .product-section div[style*="grid-template-columns: 350px 1fr"] {
-                    display: block !important;
-                }
-                .product-section div[style*="grid-template-columns: repeat(3, 1fr)"] {
-                    grid-template-columns: 1fr !important;
-                }
-                .product-section div[style*="grid-template-columns: repeat(2, 1fr)"] {
-                    grid-template-columns: 1fr !important;
-                }
-            }
-            </style>
         </div>
     </section>
 
