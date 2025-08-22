@@ -150,7 +150,7 @@
 
         .frequency-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
             margin-bottom: 2rem;
         }
@@ -163,6 +163,7 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .frequency-card:hover {
@@ -175,6 +176,16 @@
             background: linear-gradient(135deg, #10b98110 0%, #34d39910 100%);
         }
 
+        .frequency-card.selected::before {
+            content: "✓";
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
         .frequency-title {
             font-weight: 600;
             color: #1f2937;
@@ -185,22 +196,6 @@
             color: #10b981;
             font-weight: 600;
             font-size: 0.9rem;
-        }
-
-        .toggle-button {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-button:hover {
-            background: #dc2626;
         }
 
         .form-section {
@@ -305,6 +300,28 @@
             padding-bottom: 0;
         }
 
+        .payment-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px solid #e5e7eb;
+        }
+
+        .stripe-element {
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            background: white;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .stripe-element:focus-within {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
         .order-button {
             width: 100%;
             background: var(--primary);
@@ -329,6 +346,47 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+        }
+
+        .loading-spinner {
+            display: none;
+            margin-right: 0.5rem;
+        }
+
+        .error-message {
+            color: #ef4444;
+            background: #fef2f2;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #fecaca;
+            display: none;
+        }
+
+        .success-message {
+            color: #10b981;
+            background: #f0fdf4;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #bbf7d0;
+            display: none;
+        }
+
+        .subscription-remove {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .subscription-remove:hover {
+            background: #dc2626;
         }
 
         @media (max-width: 768px) {
@@ -379,6 +437,10 @@
                 </div>
 
                 <form id="orderForm">
+                    <!-- メッセージエリア -->
+                    <div id="errorMessage" class="error-message"></div>
+                    <div id="successMessage" class="success-message"></div>
+
                     <!-- 商品オプション選択 -->
                     <div class="mb-8">
                         <h3 class="section-title">
@@ -386,22 +448,22 @@
                             商品プランを選択
                         </h3>
                         <div class="option-grid" id="productOptions">
-                            <div class="option-card" data-plan="single" data-price="2100" data-original="2100" data-quantity="1">
+                            <div class="option-card" data-plan="single" data-price="2100" data-base-price="1600" data-shipping="500">
                                 <div class="option-title">単品購入</div>
                                 <div class="option-price">¥2,100</div>
-                                <div class="option-note">送料別途500円</div>
+                                <div class="option-note">¥1,600 + 送料¥500</div>
                             </div>
-                            <div class="option-card" data-plan="double" data-price="2880" data-original="4200" data-quantity="2">
+                            <div class="option-card" data-plan="double" data-price="2880" data-base-price="2880" data-shipping="0">
                                 <div class="badge">10%OFF</div>
                                 <div class="option-title">2個セット</div>
-                                <div class="option-old-price">¥4,200</div>
+                                <div class="option-old-price">¥3,200</div>
                                 <div class="option-price">¥2,880</div>
                                 <div class="option-note">送料無料</div>
                             </div>
-                            <div class="option-card" data-plan="triple" data-price="4080" data-original="6300" data-quantity="3">
+                            <div class="option-card" data-plan="triple" data-price="4080" data-base-price="4080" data-shipping="0">
                                 <div class="badge">15%OFF</div>
                                 <div class="option-title">3個セット</div>
-                                <div class="option-old-price">¥6,300</div>
+                                <div class="option-old-price">¥4,800</div>
                                 <div class="option-price">¥4,080</div>
                                 <div class="option-note">送料無料</div>
                             </div>
@@ -413,21 +475,25 @@
                         <h3 class="section-title">
                             <i class="fas fa-sync-alt"></i>
                             配送頻度を選択（定期購入でさらにお得）
-                            <button type="button" class="toggle-button ml-4" id="clearSubscription" style="display: none;">定期購入を解除</button>
                         </h3>
                         <div class="frequency-grid" id="frequencyOptions">
                             <div class="frequency-card" data-frequency="monthly" data-discount="0.75">
-                                <div class="frequency-title">毎月</div>
+                                <div class="frequency-title">毎月お届け</div>
                                 <div class="frequency-discount">25% OFF</div>
                             </div>
                             <div class="frequency-card" data-frequency="bimonthly" data-discount="0.8">
-                                <div class="frequency-title">2ヶ月毎</div>
+                                <div class="frequency-title">2ヶ月毎お届け</div>
                                 <div class="frequency-discount">20% OFF</div>
                             </div>
                             <div class="frequency-card" data-frequency="quarterly" data-discount="0.85">
-                                <div class="frequency-title">3ヶ月毎</div>
+                                <div class="frequency-title">3ヶ月毎お届け</div>
                                 <div class="frequency-discount">15% OFF</div>
                             </div>
+                        </div>
+                        <div id="subscriptionRemove" style="display: none; text-align: center;">
+                            <button type="button" class="subscription-remove" onclick="removeSubscription()">
+                                <i class="fas fa-times"></i> 定期購入を解除
+                            </button>
                         </div>
                     </div>
 
@@ -494,10 +560,26 @@
                         </div>
                     </div>
 
+                    <!-- 決済情報 -->
+                    <div class="payment-section" id="paymentSection" style="display: none;">
+                        <h3 class="section-title">
+                            <i class="fas fa-credit-card"></i>
+                            お支払い情報
+                        </h3>
+                        <div class="form-group">
+                            <label class="form-label">カード情報*</label>
+                            <div id="card-element" class="stripe-element">
+                                <!-- Stripe Elements will create form elements here -->
+                            </div>
+                            <div id="card-errors" class="error-message"></div>
+                        </div>
+                    </div>
+
                     <!-- 注文ボタン -->
                     <button type="submit" class="order-button" id="orderButton" disabled>
-                        <i class="fas fa-credit-card mr-2"></i>
-                        ご注文を確定する
+                        <i class="fas fa-spinner fa-spin loading-spinner" id="loadingSpinner"></i>
+                        <i class="fas fa-credit-card mr-2" id="buttonIcon"></i>
+                        <span id="buttonText">商品を選択してください</span>
                     </button>
                 </form>
             </div>
@@ -505,7 +587,7 @@
     </div>
 
     <script>
-        // 設定
+        // Configuration
         const STRIPE_CONFIG = {
             publishableKey: 'pk_live_51RvKWh673l6kt5LxH6Tyz46zGR5KbC9JkWvD5UR0Tkt0Ofobap7qptE8OkPVLFo08KvqbcEwy4T1l96k3xAVaO00vqUtav39',
             webhookEndpoint: 'https://script.google.com/macros/s/AKfycbypzzmH-SsoK8urIOLJfV6msGEiQo53GcRSYPBioO865VYXf3aHsffYl8GwyoBjuWZgGQ/exec'
@@ -517,86 +599,108 @@
             userId: 'bJTa6D-K4-MainZRn'
         };
 
-        // Stripe初期化
-        const stripe = Stripe(STRIPE_CONFIG.publishableKey);
-
-        // EmailJS初期化
+        // Initialize EmailJS
         emailjs.init(EMAIL_CONFIG.userId);
 
+        // Initialize Stripe
+        const stripe = Stripe(STRIPE_CONFIG.publishableKey);
+        const elements = stripe.elements();
+        
+        // Create card element
+        const cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#424770',
+                    '::placeholder': {
+                        color: '#aab7c4',
+                    },
+                },
+            },
+        });
+        
+        let isStripeReady = false;
+        
+        // Global variables
         let selectedProduct = null;
         let selectedFrequency = null;
+        let finalPrice = 0;
+        let orderData = {};
 
-        // 商品プラン選択
-        document.querySelectorAll('#productOptions .option-card').forEach(card => {
+        // DOM elements
+        const productOptions = document.querySelectorAll('#productOptions .option-card');
+        const frequencyOptions = document.querySelectorAll('#frequencyOptions .frequency-card');
+        const subscriptionSection = document.getElementById('subscriptionSection');
+        const subscriptionRemove = document.getElementById('subscriptionRemove');
+        const paymentSection = document.getElementById('paymentSection');
+        const orderButton = document.getElementById('orderButton');
+        const buttonText = document.getElementById('buttonText');
+        const buttonIcon = document.getElementById('buttonIcon');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Product selection
+        productOptions.forEach((card, index) => {
             card.addEventListener('click', function() {
-                // 他の選択を解除
-                document.querySelectorAll('#productOptions .option-card').forEach(c => {
-                    c.classList.remove('selected');
-                });
+                // Remove previous selections
+                productOptions.forEach(c => c.classList.remove('selected'));
                 
-                // 現在のカードを選択
+                // Select current card
                 this.classList.add('selected');
                 selectedProduct = this.dataset;
                 
-                // 定期購入セクションを表示
-                const subscriptionSection = document.getElementById('subscriptionSection');
+                // Show subscription section
                 subscriptionSection.style.display = 'block';
                 
-                // 配達予定日と注文サマリーを更新
+                // Update delivery dates and summary
                 updateDeliveryDates();
                 updateOrderSummary();
+                updatePaymentSection();
             });
         });
 
-        // 配送頻度選択
-        document.querySelectorAll('#frequencyOptions .frequency-card').forEach(card => {
+        // Frequency selection with toggle functionality
+        frequencyOptions.forEach((card, index) => {
             card.addEventListener('click', function() {
-                // 既に選択されている場合は解除
                 if (this.classList.contains('selected')) {
+                    // Deselect if already selected
                     this.classList.remove('selected');
                     selectedFrequency = null;
-                    document.getElementById('clearSubscription').style.display = 'none';
+                    subscriptionRemove.style.display = 'none';
                 } else {
-                    // 他の選択を解除
-                    document.querySelectorAll('#frequencyOptions .frequency-card').forEach(c => {
-                        c.classList.remove('selected');
-                    });
-                    
-                    // 現在のカードを選択
+                    // Remove other selections and select this one
+                    frequencyOptions.forEach(c => c.classList.remove('selected'));
                     this.classList.add('selected');
                     selectedFrequency = this.dataset;
-                    document.getElementById('clearSubscription').style.display = 'inline-block';
+                    subscriptionRemove.style.display = 'block';
                 }
                 
-                // 配達予定日と注文サマリーを更新
+                // Update delivery dates and summary
                 updateDeliveryDates();
                 updateOrderSummary();
             });
         });
 
-        // 定期購入解除ボタン
-        document.getElementById('clearSubscription').addEventListener('click', function() {
-            document.querySelectorAll('#frequencyOptions .frequency-card').forEach(c => {
-                c.classList.remove('selected');
-            });
+        // Remove subscription function
+        function removeSubscription() {
+            frequencyOptions.forEach(c => c.classList.remove('selected'));
             selectedFrequency = null;
-            this.style.display = 'none';
+            subscriptionRemove.style.display = 'none';
             updateDeliveryDates();
             updateOrderSummary();
-        });
+        }
 
-        // 配達予定日の計算
+        // Update delivery dates
         function updateDeliveryDates() {
             if (!selectedProduct) return;
             
             try {
-                // 初回配達日（2-3日後）
+                // Calculate first delivery (2-3 days from now)
                 const today = new Date();
                 const firstDelivery = new Date(today);
                 const randomDays = Math.floor(Math.random() * 2) + 2;
                 firstDelivery.setDate(today.getDate() + randomDays);
                 
-                // 土日を避ける
+                // Skip weekends
                 while (firstDelivery.getDay() === 0 || firstDelivery.getDay() === 6) {
                     firstDelivery.setDate(firstDelivery.getDate() + 1);
                 }
@@ -608,12 +712,11 @@
                     weekday: 'long' 
                 };
                 
-                const firstDeliveryText = firstDelivery.toLocaleDateString('ja-JP', options);
-                document.getElementById('firstDelivery').textContent = firstDeliveryText;
+                document.getElementById('firstDelivery').textContent = 
+                    firstDelivery.toLocaleDateString('ja-JP', options);
                 
-                // 次回配達日（定期購入の場合）
+                // Calculate next delivery for subscription
                 const nextDeliveryItem = document.getElementById('nextDeliveryItem');
-                
                 if (selectedFrequency) {
                     const nextDelivery = new Date(firstDelivery);
                     const frequency = selectedFrequency.frequency;
@@ -630,132 +733,187 @@
                             break;
                     }
                     
-                    // 土日を避ける
+                    // Skip weekends
                     while (nextDelivery.getDay() === 0 || nextDelivery.getDay() === 6) {
                         nextDelivery.setDate(nextDelivery.getDate() + 1);
                     }
                     
-                    const nextDeliveryText = nextDelivery.toLocaleDateString('ja-JP', options);
-                    document.getElementById('nextDelivery').textContent = nextDeliveryText;
+                    document.getElementById('nextDelivery').textContent = 
+                        nextDelivery.toLocaleDateString('ja-JP', options);
                     nextDeliveryItem.style.display = 'block';
                 } else {
                     nextDeliveryItem.style.display = 'none';
                 }
+                
             } catch (error) {
-                console.error('配達予定日計算エラー:', error);
-                document.getElementById('firstDelivery').textContent = '配達予定日の計算に失敗しました';
+                console.error('Error calculating delivery dates:', error);
+                document.getElementById('firstDelivery').textContent = 'エラーが発生しました';
             }
         }
 
-        // 注文サマリー更新
+        // Update order summary
         function updateOrderSummary() {
             if (!selectedProduct) return;
             
             try {
-                const basePrice = parseInt(selectedProduct.price);
-                const originalPrice = parseInt(selectedProduct.original);
+                const basePrice = parseInt(selectedProduct.basePrice);
+                const shipping = parseInt(selectedProduct.shipping);
+                let currentPrice = basePrice + shipping;
                 const plan = selectedProduct.plan;
                 
-                let finalPrice = basePrice;
-                let shippingFee = plan === 'single' ? 500 : 0;
-                let discountText = '';
-                
+                // Apply subscription discount
                 if (selectedFrequency) {
                     const discount = parseFloat(selectedFrequency.discount);
-                    finalPrice = Math.round(basePrice * discount);
-                    const frequencyText = document.querySelector('#frequencyOptions .frequency-card.selected .frequency-title').textContent;
-                    const discountPercent = Math.round((1 - discount) * 100);
-                    discountText = `定期購入（${frequencyText}）${discountPercent}%OFF適用`;
+                    currentPrice = Math.round((basePrice + shipping) * discount);
                 }
                 
-                const totalPrice = finalPrice + shippingFee;
+                finalPrice = currentPrice;
                 
                 let summaryHTML = '';
                 
-                if (originalPrice > basePrice) {
-                    summaryHTML += `<div class="summary-row"><span>商品代金（通常価格）</span><span>¥${originalPrice.toLocaleString()}</span></div>`;
-                    summaryHTML += `<div class="summary-row"><span>セット割引</span><span>-¥${(originalPrice - basePrice).toLocaleString()}</span></div>`;
-                }
-                
+                // Product price
                 summaryHTML += `<div class="summary-row"><span>商品代金</span><span>¥${basePrice.toLocaleString()}</span></div>`;
                 
+                // Shipping
+                if (shipping > 0) {
+                    summaryHTML += `<div class="summary-row"><span>送料</span><span>¥${shipping.toLocaleString()}</span></div>`;
+                }
+                
+                // Subscription discount
                 if (selectedFrequency) {
-                    summaryHTML += `<div class="summary-row"><span>${discountText}</span><span>-¥${(basePrice - finalPrice).toLocaleString()}</span></div>`;
+                    const originalTotal = basePrice + shipping;
+                    const discountAmount = originalTotal - currentPrice;
+                    const frequencyText = selectedFrequency.frequency === 'monthly' ? '毎月' : 
+                                        selectedFrequency.frequency === 'bimonthly' ? '2ヶ月毎' : '3ヶ月毎';
+                    const discountPercent = Math.round((1 - parseFloat(selectedFrequency.discount)) * 100);
+                    
+                    summaryHTML += `<div class="summary-row"><span>定期購入割引（${frequencyText} ${discountPercent}%OFF）</span><span>-¥${discountAmount.toLocaleString()}</span></div>`;
                 }
                 
-                if (shippingFee > 0) {
-                    summaryHTML += `<div class="summary-row"><span>送料</span><span>¥${shippingFee}</span></div>`;
-                }
-                
-                summaryHTML += `<div class="summary-row"><span>合計金額</span><span>¥${totalPrice.toLocaleString()}</span></div>`;
+                summaryHTML += `<div class="summary-row"><span>合計金額</span><span>¥${currentPrice.toLocaleString()}</span></div>`;
                 
                 document.getElementById('orderSummaryContent').innerHTML = summaryHTML;
-                document.getElementById('orderButton').disabled = false;
+                
             } catch (error) {
-                console.error('注文サマリー更新エラー:', error);
+                console.error('Error updating order summary:', error);
             }
         }
 
-        // 注文処理
+        // Update payment section visibility
+        function updatePaymentSection() {
+            if (selectedProduct) {
+                paymentSection.style.display = 'block';
+                orderButton.disabled = false;
+                buttonText.textContent = `¥${finalPrice.toLocaleString()} でご注文を確定する`;
+                
+                // Mount Stripe card element if not already mounted
+                if (!isStripeReady) {
+                    try {
+                        cardElement.mount('#card-element');
+                        isStripeReady = true;
+                        
+                        cardElement.on('change', ({error}) => {
+                            const displayError = document.getElementById('card-errors');
+                            if (error) {
+                                displayError.textContent = error.message;
+                                displayError.style.display = 'block';
+                            } else {
+                                displayError.textContent = '';
+                                displayError.style.display = 'none';
+                            }
+                        });
+                    } catch (error) {
+                        console.error('Error mounting Stripe element:', error);
+                    }
+                }
+            } else {
+                paymentSection.style.display = 'none';
+                orderButton.disabled = true;
+                buttonText.textContent = '商品を選択してください';
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Show success message
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Set loading state
+        function setLoading(loading) {
+            if (loading) {
+                orderButton.disabled = true;
+                loadingSpinner.style.display = 'inline-block';
+                buttonIcon.style.display = 'none';
+                buttonText.textContent = '処理中...';
+            } else {
+                orderButton.disabled = false;
+                loadingSpinner.style.display = 'none';
+                buttonIcon.style.display = 'inline-block';
+                buttonText.textContent = `¥${finalPrice.toLocaleString()} でご注文を確定する`;
+            }
+        }
+
+        // Form submission
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             if (!selectedProduct) {
-                alert('商品プランを選択してください');
+                showError('商品プランを選択してください');
                 return;
             }
             
-            // 入力チェック
+            // Validate form
             const requiredFields = ['lastName', 'firstName', 'email', 'phone', 'zipCode', 'address'];
             const emptyFields = [];
             
             requiredFields.forEach(fieldId => {
                 const field = document.getElementById(fieldId);
                 if (!field.value.trim()) {
-                    emptyFields.push(field.previousElementSibling.textContent);
+                    emptyFields.push(field.previousElementSibling.textContent.replace('*', ''));
                 }
             });
             
             if (emptyFields.length > 0) {
-                alert(`以下の項目を入力してください：\n${emptyFields.join('\n')}`);
+                showError(`以下の項目を入力してください：\n${emptyFields.join(', ')}`);
                 return;
             }
-
-            // 決済処理開始
-            const orderButton = document.getElementById('orderButton');
-            const originalText = orderButton.innerHTML;
-            orderButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>決済処理中...';
-            orderButton.disabled = true;
-
+            
+            setLoading(true);
+            
             try {
-                // 注文データ準備
-                const basePrice = parseInt(selectedProduct.price);
-                let finalPrice = basePrice;
-                let shippingFee = selectedProduct.plan === 'single' ? 500 : 0;
-                
-                if (selectedFrequency) {
-                    const discount = parseFloat(selectedFrequency.discount);
-                    finalPrice = Math.round(basePrice * discount);
-                }
-                
-                const totalAmount = finalPrice + shippingFee;
-                
-                const orderData = {
+                // Prepare order data
+                orderData = {
                     customerName: document.getElementById('lastName').value + ' ' + document.getElementById('firstName').value,
                     email: document.getElementById('email').value,
                     phone: document.getElementById('phone').value,
                     zipCode: document.getElementById('zipCode').value,
                     address: document.getElementById('address').value,
-                    productName: `カリウムfor Beauty ${selectedProduct.quantity}個セット`,
-                    amount: totalAmount,
-                    quantity: selectedProduct.quantity,
-                    frequency: selectedFrequency ? document.querySelector('#frequencyOptions .frequency-card.selected .frequency-title').textContent : '単品',
+                    productName: document.querySelector('.option-card.selected .option-title').textContent,
+                    amount: finalPrice,
+                    frequency: selectedFrequency ? 
+                        (selectedFrequency.frequency === 'monthly' ? '毎月' : 
+                         selectedFrequency.frequency === 'bimonthly' ? '2ヶ月毎' : '3ヶ月毎') : '単品購入',
                     deliveryDate: document.getElementById('firstDelivery').textContent,
                     nextDelivery: selectedFrequency ? document.getElementById('nextDelivery').textContent : '',
                     orderDate: new Date().toLocaleString('ja-JP')
                 };
-
-                // Google Apps Scriptで決済処理
+                
+                // Create payment intent
                 const response = await fetch(STRIPE_CONFIG.webhookEndpoint, {
                     method: 'POST',
                     headers: {
@@ -763,70 +921,82 @@
                     },
                     body: JSON.stringify(orderData)
                 });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    // Stripe決済確認
-                    const {error} = await stripe.confirmCardPayment(result.clientSecret);
-
-                    if (error) {
-                        throw new Error(error.message);
-                    }
-
-                    // 成功時のメール送信
-                    await emailjs.send(
-                        EMAIL_CONFIG.serviceId,
-                        EMAIL_CONFIG.templateId,
-                        {
-                            to_name: orderData.customerName,
-                            email: orderData.email,
-                            product_name: orderData.productName,
-                            quantity: orderData.quantity,
-                            amount: orderData.amount.toLocaleString(),
-                            frequency: orderData.frequency,
-                            delivery_date: orderData.deliveryDate,
-                            customer_name: orderData.customerName,
-                            address: orderData.address,
-                            payment_id: result.paymentIntent,
-                            order_date: orderData.orderDate
-                        }
-                    );
-
-                    // 成功ページへリダイレクト
-                    window.location.href = 'success.html?order=' + encodeURIComponent(JSON.stringify({
-                        customerName: orderData.customerName,
-                        productName: orderData.productName,
-                        amount: orderData.amount,
-                        deliveryDate: orderData.deliveryDate,
-                        paymentId: result.paymentIntent
-                    }));
-
-                } else {
-                    throw new Error(result.error || '決済処理でエラーが発生しました');
-                }
-
-            } catch (error) {
-                console.error('注文処理エラー:', error);
-                alert(`エラーが発生しました：${error.message}`);
                 
-                orderButton.innerHTML = originalText;
-                orderButton.disabled = false;
+                const result = await response.json();
+                
+                if (!result.success) {
+                    throw new Error(result.error || 'Payment intent creation failed');
+                }
+                
+                // Confirm payment
+                const {error, paymentIntent} = await stripe.confirmCardPayment(result.clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            name: orderData.customerName,
+                            email: orderData.email,
+                            phone: orderData.phone
+                        }
+                    }
+                });
+                
+                if (error) {
+                    throw new Error(error.message);
+                }
+                
+                if (paymentIntent.status === 'succeeded') {
+                    // Payment successful
+                    orderData.paymentId = paymentIntent.id;
+                    
+                    // Send confirmation email
+                    try {
+                        await emailjs.send(
+                            EMAIL_CONFIG.serviceId, 
+                            EMAIL_CONFIG.templateId,
+                            {
+                                to_name: orderData.customerName,
+                                email: orderData.email,
+                                product_name: orderData.productName,
+                                quantity: selectedProduct.plan === 'single' ? '1個' : 
+                                         selectedProduct.plan === 'double' ? '2個' : '3個',
+                                amount: orderData.amount,
+                                frequency: orderData.frequency,
+                                delivery_date: orderData.deliveryDate,
+                                customer_name: orderData.customerName,
+                                address: orderData.address,
+                                payment_id: orderData.paymentId,
+                                order_date: orderData.orderDate
+                            }
+                        );
+                        console.log('Confirmation email sent successfully');
+                    } catch (emailError) {
+                        console.error('Error sending confirmation email:', emailError);
+                    }
+                    
+                    // Redirect to success page
+                    window.location.href = 'success.html?order=' + paymentIntent.id;
+                }
+                
+            } catch (error) {
+                console.error('Payment error:', error);
+                showError('決済処理中にエラーが発生しました: ' + error.message);
+            } finally {
+                setLoading(false);
             }
         });
 
-        // 初期化
+        // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('firstDelivery').textContent = '商品を選択してください';
+            console.log('Order page initialized');
         });
     </script>
 </body>
 </html>
     <script id="html_badge_script1">
         window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
-            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDmt6Ys7Lnir29QRp6CLLSOV2oT2mVvz5w9F167TRIbdxK6Yf4kTWTme7p87ctF595OVJHePZOx8fmg%2BR6%2Fq9a6QrNpX%2FatvIEt%2BuiJuo%2B72h%2FHDsEq61q7rQNkxq%2Fwc6xcQSGQSn1VKmlONuV9B0bvwSY4jmlrszwxe%2FeGNo38gz6NlKz5KSl74BJl1LyAdPH8rpfjI9zQoEyVYFyUTdCuQc66vxRA13mgK2DFzrcV43xJ6MEbddIG4Gvy5RhixZrF0XuxnMjvWajvIs%2FNVeBySUg4Ulnwj%2B8q6YDV8IRDDbQXI1d5%2BeLfoFAPYxKpbbAe1YHYvitSecr86SIaI4LF%2FItpN7ismq8mUIQHvNss3kNUJpCBqR5HT07iRN0lOjiHC0z1RYArNvrkoSS8LVvu72Z5jdrBOcW1JlEBoGglghtUrzZncgbRy5QIB104%2FxRHwTPpGLXQEwmKjI1jWdihMpg6Faz9kQKDLSQqX2r8XaTZ4XSylmlLaH%2F2kJOrwXuw%3D%3D";
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDt%2BpbEdWmLNBnAiNreUUMkX5k%2FTGBjI6iaaVVZoapW0gskDlJemnfPXFcCG7IGuho2wnJUOf8uRhJgPZvL3EqSUcyp3%2FOvwKadPyXot8OIBOcPxkIUOYUajBW2k3Rb6E%2FlHYVwR14krh7mdKi9az1PEXJUoF81VrW08gl7YYaKTT6PaNWc2KI6%2FjemUJ5o5l6aYo%2BlzDUuS7GkX9S7JKUNhkctxzHVgRpmIAw78U%2FvHKkP8uKCAF1Mp90B1uDagCKn0CNlebQNluTan8t3dgtg3VaryGUVykbjtAQPz7pMhTZBrXONaUZOPkkuA5gypSDwDx%2FkuNpZUSzwt0HhV4jZEqZezQ30NlKy5BzuYzkU%2BDJesnMYaoVNZvpEdCho5UVaSRUinYBEJYeJA%2BE9RunngH7z1J0GWsdWOSyFy%2B2O%2BQvgYmHAtwxYLUiM0u66d%2B1FaNXM%2B51UZR8BFn4uPl4UAGwJT7ZJHD0xrJdtEBx5Es7ykyisHMi2zAcTOEUDPlV4gJm8I4cUx1y8V%2BHMB7y8Q%3D";
         window.__genspark_locale = "ja-JP";
-        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDmt6Ys7Lnir29QRp6CLLSOV2oT2mVvz5w9F167TRIbdxK6Yf4kTWTme7p87ctF595OVJHePZOx8fmg+R6/q9a6QrNpX/atvIEt+uiJuo+72h/HDsEq61q7rQNkxq/wc6xcQSGQSn1VKmlONuV9B0bvwSY4jmlrszwxe/eGNo38gz6NlKz5KSl74BJl1LyAdPH8rpfjI9zQoEyVYFyUTdCuQc66vxRA13mgK2DFzrcV43xJ6MEbddIG4Gvy5RhixZrF0XuxnMjvWajvIs/NVeBySUg4Ulnwj+8q6YDV8IRDDbQXI1d5+eLfoFAPYxKpbbAe1YHYvitSecr86SIaI4LF/ItpN7ismq8mUIQHvNss3kNUJpCBqR5HT07iRN0lOjiHC0z1RYArNvrkoSS8LVvu72Z5jdrBOcW1JlEBoGglghtUrzZncgbRy5QIB104/xRHwTPpGLXQEwmKjI1jWdihMpg6Faz9kQKDLSQqX2r8XaTZ4XSylmlLaH/2kJOrwXuw==";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDt+pbEdWmLNBnAiNreUUMkX5k/TGBjI6iaaVVZoapW0gskDlJemnfPXFcCG7IGuho2wnJUOf8uRhJgPZvL3EqSUcyp3/OvwKadPyXot8OIBOcPxkIUOYUajBW2k3Rb6E/lHYVwR14krh7mdKi9az1PEXJUoF81VrW08gl7YYaKTT6PaNWc2KI6/jemUJ5o5l6aYo+lzDUuS7GkX9S7JKUNhkctxzHVgRpmIAw78U/vHKkP8uKCAF1Mp90B1uDagCKn0CNlebQNluTan8t3dgtg3VaryGUVykbjtAQPz7pMhTZBrXONaUZOPkkuA5gypSDwDx/kuNpZUSzwt0HhV4jZEqZezQ30NlKy5BzuYzkU+DJesnMYaoVNZvpEdCho5UVaSRUinYBEJYeJA+E9RunngH7z1J0GWsdWOSyFy+2O+QvgYmHAtwxYLUiM0u66d+1FaNXM+51UZR8BFn4uPl4UAGwJT7ZJHD0xrJdtEBx5Es7ykyisHMi2zAcTOEUDPlV4gJm8I4cUx1y8V+HMB7y8Q=";
     </script>
     
     <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
