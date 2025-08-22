@@ -3,524 +3,608 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ご注文 - ANDROPSY</title>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script src="config.js"></script>
-    <script src="email-config.js"></script>
+    <title>ご注文 - カリウムfor Beauty | &ROPSY</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Kaku Gothic Pro', sans-serif;
-            line-height: 1.6;
-            color: #2c3e50;
-            background-color: #f8f9fa;
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #fefce8 100%);
             min-height: 100vh;
         }
-        
-        .header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e9ecef;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+
+        .header-gradient {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
-        .header-content {
-            max-width: 900px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
+
+        .brand-gradient {
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        .logo {
-            font-size: 20px;
-            font-weight: 700;
-            color: #2c3e50;
-            text-decoration: none;
-        }
-        
-        .back-to-top {
-            display: flex;
-            align-items: center;
-            color: #6c757d;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-        
-        .back-to-top:hover {
-            color: #2c3e50;
-            text-decoration: none;
-        }
-        
-        .back-to-top i {
-            margin-right: 6px;
-        }
-        
-        .container {
+
+        .order-container {
             max-width: 800px;
-            margin: 20px auto;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            overflow: hidden;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
-        
-        .page-header {
-            padding: 30px;
+
+        .product-summary {
+            background: linear-gradient(135deg, #eff6ff 0%, #fef7ff 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
             text-align: center;
-            background-color: #ffffff;
-            border-bottom: 1px solid #e9ecef;
         }
-        
-        .page-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 8px;
+
+        .product-image {
+            width: 150px;
+            height: auto;
+            margin: 0 auto 1rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        
-        .page-subtitle {
-            color: #6c757d;
-            font-size: 14px;
-        }
-        
-        .form-section {
-            padding: 30px;
-        }
-        
+
         .section-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e9ecef;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
         }
-        
-        .form-row {
+
+        .section-title i {
+            margin-right: 0.5rem;
+            color: #667eea;
+        }
+
+        .option-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
-        
-        .form-group {
-            margin-bottom: 20px;
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        
-        .form-group.full-width {
-            grid-column: 1 / -1;
+
+        .option-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
         }
-        
-        label {
-            display: block;
-            margin-bottom: 6px;
+
+        .option-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+        }
+
+        .option-card .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .option-title {
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #2c3e50;
-            font-size: 14px;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
         }
-        
-        select, input {
+
+        .option-price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-old-price {
+            text-decoration: line-through;
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .option-note {
+            color: #6b7280;
+            font-size: 0.85rem;
+        }
+
+        .frequency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .frequency-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .frequency-card:hover {
+            border-color: #10b981;
+            transform: translateY(-2px);
+        }
+
+        .frequency-card.selected {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #10b98110 0%, #34d39910 100%);
+        }
+
+        .frequency-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .frequency-discount {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            font-size: 14px;
-            transition: border-color 0.2s;
-            background-color: #ffffff;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
-        
-        select:focus, input:focus {
+
+        .form-input:focus {
             outline: none;
-            border-color: #495057;
-            box-shadow: 0 0 0 2px rgba(73, 80, 87, 0.1);
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-        
+
+        .delivery-info {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid #10b981;
+        }
+
+        .delivery-title {
+            font-weight: 700;
+            color: #047857;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .delivery-title i {
+            margin-right: 0.5rem;
+        }
+
         .order-summary {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 25px;
-            margin: 20px 0;
-            border-radius: 6px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
         }
-        
+
         .summary-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            font-size: 14px;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
-        
-        .summary-label {
-            font-weight: 500;
-        }
-        
-        .summary-value {
-            font-weight: 600;
-        }
-        
-        .total-row {
-            font-size: 20px;
+
+        .summary-row:last-child {
+            border-bottom: none;
             font-weight: 700;
-            text-align: center;
-            padding: 15px;
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 4px;
-            margin: 15px 0;
+            font-size: 1.1rem;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
-        
-        .delivery-info {
-            background-color: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 4px;
-            margin-top: 15px;
-            font-size: 13px;
-        }
-        
-        .delivery-date {
-            margin-bottom: 6px;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .discount-info {
-            background-color: rgba(255,255,255,0.1);
-            padding: 12px;
-            border-radius: 4px;
-            margin-top: 10px;
-            font-size: 13px;
-            text-align: center;
-        }
-        
-        .btn-order {
-            background-color: #2c3e50;
-            color: #ffffff;
-            border: none;
-            padding: 16px 30px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
+
+        .order-button {
             width: 100%;
-            transition: background-color 0.2s;
+            background: var(--primary);
+            color: white;
+            padding: 1.25rem 2rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
         }
-        
-        .btn-order:hover:not(:disabled) {
-            background-color: #34495e;
+
+        .order-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
         }
-        
-        .btn-order:disabled {
-            background-color: #adb5bd;
+
+        .order-button:disabled {
+            background: #9ca3af;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
-        
+
         @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 0;
+            .order-container {
+                margin: 1rem;
+                padding: 2rem;
             }
             
-            .form-row {
+            .option-grid {
                 grid-template-columns: 1fr;
             }
             
-            .form-section {
-                padding: 20px;
-            }
-            
-            .page-header {
-                padding: 20px;
-            }
-            
-            .header-content {
-                padding: 0 15px;
+            .frequency-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ヘッダー -->
-    <div class="header">
-        <div class="header-content">
-            <a href="/" class="logo">ANDROPSY</a>
-            <a href="/" class="back-to-top">
-                <i class="fas fa-arrow-left"></i>
-                商品ページに戻る
-            </a>
-        </div>
-    </div>
-    
-    <div class="container">
-        <!-- ページヘッダー -->
-        <div class="page-header">
-            <h1 class="page-title">ご注文</h1>
-            <p class="page-subtitle">カリウムfor Beauty</p>
-        </div>
-        
-        <!-- 注文フォーム -->
-        <div class="form-section">
-            <form id="orderForm">
-                <!-- 商品選択 -->
-                <div class="section-title">商品・配送設定</div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="quantity">個数</label>
-                        <select id="quantity" name="quantity" required>
-                            <option value="">選択してください</option>
-                            <option value="single">1個（¥2,100）</option>
-                            <option value="double">2個セット（¥2,880）お得</option>
-                            <option value="triple">3個セット（¥4,080）最もお得</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="frequency">配送頻度</label>
-                        <select id="frequency" name="frequency" required>
-                            <option value="">まず個数を選択してください</option>
-                        </select>
-                    </div>
+    <!-- Header -->
+    <header class="header-gradient sticky top-0 z-50 shadow-lg backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold brand-gradient">&ROPSY</h1>
+                    <span class="ml-3 text-sm text-gray-600">公式サイト</span>
                 </div>
-                
-                <!-- 注文サマリー -->
-                <div class="order-summary" id="orderSummary" style="display: none;">
-                    <div class="summary-row">
-                        <span class="summary-label">商品価格</span>
-                        <span class="summary-value" id="basePrice">¥0</span>
-                    </div>
-                    <div class="summary-row" id="discountRow" style="display: none;">
-                        <span class="summary-label">定期購入割引</span>
-                        <span class="summary-value" id="discountAmount">¥0</span>
-                    </div>
-                    <div class="summary-row" id="frequencyRow" style="display: none;">
-                        <span class="summary-label">配送頻度</span>
-                        <span class="summary-value" id="frequencyText">-</span>
-                    </div>
-                    
-                    <div class="total-row" id="totalPrice">合計: ¥0</div>
-                    
-                    <!-- 配送スケジュール -->
-                    <div class="delivery-info" id="deliveryInfo" style="display: none;">
-                        <div class="delivery-date" id="firstDelivery">
-                            <span>初回お届け:</span>
-                            <span id="firstDate">-</span>
-                        </div>
-                        <div class="delivery-date" id="nextDelivery" style="display: none;">
-                            <span>次回お届け:</span>
-                            <span id="nextDate">-</span>
+                <a href="index.html" class="text-gray-600 hover:text-purple-600 transition-colors">
+                    <i class="fas fa-arrow-left mr-1"></i>戻る
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="order-container">
+                <!-- 商品サマリー -->
+                <div class="product-summary">
+                    <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
+                         alt="カリウムfor Beauty" class="product-image">
+                    <h2 style="font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">カリウムfor Beauty</h2>
+                    <p style="color: #6b7280;">15種類の厳選美容成分配合</p>
+                </div>
+
+                <form id="orderForm">
+                    <!-- 商品オプション選択 -->
+                    <div class="mb-8">
+                        <h3 class="section-title">
+                            <i class="fas fa-shopping-bag"></i>
+                            商品プランを選択
+                        </h3>
+                        <div class="option-grid" id="productOptions">
+                            <div class="option-card" data-plan="single" data-price="2100" data-original="2100">
+                                <div class="option-title">単品購入</div>
+                                <div class="option-price">¥2,100</div>
+                                <div class="option-note">送料別途500円</div>
+                            </div>
+                            <div class="option-card" data-plan="double" data-price="2880" data-original="4200">
+                                <div class="badge">10%OFF</div>
+                                <div class="option-title">2個セット</div>
+                                <div class="option-old-price">¥4,200</div>
+                                <div class="option-price">¥2,880</div>
+                                <div class="option-note">送料無料</div>
+                            </div>
+                            <div class="option-card" data-plan="triple" data-price="4080" data-original="6300">
+                                <div class="badge">15%OFF</div>
+                                <div class="option-title">3個セット</div>
+                                <div class="option-old-price">¥6,300</div>
+                                <div class="option-price">¥4,080</div>
+                                <div class="option-note">送料無料</div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="discount-info" id="discountNotice" style="display: none;"></div>
-                </div>
-                
-                <!-- お客様情報 -->
-                <div class="section-title">お客様情報</div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">お名前</label>
-                        <input type="text" id="name" name="name" required placeholder="山田 太郎">
+
+                    <!-- 定期購入オプション -->
+                    <div class="mb-8" id="subscriptionSection" style="display: none;">
+                        <h3 class="section-title">
+                            <i class="fas fa-sync-alt"></i>
+                            配送頻度を選択（定期購入でさらにお得）
+                        </h3>
+                        <div class="frequency-grid" id="frequencyOptions">
+                            <div class="frequency-card" data-frequency="monthly" data-discount="0.75">
+                                <div class="frequency-title">毎月</div>
+                                <div class="frequency-discount">25% OFF</div>
+                            </div>
+                            <div class="frequency-card" data-frequency="bimonthly" data-discount="0.8">
+                                <div class="frequency-title">2ヶ月毎</div>
+                                <div class="frequency-discount">20% OFF</div>
+                            </div>
+                            <div class="frequency-card" data-frequency="quarterly" data-discount="0.85">
+                                <div class="frequency-title">3ヶ月毎</div>
+                                <div class="frequency-discount">15% OFF</div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">電話番号</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="090-1234-5678">
+
+                    <!-- 配送情報 -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-truck"></i>
+                            配送情報
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="form-group">
+                                <label class="form-label">お名前（姓）*</label>
+                                <input type="text" class="form-input" id="lastName" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">お名前（名）*</label>
+                                <input type="text" class="form-input" id="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">メールアドレス*</label>
+                                <input type="email" class="form-input" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">電話番号*</label>
+                                <input type="tel" class="form-input" id="phone" required>
+                            </div>
+                            <div class="form-group md:col-span-2">
+                                <label class="form-label">郵便番号*</label>
+                                <input type="text" class="form-input" id="zipCode" placeholder="例：123-4567" required>
+                            </div>
+                            <div class="form-group md:col-span-2">
+                                <label class="form-label">住所*</label>
+                                <input type="text" class="form-input" id="address" placeholder="都道府県市区町村番地建物名" required>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">メールアドレス</label>
-                    <input type="email" id="email" name="email" required placeholder="example@email.com">
-                </div>
-                
-                <div class="form-group">
-                    <label for="address">お届け先住所</label>
-                    <input type="text" id="address" name="address" required placeholder="〒000-0000 東京都渋谷区〇〇 1-2-3 マンション名 101号室">
-                </div>
-                
-                <button type="submit" class="btn-order" id="submitBtn" disabled>
-                    ご注文を確定する
-                </button>
-            </form>
+
+                    <!-- 配達予定日 -->
+                    <div class="delivery-info">
+                        <div class="delivery-title">
+                            <i class="fas fa-calendar-alt"></i>
+                            お届け予定日
+                        </div>
+                        <p id="deliveryDate" style="color: #047857; font-weight: 500;">お届け予定日を計算中...</p>
+                    </div>
+
+                    <!-- 注文サマリー -->
+                    <div class="order-summary">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #92400e; margin-bottom: 1rem;">ご注文内容</h3>
+                        <div id="orderSummaryContent">
+                            <div class="summary-row">
+                                <span>商品を選択してください</span>
+                                <span>¥0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 注文ボタン -->
+                    <button type="submit" class="order-button" id="orderButton" disabled>
+                        <i class="fas fa-credit-card mr-2"></i>
+                        ご注文を確定する
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
-    <!-- Font Awesome for icons -->
-    <script src="https://kit.fontawesome.com/your-kit-id.js"></script>
-
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="config.js"></script>
+    <script src="email-config.js"></script>
     <script>
-        // 料金設定
-        const pricing = {
-            single: { base: 2100, subscriptionDiscounts: { monthly: 0.25, bimonthly: 0.20, quarterly: 0.15 }},
-            double: { base: 2880, subscriptionDiscounts: { monthly: 0.30, bimonthly: 0.25, quarterly: 0.20 }},
-            triple: { base: 4080, subscriptionDiscounts: { monthly: 0.35, bimonthly: 0.30, quarterly: 0.25 }}
-        };
-        
-        const frequencyOptions = {
-            oneTime: '単品購入（1回のみ）',
-            monthly: '毎月お届け（最大割引）',
-            bimonthly: '2ヶ月に1回お届け',
-            quarterly: '3ヶ月に1回お届け'
-        };
-        
-        let currentSelection = { quantity: '', frequency: '', price: 0, isSubscription: false };
-        
-        // 配達日計算
-        function calculateDeliveryDates(frequency) {
-            const today = new Date();
-            const firstDelivery = new Date(today);
-            const nextDelivery = new Date(today);
-            
-            firstDelivery.setDate(today.getDate() + 5);
-            
-            if (frequency === 'monthly') nextDelivery.setMonth(today.getMonth() + 1);
-            else if (frequency === 'bimonthly') nextDelivery.setMonth(today.getMonth() + 2);
-            else if (frequency === 'quarterly') nextDelivery.setMonth(today.getMonth() + 3);
-            
-            [firstDelivery, nextDelivery].forEach(date => {
-                const day = date.getDay();
-                if (day === 0) date.setDate(date.getDate() + 1);
-                if (day === 6) date.setDate(date.getDate() + 2);
-            });
-            
-            return { firstDelivery, nextDelivery };
-        }
-        
-        function formatDate(date) {
-            return `${date.getMonth() + 1}/${date.getDate()}`;
-        }
-        
-        // 商品選択イベント
-        document.getElementById('quantity').addEventListener('change', function() {
-            const frequencySelect = document.getElementById('frequency');
-            frequencySelect.innerHTML = '<option value="">配送頻度を選択してください</option>';
-            
-            if (this.value) {
-                Object.entries(frequencyOptions).forEach(([key, label]) => {
-                    const option = document.createElement('option');
-                    option.value = key;
-                    option.textContent = label;
-                    frequencySelect.appendChild(option);
-                });
-                currentSelection.quantity = this.value;
+        // 商品プラン選択
+        document.querySelectorAll('#productOptions .option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // 他の選択を解除
+                document.querySelectorAll('#productOptions .option-card').forEach(c => c.classList.remove('selected'));
+                // 現在のカードを選択
+                this.classList.add('selected');
+                
+                // 定期購入セクションを表示
+                document.getElementById('subscriptionSection').style.display = 'block';
+                
                 updateOrderSummary();
-            } else {
-                document.getElementById('orderSummary').style.display = 'none';
-                currentSelection.quantity = '';
-            }
-            validateForm();
+            });
         });
-        
-        // 頻度選択イベント
-        document.getElementById('frequency').addEventListener('change', function() {
-            currentSelection.frequency = this.value;
-            currentSelection.isSubscription = this.value !== 'oneTime';
-            updateOrderSummary();
-            validateForm();
+
+        // 配送頻度選択
+        document.querySelectorAll('#frequencyOptions .frequency-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // 他の選択を解除
+                document.querySelectorAll('#frequencyOptions .frequency-card').forEach(c => c.classList.remove('selected'));
+                // 現在のカードを選択
+                this.classList.add('selected');
+                
+                updateOrderSummary();
+            });
         });
-        
+
         // 注文サマリー更新
         function updateOrderSummary() {
-            if (!currentSelection.quantity || !currentSelection.frequency) {
-                document.getElementById('orderSummary').style.display = 'none';
+            const selectedProduct = document.querySelector('#productOptions .option-card.selected');
+            const selectedFrequency = document.querySelector('#frequencyOptions .frequency-card.selected');
+            
+            if (!selectedProduct) return;
+            
+            const basePrice = parseInt(selectedProduct.dataset.price);
+            const originalPrice = parseInt(selectedProduct.dataset.original);
+            const plan = selectedProduct.dataset.plan;
+            
+            let finalPrice = basePrice;
+            let shippingFee = plan === 'single' ? 500 : 0;
+            let discountText = '';
+            
+            if (selectedFrequency) {
+                const discount = parseFloat(selectedFrequency.dataset.discount);
+                finalPrice = Math.round(basePrice * discount);
+                const frequencyText = selectedFrequency.querySelector('.frequency-title').textContent;
+                const discountPercent = Math.round((1 - discount) * 100);
+                discountText = `定期購入（${frequencyText}）${discountPercent}%OFF適用`;
+            }
+            
+            const totalPrice = finalPrice + shippingFee;
+            
+            let summaryHTML = '';
+            
+            if (originalPrice > basePrice) {
+                summaryHTML += `<div class="summary-row"><span>商品代金（通常価格）</span><span>¥${originalPrice.toLocaleString()}</span></div>`;
+                summaryHTML += `<div class="summary-row"><span>セット割引</span><span>-¥${(originalPrice - basePrice).toLocaleString()}</span></div>`;
+            }
+            
+            summaryHTML += `<div class="summary-row"><span>商品代金</span><span>¥${basePrice.toLocaleString()}</span></div>`;
+            
+            if (selectedFrequency) {
+                summaryHTML += `<div class="summary-row"><span>${discountText}</span><span>-¥${(basePrice - finalPrice).toLocaleString()}</span></div>`;
+            }
+            
+            if (shippingFee > 0) {
+                summaryHTML += `<div class="summary-row"><span>送料</span><span>¥${shippingFee}</span></div>`;
+            }
+            
+            summaryHTML += `<div class="summary-row"><span>合計金額</span><span>¥${totalPrice.toLocaleString()}</span></div>`;
+            
+            document.getElementById('orderSummaryContent').innerHTML = summaryHTML;
+            document.getElementById('orderButton').disabled = false;
+        }
+
+        // 配達予定日の計算
+        function calculateDeliveryDate() {
+            const today = new Date();
+            const deliveryDate = new Date(today);
+            deliveryDate.setDate(today.getDate() + 3);
+            
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                weekday: 'long' 
+            };
+            const formattedDate = deliveryDate.toLocaleDateString('ja-JP', options);
+            
+            document.getElementById('deliveryDate').textContent = `${formattedDate} にお届け予定です`;
+        }
+
+        // Stripe決済処理
+        const stripe = Stripe(STRIPE_PUBLIC_KEY);
+        
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const selectedProduct = document.querySelector('#productOptions .option-card.selected');
+            const selectedFrequency = document.querySelector('#frequencyOptions .frequency-card.selected');
+            
+            if (!selectedProduct) {
+                alert('商品プランを選択してください');
                 return;
             }
             
-            const basePrice = pricing[currentSelection.quantity].base;
-            let finalPrice = basePrice;
-            let discount = 0;
+            // フォームデータの収集
+            const formData = {
+                lastName: document.getElementById('lastName').value,
+                firstName: document.getElementById('firstName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                zipCode: document.getElementById('zipCode').value,
+                address: document.getElementById('address').value,
+                plan: selectedProduct.dataset.plan,
+                basePrice: parseInt(selectedProduct.dataset.price),
+                frequency: selectedFrequency ? selectedFrequency.dataset.frequency : null,
+                discount: selectedFrequency ? parseFloat(selectedFrequency.dataset.discount) : 1
+            };
             
-            if (currentSelection.isSubscription) {
-                const discountRate = pricing[currentSelection.quantity].subscriptionDiscounts[currentSelection.frequency];
-                discount = Math.round(basePrice * discountRate);
-                finalPrice = basePrice - discount;
-            }
+            const finalPrice = Math.round(formData.basePrice * formData.discount);
+            const shippingFee = formData.plan === 'single' ? 500 : 0;
+            const totalAmount = finalPrice + shippingFee;
             
-            document.getElementById('basePrice').textContent = `¥${basePrice.toLocaleString()}`;
-            document.getElementById('totalPrice').textContent = `合計: ¥${finalPrice.toLocaleString()}`;
-            
-            const discountRow = document.getElementById('discountRow');
-            const discountNotice = document.getElementById('discountNotice');
-            const frequencyRow = document.getElementById('frequencyRow');
-            
-            if (currentSelection.isSubscription) {
-                discountRow.style.display = 'flex';
-                discountNotice.style.display = 'block';
-                frequencyRow.style.display = 'flex';
+            try {
+                // Stripe Checkout セッション作成
+                const { error } = await stripe.redirectToCheckout({
+                    lineItems: [{
+                        price_data: {
+                            currency: 'jpy',
+                            product_data: {
+                                name: 'カリウムfor Beauty',
+                            },
+                            unit_amount: totalAmount,
+                        },
+                        quantity: 1,
+                    }],
+                    mode: 'payment',
+                    successUrl: window.location.origin + '/success.html',
+                    cancelUrl: window.location.href,
+                    customerEmail: formData.email,
+                });
                 
-                document.getElementById('discountAmount').textContent = `-¥${discount.toLocaleString()}`;
-                document.getElementById('frequencyText').textContent = frequencyOptions[currentSelection.frequency];
-                
-                const discountPercent = Math.round((discount / basePrice) * 100);
-                discountNotice.textContent = `定期購入で${discountPercent}%OFF`;
-            } else {
-                discountRow.style.display = 'none';
-                discountNotice.style.display = 'none';
-                frequencyRow.style.display = 'none';
+                if (error) {
+                    console.error('Error:', error);
+                    alert('決済処理中にエラーが発生しました。もう一度お試しください。');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('決済処理中にエラーが発生しました。もう一度お試しください。');
             }
-            
-            // 配送スケジュール
-            const deliveryInfo = document.getElementById('deliveryInfo');
-            const dates = calculateDeliveryDates(currentSelection.frequency);
-            
-            document.getElementById('firstDate').textContent = formatDate(dates.firstDelivery);
-            
-            if (currentSelection.isSubscription) {
-                document.getElementById('nextDelivery').style.display = 'flex';
-                document.getElementById('nextDate').textContent = formatDate(dates.nextDelivery);
-            } else {
-                document.getElementById('nextDelivery').style.display = 'none';
-            }
-            
-            deliveryInfo.style.display = 'block';
-            document.getElementById('orderSummary').style.display = 'block';
-            currentSelection.price = finalPrice;
-        }
-        
-        // フォーム検証
-        function validateForm() {
-            const fields = ['quantity', 'frequency', 'name', 'email', 'phone', 'address'];
-            const isValid = fields.every(field => {
-                const element = document.getElementById(field);
-                return element && element.value.trim() !== '';
-            });
-            document.getElementById('submitBtn').disabled = !isValid;
-        }
-        
-        ['name', 'email', 'phone', 'address'].forEach(fieldId => {
-            document.getElementById(fieldId).addEventListener('input', validateForm);
         });
-        
-        // フォーム送信
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = true;
-            submitBtn.textContent = '処理中...';
-            
-            setTimeout(() => {
-                const productName = currentSelection.quantity === 'single' ? '1個' : 
-                                  currentSelection.quantity === 'double' ? '2個セット' : '3個セット';
-                
-                alert(`ご注文ありがとうございます！\n\n商品: カリウムfor Beauty ${productName}\n配送: ${frequencyOptions[currentSelection.frequency]}\n料金: ¥${currentSelection.price.toLocaleString()}\n\n確認メールをお送りいたします。`);
-                
-                window.location.href = 'success.html';
-            }, 1500);
-        });
+
+        // 初期化
+        calculateDeliveryDate();
     </script>
 </body>
 </html>
