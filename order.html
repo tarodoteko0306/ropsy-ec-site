@@ -185,16 +185,6 @@
             font-size: 0.9rem;
         }
 
-        .test-mode-banner {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            color: white;
-            padding: 0.75rem;
-            text-align: center;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            border-radius: 10px;
-        }
-
         .form-section {
             background: rgba(255, 255, 255, 0.5);
             border-radius: 15px;
@@ -323,12 +313,6 @@
             box-shadow: none;
         }
 
-        .processing {
-            background: #f59e0b !important;
-            cursor: not-allowed !important;
-            transform: none !important;
-        }
-
         @media (max-width: 768px) {
             .order-container {
                 margin: 1rem;
@@ -368,12 +352,6 @@
     <div class="py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="order-container">
-                <!-- テストモードバナー -->
-                <div class="test-mode-banner" id="testModeBanner" style="display: none;">
-                    <i class="fas fa-flask mr-2"></i>
-                    テストモード - 実際の決済は発生しません
-                </div>
-
                 <!-- 商品サマリー -->
                 <div class="product-summary">
                     <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
@@ -432,15 +410,10 @@
                                 <div class="frequency-discount">15% OFF</div>
                             </div>
                         </div>
-                        <div style="text-align: center; margin-top: 1rem;">
-                            <button type="button" id="skipSubscription" style="background: #6b7280; color: white; padding: 0.5rem 1rem; border: none; border-radius: 8px; cursor: pointer;">
-                                定期購入をスキップ
-                            </button>
-                        </div>
                     </div>
 
                     <!-- 配送情報 -->
-                    <div class="form-section" id="shippingSection" style="display: none;">
+                    <div class="form-section">
                         <h3 class="section-title">
                             <i class="fas fa-truck"></i>
                             配送情報
@@ -474,7 +447,7 @@
                     </div>
 
                     <!-- 配達予定日 -->
-                    <div class="delivery-info" id="deliverySection" style="display: none;">
+                    <div class="delivery-info">
                         <div class="delivery-title">
                             <i class="fas fa-calendar-alt"></i>
                             お届け予定日
@@ -482,7 +455,7 @@
                         <div class="delivery-schedule" id="deliverySchedule">
                             <div class="delivery-item">
                                 <div class="delivery-label">初回お届け</div>
-                                <div class="delivery-date" id="firstDelivery">計算中...</div>
+                                <div class="delivery-date" id="firstDelivery">商品を選択してください</div>
                             </div>
                             <div class="delivery-item" id="nextDeliveryItem" style="display: none;">
                                 <div class="delivery-label">次回お届け</div>
@@ -492,7 +465,7 @@
                     </div>
 
                     <!-- 注文サマリー -->
-                    <div class="order-summary" id="summarySection" style="display: none;">
+                    <div class="order-summary">
                         <h3 style="font-size: 1.25rem; font-weight: 700; color: #92400e; margin-bottom: 1rem;">ご注文内容</h3>
                         <div id="orderSummaryContent">
                             <div class="summary-row">
@@ -503,7 +476,7 @@
                     </div>
 
                     <!-- 注文ボタン -->
-                    <button type="submit" class="order-button" id="orderButton" disabled style="display: none;">
+                    <button type="submit" class="order-button" id="orderButton" disabled>
                         <i class="fas fa-credit-card mr-2"></i>
                         ご注文を確定する
                     </button>
@@ -512,273 +485,293 @@
         </div>
     </div>
 
-    <script src="https://js.stripe.com/v3/"></script>
     <script>
-        // 設定の読み込み（エラーハンドリング付き）
-        let stripePublicKey = '';
-        let gasWebAppUrl = '';
+        console.log('注文ページ読み込み開始');
         
-        try {
-            stripePublicKey = window.STRIPE_PUBLIC_KEY || '';
-            gasWebAppUrl = window.GAS_WEB_APP_URL || '';
-        } catch (error) {
-            console.warn('設定ファイルが見つかりません。テストモードで動作します。');
-        }
-
-        // テストモード判定
-        const isTestMode = !stripePublicKey || stripePublicKey.includes('test') || !gasWebAppUrl.includes('script.google.com');
+        // デバッグ用の設定
+        const DEBUG_MODE = true;
         
-        if (isTestMode) {
-            document.getElementById('testModeBanner').style.display = 'block';
-            console.log('テストモード: 実際の決済は発生しません');
-        }
-
-        // Stripe初期化（テストキーまたは本番キー）
-        let stripe = null;
-        if (stripePublicKey) {
-            try {
-                stripe = Stripe(stripePublicKey);
-            } catch (error) {
-                console.warn('Stripeの初期化に失敗:', error);
+        function debugLog(message, data = null) {
+            if (DEBUG_MODE) {
+                console.log('[DEBUG]', message, data || '');
             }
         }
         
-        // 注文データ格納用
-        let currentOrderData = {};
+        debugLog('スクリプト初期化開始');
 
         // 商品プラン選択
-        document.querySelectorAll('#productOptions .option-card').forEach(card => {
+        document.querySelectorAll('#productOptions .option-card').forEach((card, index) => {
+            debugLog(`商品カード${index + 1}にイベント追加`);
+            
             card.addEventListener('click', function() {
-                console.log('商品が選択されました:', this.dataset.plan);
+                debugLog('商品カードがクリックされました', this.dataset);
                 
                 // 他の選択を解除
-                document.querySelectorAll('#productOptions .option-card').forEach(c => c.classList.remove('selected'));
+                document.querySelectorAll('#productOptions .option-card').forEach(c => {
+                    c.classList.remove('selected');
+                });
+                
                 // 現在のカードを選択
                 this.classList.add('selected');
+                debugLog('商品が選択されました', this.dataset.plan);
                 
                 // 定期購入セクションを表示
-                document.getElementById('subscriptionSection').style.display = 'block';
+                const subscriptionSection = document.getElementById('subscriptionSection');
+                subscriptionSection.style.display = 'block';
+                debugLog('定期購入セクションを表示');
                 
+                // 配達予定日と注文サマリーを更新
                 updateDeliveryDates();
                 updateOrderSummary();
-                showNextSection('subscription');
             });
         });
 
         // 配送頻度選択
-        document.querySelectorAll('#frequencyOptions .frequency-card').forEach(card => {
+        document.querySelectorAll('#frequencyOptions .frequency-card').forEach((card, index) => {
+            debugLog(`配送頻度カード${index + 1}にイベント追加`);
+            
             card.addEventListener('click', function() {
-                console.log('配送頻度が選択されました:', this.dataset.frequency);
+                debugLog('配送頻度カードがクリックされました', this.dataset);
                 
                 // 他の選択を解除
-                document.querySelectorAll('#frequencyOptions .frequency-card').forEach(c => c.classList.remove('selected'));
+                document.querySelectorAll('#frequencyOptions .frequency-card').forEach(c => {
+                    c.classList.remove('selected');
+                });
+                
                 // 現在のカードを選択
                 this.classList.add('selected');
+                debugLog('配送頻度が選択されました', this.dataset.frequency);
                 
+                // 配達予定日と注文サマリーを更新
                 updateDeliveryDates();
                 updateOrderSummary();
-                showNextSection('shipping');
             });
         });
 
-        // 定期購入スキップボタン
-        document.getElementById('skipSubscription').addEventListener('click', function() {
-            console.log('定期購入をスキップしました');
-            
-            // 定期購入の選択を解除
-            document.querySelectorAll('#frequencyOptions .frequency-card').forEach(c => c.classList.remove('selected'));
-            
-            updateDeliveryDates();
-            updateOrderSummary();
-            showNextSection('shipping');
-        });
-
-        // 次のセクションを表示する関数
-        function showNextSection(section) {
-            const sections = {
-                'shipping': 'shippingSection',
-                'delivery': 'deliverySection',
-                'summary': 'summarySection',
-                'button': 'orderButton'
-            };
-            
-            if (section === 'shipping') {
-                document.getElementById('shippingSection').style.display = 'block';
-                document.getElementById('deliverySection').style.display = 'block';
-                document.getElementById('summarySection').style.display = 'block';
-                document.getElementById('orderButton').style.display = 'block';
-            }
-        }
-
-        // 配達予定日の計算（改良版）
+        // 配達予定日の計算（修正版）
         function updateDeliveryDates() {
+            debugLog('配達予定日計算開始');
+            
+            const selectedProduct = document.querySelector('#productOptions .option-card.selected');
+            if (!selectedProduct) {
+                debugLog('商品が選択されていません');
+                return;
+            }
+            
             const selectedFrequency = document.querySelector('#frequencyOptions .frequency-card.selected');
             
-            // 初回配達日（2-3日後）
-            const today = new Date();
-            const firstDelivery = new Date(today);
-            firstDelivery.setDate(today.getDate() + Math.floor(Math.random() * 2) + 2); // 2-3日後
-            
-            // 土日を避ける
-            while (firstDelivery.getDay() === 0 || firstDelivery.getDay() === 6) {
-                firstDelivery.setDate(firstDelivery.getDate() + 1);
-            }
-            
-            const options = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric', 
-                weekday: 'long' 
-            };
-            
-            const firstDeliveryText = firstDelivery.toLocaleDateString('ja-JP', options);
-            document.getElementById('firstDelivery').textContent = firstDeliveryText;
-            
-            // 次回配達日（定期購入の場合）
-            if (selectedFrequency) {
-                const nextDeliveryItem = document.getElementById('nextDeliveryItem');
-                const nextDelivery = new Date(firstDelivery);
+            try {
+                // 初回配達日（2-3日後）
+                const today = new Date();
+                const firstDelivery = new Date(today);
+                const randomDays = Math.floor(Math.random() * 2) + 2; // 2-3日後
+                firstDelivery.setDate(today.getDate() + randomDays);
                 
-                const frequency = selectedFrequency.dataset.frequency;
-                switch(frequency) {
-                    case 'monthly':
-                        nextDelivery.setMonth(nextDelivery.getMonth() + 1);
-                        break;
-                    case 'bimonthly':
-                        nextDelivery.setMonth(nextDelivery.getMonth() + 2);
-                        break;
-                    case 'quarterly':
-                        nextDelivery.setMonth(nextDelivery.getMonth() + 3);
-                        break;
-                }
+                debugLog('初回配達日計算', {
+                    today: today.toDateString(),
+                    randomDays: randomDays,
+                    firstDelivery: firstDelivery.toDateString()
+                });
                 
                 // 土日を避ける
-                while (nextDelivery.getDay() === 0 || nextDelivery.getDay() === 6) {
-                    nextDelivery.setDate(nextDelivery.getDate() + 1);
+                while (firstDelivery.getDay() === 0 || firstDelivery.getDay() === 6) {
+                    firstDelivery.setDate(firstDelivery.getDate() + 1);
+                    debugLog('土日のため翌日に調整', firstDelivery.toDateString());
                 }
                 
-                document.getElementById('nextDelivery').textContent = 
-                    nextDelivery.toLocaleDateString('ja-JP', options);
-                nextDeliveryItem.style.display = 'block';
-            } else {
-                document.getElementById('nextDeliveryItem').style.display = 'none';
+                const options = { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric', 
+                    weekday: 'long' 
+                };
+                
+                const firstDeliveryText = firstDelivery.toLocaleDateString('ja-JP', options);
+                document.getElementById('firstDelivery').textContent = firstDeliveryText;
+                debugLog('初回配達日設定完了', firstDeliveryText);
+                
+                // 次回配達日（定期購入の場合）
+                const nextDeliveryItem = document.getElementById('nextDeliveryItem');
+                
+                if (selectedFrequency) {
+                    debugLog('定期購入が選択されているため次回配達日を計算');
+                    
+                    const nextDelivery = new Date(firstDelivery);
+                    const frequency = selectedFrequency.dataset.frequency;
+                    
+                    switch(frequency) {
+                        case 'monthly':
+                            nextDelivery.setMonth(nextDelivery.getMonth() + 1);
+                            break;
+                        case 'bimonthly':
+                            nextDelivery.setMonth(nextDelivery.getMonth() + 2);
+                            break;
+                        case 'quarterly':
+                            nextDelivery.setMonth(nextDelivery.getMonth() + 3);
+                            break;
+                        default:
+                            debugLog('未知の配送頻度', frequency);
+                    }
+                    
+                    debugLog('次回配達日計算', {
+                        frequency: frequency,
+                        nextDelivery: nextDelivery.toDateString()
+                    });
+                    
+                    // 土日を避ける
+                    while (nextDelivery.getDay() === 0 || nextDelivery.getDay() === 6) {
+                        nextDelivery.setDate(nextDelivery.getDate() + 1);
+                    }
+                    
+                    const nextDeliveryText = nextDelivery.toLocaleDateString('ja-JP', options);
+                    document.getElementById('nextDelivery').textContent = nextDeliveryText;
+                    nextDeliveryItem.style.display = 'block';
+                    debugLog('次回配達日設定完了', nextDeliveryText);
+                    
+                } else {
+                    nextDeliveryItem.style.display = 'none';
+                    debugLog('定期購入が選択されていないため次回配達日を非表示');
+                }
+                
+            } catch (error) {
+                debugLog('配達予定日計算エラー', error);
+                document.getElementById('firstDelivery').textContent = '配達予定日の計算に失敗しました';
             }
         }
 
         // 注文サマリー更新
         function updateOrderSummary() {
+            debugLog('注文サマリー更新開始');
+            
             const selectedProduct = document.querySelector('#productOptions .option-card.selected');
             const selectedFrequency = document.querySelector('#frequencyOptions .frequency-card.selected');
             
-            if (!selectedProduct) return;
-            
-            const basePrice = parseInt(selectedProduct.dataset.price);
-            const originalPrice = parseInt(selectedProduct.dataset.original);
-            const plan = selectedProduct.dataset.plan;
-            
-            let finalPrice = basePrice;
-            let shippingFee = plan === 'single' ? 500 : 0;
-            let discountText = '';
-            
-            if (selectedFrequency) {
-                const discount = parseFloat(selectedFrequency.dataset.discount);
-                finalPrice = Math.round(basePrice * discount);
-                const frequencyText = selectedFrequency.querySelector('.frequency-title').textContent;
-                const discountPercent = Math.round((1 - discount) * 100);
-                discountText = `定期購入（${frequencyText}）${discountPercent}%OFF適用`;
+            if (!selectedProduct) {
+                debugLog('商品が選択されていないためサマリー更新をスキップ');
+                return;
             }
             
-            const totalPrice = finalPrice + shippingFee;
-            
-            let summaryHTML = '';
-            
-            if (originalPrice > basePrice) {
-                summaryHTML += `<div class="summary-row"><span>商品代金（通常価格）</span><span>¥${originalPrice.toLocaleString()}</span></div>`;
-                summaryHTML += `<div class="summary-row"><span>セット割引</span><span>-¥${(originalPrice - basePrice).toLocaleString()}</span></div>`;
+            try {
+                const basePrice = parseInt(selectedProduct.dataset.price);
+                const originalPrice = parseInt(selectedProduct.dataset.original);
+                const plan = selectedProduct.dataset.plan;
+                
+                debugLog('価格情報', {
+                    basePrice: basePrice,
+                    originalPrice: originalPrice,
+                    plan: plan
+                });
+                
+                let finalPrice = basePrice;
+                let shippingFee = plan === 'single' ? 500 : 0;
+                let discountText = '';
+                
+                if (selectedFrequency) {
+                    const discount = parseFloat(selectedFrequency.dataset.discount);
+                    finalPrice = Math.round(basePrice * discount);
+                    const frequencyText = selectedFrequency.querySelector('.frequency-title').textContent;
+                    const discountPercent = Math.round((1 - discount) * 100);
+                    discountText = `定期購入（${frequencyText}）${discountPercent}%OFF適用`;
+                    
+                    debugLog('定期購入割引適用', {
+                        discount: discount,
+                        finalPrice: finalPrice,
+                        discountText: discountText
+                    });
+                }
+                
+                const totalPrice = finalPrice + shippingFee;
+                
+                let summaryHTML = '';
+                
+                if (originalPrice > basePrice) {
+                    summaryHTML += `<div class="summary-row"><span>商品代金（通常価格）</span><span>¥${originalPrice.toLocaleString()}</span></div>`;
+                    summaryHTML += `<div class="summary-row"><span>セット割引</span><span>-¥${(originalPrice - basePrice).toLocaleString()}</span></div>`;
+                }
+                
+                summaryHTML += `<div class="summary-row"><span>商品代金</span><span>¥${basePrice.toLocaleString()}</span></div>`;
+                
+                if (selectedFrequency) {
+                    summaryHTML += `<div class="summary-row"><span>${discountText}</span><span>-¥${(basePrice - finalPrice).toLocaleString()}</span></div>`;
+                }
+                
+                if (shippingFee > 0) {
+                    summaryHTML += `<div class="summary-row"><span>送料</span><span>¥${shippingFee}</span></div>`;
+                }
+                
+                summaryHTML += `<div class="summary-row"><span>合計金額</span><span>¥${totalPrice.toLocaleString()}</span></div>`;
+                
+                document.getElementById('orderSummaryContent').innerHTML = summaryHTML;
+                document.getElementById('orderButton').disabled = false;
+                
+                debugLog('注文サマリー更新完了', {
+                    totalPrice: totalPrice,
+                    summaryHTML: summaryHTML
+                });
+                
+            } catch (error) {
+                debugLog('注文サマリー更新エラー', error);
             }
-            
-            summaryHTML += `<div class="summary-row"><span>商品代金</span><span>¥${basePrice.toLocaleString()}</span></div>`;
-            
-            if (selectedFrequency) {
-                summaryHTML += `<div class="summary-row"><span>${discountText}</span><span>-¥${(basePrice - finalPrice).toLocaleString()}</span></div>`;
-            }
-            
-            if (shippingFee > 0) {
-                summaryHTML += `<div class="summary-row"><span>送料</span><span>¥${shippingFee}</span></div>`;
-            }
-            
-            summaryHTML += `<div class="summary-row"><span>合計金額</span><span>¥${totalPrice.toLocaleString()}</span></div>`;
-            
-            document.getElementById('orderSummaryContent').innerHTML = summaryHTML;
-            document.getElementById('orderButton').disabled = false;
         }
 
-        // テスト用注文処理
-        function processTestOrder() {
-            alert('テストモード: 注文処理をシミュレーションしました！\n\n実際の決済は発生していません。\n本番環境では実際の決済が行われます。');
-            
-            // テスト用成功ページにリダイレクト
-            const orderId = 'TEST_ORDER_' + Date.now();
-            window.location.href = `/success.html?order=${orderId}&test=true`;
-        }
-
-        // 注文フォーム送信処理
-        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+        // 簡単な注文処理（テスト用）
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            debugLog('注文フォーム送信');
             
             const selectedProduct = document.querySelector('#productOptions .option-card.selected');
+            const selectedFrequency = document.querySelector('#frequencyOptions .frequency-card.selected');
             
             if (!selectedProduct) {
                 alert('商品プランを選択してください');
                 return;
             }
             
-            // フォーム入力チェック
+            // 入力チェック
             const requiredFields = ['lastName', 'firstName', 'email', 'phone', 'zipCode', 'address'];
-            for (const field of requiredFields) {
-                if (!document.getElementById(field).value.trim()) {
-                    alert('必須項目を入力してください');
-                    document.getElementById(field).focus();
-                    return;
+            const emptyFields = [];
+            
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    emptyFields.push(field.previousElementSibling.textContent);
                 }
-            }
+            });
             
-            // ボタン状態を更新
-            const orderButton = document.getElementById('orderButton');
-            orderButton.disabled = true;
-            orderButton.classList.add('processing');
-            
-            // テストモードの場合
-            if (isTestMode) {
-                orderButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>テスト処理中...';
-                setTimeout(() => {
-                    processTestOrder();
-                }, 2000);
+            if (emptyFields.length > 0) {
+                alert(`以下の項目を入力してください：\n${emptyFields.join('\n')}`);
                 return;
             }
             
-            // 本番決済処理（実装中）
-            orderButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>決済準備中...';
+            // テスト用の注文完了メッセージ
+            const orderData = {
+                product: selectedProduct.querySelector('.option-title').textContent,
+                frequency: selectedFrequency ? selectedFrequency.querySelector('.frequency-title').textContent : '単品購入',
+                customer: document.getElementById('lastName').value + ' ' + document.getElementById('firstName').value,
+                email: document.getElementById('email').value,
+                deliveryDate: document.getElementById('firstDelivery').textContent
+            };
             
-            try {
-                // 実際の決済処理はここに実装
-                alert('本番決済システムは設定完了後に利用可能です');
-                
-            } catch (error) {
-                console.error('Payment error:', error);
-                alert(`決済処理中にエラーが発生しました: ${error.message}`);
-                
-                // ボタンを元に戻す
-                orderButton.disabled = false;
-                orderButton.classList.remove('processing');
-                orderButton.innerHTML = '<i class="fas fa-credit-card mr-2"></i>ご注文を確定する';
-            }
+            debugLog('注文データ', orderData);
+            
+            alert(`【テスト注文完了】\n\n商品: ${orderData.product}\n配送: ${orderData.frequency}\nお客様: ${orderData.customer}\nメール: ${orderData.email}\n配達予定: ${orderData.deliveryDate}\n\n実際の決済処理はまだ実装されていません。`);
         });
 
         // 初期化
-        console.log('注文ページを初期化しました');
-        console.log('テストモード:', isTestMode);
-        updateDeliveryDates();
+        debugLog('初期化実行');
+        
+        // ページ読み込み完了後に配達予定日を初期設定
+        document.addEventListener('DOMContentLoaded', function() {
+            debugLog('DOMContentLoaded - 初期設定開始');
+            
+            // 初期状態での配達予定日を設定
+            setTimeout(() => {
+                debugLog('初期配達予定日設定');
+                document.getElementById('firstDelivery').textContent = '商品を選択してください';
+            }, 100);
+        });
+        
+        debugLog('スクリプト初期化完了');
     </script>
 </body>
 </html>
