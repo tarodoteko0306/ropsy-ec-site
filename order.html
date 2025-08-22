@@ -361,7 +361,7 @@
     </div>
 
     <script>
-        // 環境変数からStripe公開キーを取得（APIキーは別ファイルで管理）
+        // 環境変数からStripe公開キーを取得
         const STRIPE_PUBLIC_KEY = window.STRIPE_CONFIG?.publicKey || 'YOUR_STRIPE_PUBLISHABLE_KEY_HERE';
         const stripe = Stripe(STRIPE_PUBLIC_KEY);
 
@@ -372,6 +372,23 @@
             
             event.currentTarget.classList.add('selected');
             document.querySelector(`#${productType}`).checked = true;
+        }
+
+        // 顧客情報をGoogle Sheetsに送信
+        async function sendToGoogleSheets(orderData) {
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzVqA8B7eEMcvJz8nEeA_6bRoOhRJqPcWU9f8K_-X6n4MNhOQX2g-OJK7wWGmMKTMEqUw/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(orderData)
+                });
+                console.log('顧客情報をGoogle Sheetsに送信しました');
+            } catch (error) {
+                console.error('Google Sheets送信エラー:', error);
+            }
         }
 
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
@@ -390,15 +407,78 @@
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>決済処理中...';
             submitBtn.disabled = true;
 
-            // ここで実際の決済処理を実装
-            // 現在はアラート表示のみ
-            setTimeout(() => {
-                alert('決済システムとの連携は設定ファイルで行います。');
+            // 商品価格設定
+            const products = {
+                single: { amount: 2600, name: 'カリウムfor Beauty 単品' }, // 2100 + 500送料
+                double: { amount: 2880, name: 'カリウムfor Beauty 2個セット' },
+                triple: { amount: 4080, name: 'カリウムfor Beauty 3個セット' }
+            };
+
+            const selectedProductData = products[selectedProduct];
+
+            // Google Sheetsに顧客情報を送信
+            const orderData = {
+                timestamp: new Date().toLocaleString('ja-JP'),
+                product: selectedProductData.name,
+                amount: selectedProductData.amount,
+                lastName: formData.get('lastName'),
+                firstName: formData.get('firstName'),
+                lastNameKana: formData.get('lastNameKana'),
+                firstNameKana: formData.get('firstNameKana'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                zipCode: formData.get('zipCode'),
+                prefecture: formData.get('prefecture'),
+                city: formData.get('city'),
+                address: formData.get('address'),
+                message: formData.get('message') || ''
+            };
+
+            await sendToGoogleSheets(orderData);
+            
+            try {
+                // Stripe決済処理
+                const { error } = await stripe.redirectToCheckout({
+                    lineItems: [{
+                        price_data: {
+                            currency: 'jpy',
+                            product_data: {
+                                name: selectedProductData.name,
+                                description: '女性の美と健康をサポートするサプリメント'
+                            },
+                            unit_amount: selectedProductData.amount
+                        },
+                        quantity: 1
+                    }],
+                    mode: 'payment',
+                    successUrl: window.location.origin + '/success.html',
+                    cancelUrl: window.location.origin + '/order.html',
+                    customerEmail: formData.get('email'),
+                    metadata: {
+                        customer_name: formData.get('lastName') + ' ' + formData.get('firstName'),
+                        customer_kana: formData.get('lastNameKana') + ' ' + formData.get('firstNameKana'),
+                        phone: formData.get('phone'),
+                        prefecture: formData.get('prefecture'),
+                        city: formData.get('city'),
+                        address: formData.get('address'),
+                        message: formData.get('message') || ''
+                    }
+                });
+                
+                if (error) {
+                    console.error('Stripe error:', error);
+                    alert('決済処理でエラーが発生しました。しばらく時間をおいて再度お試しください。');
+                }
+            } catch (error) {
+                console.error('Payment error:', error);
+                alert('決済処理でエラーが発生しました。しばらく時間をおいて再度お試しください。');
+            } finally {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-            }, 2000);
+            }
         });
 
+        // 郵便番号自動フォーマット
         document.getElementById('zipCode').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length >= 3) {
@@ -407,6 +487,7 @@
             e.target.value = value;
         });
 
+        // 電話番号自動フォーマット
         document.getElementById('phone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length >= 6) {
