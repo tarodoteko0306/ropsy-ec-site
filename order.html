@@ -1,99 +1,248 @@
-{"detail":"Found"}
-<script>
-// 価格計算を修正
-function updateOrderSummary() {
-    const selectedProduct = document.querySelector('#productOptions .option-card.selected');
-    const selectedFrequency = document.querySelector('#frequencyOptions .frequency-card.selected');
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ご注文 - カリウムfor Beauty | &ROPSY</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Noto Sans JP', sans-serif; background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 50%, #fefce8 100%); min-height: 100vh;">
     
-    if (!selectedProduct) return;
-    
-    const plan = selectedProduct.dataset.plan;
-    let basePrice, shipping, totalPrice;
-    
-    // 正しい価格設定
-    switch(plan) {
-        case 'single':
-            basePrice = 1600;
-            shipping = 500;
-            totalPrice = basePrice + shipping; // 2100円
-            break;
-        case 'double':
-            basePrice = 2880;
-            shipping = 0;
-            totalPrice = basePrice; // 2880円（送料無料）
-            break;
-        case 'triple':
-            basePrice = 4080;
-            shipping = 0;
-            totalPrice = basePrice; // 4080円（送料無料）
-            break;
-    }
-    
-    // 定期購入割引
-    if (selectedFrequency) {
-        const discount = parseFloat(selectedFrequency.dataset.discount);
-        totalPrice = Math.round(totalPrice * discount);
-    }
-    
-    // サマリー更新
-    let summaryHTML = `<div class="summary-row"><span>商品代金</span><span>¥${basePrice.toLocaleString()}</span></div>`;
-    
-    if (shipping > 0) {
-        summaryHTML += `<div class="summary-row"><span>送料</span><span>¥${shipping}</span></div>`;
-    }
-    
-    if (selectedFrequency) {
-        const discountPercent = Math.round((1 - parseFloat(selectedFrequency.dataset.discount)) * 100);
-        summaryHTML += `<div class="summary-row"><span>定期購入割引 ${discountPercent}%OFF</span><span>-¥${((basePrice + shipping) - totalPrice).toLocaleString()}</span></div>`;
-    }
-    
-    summaryHTML += `<div class="summary-row"><span>合計金額</span><span>¥${totalPrice.toLocaleString()}</span></div>`;
-    
-    document.getElementById('orderSummaryContent').innerHTML = summaryHTML;
-}
+    <!-- Header -->
+    <header style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.2); position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div style="max-width: 1280px; margin: 0 auto; padding: 0 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; height: 64px;">
+                <div style="display: flex; align-items: center;">
+                    <h1 style="font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">&ROPSY</h1>
+                    <span style="margin-left: 0.75rem; font-size: 0.875rem; color: #6b7280;">公式サイト</span>
+                </div>
+                <a href="index.html" style="color: #6b7280; text-decoration: none; transition: color 0.3s;">
+                    <i class="fas fa-arrow-left" style="margin-right: 0.25rem;"></i>戻る
+                </a>
+            </div>
+        </div>
+    </header>
 
-// カード入力欄を修正
-document.addEventListener('DOMContentLoaded', function() {
-    // カード番号入力欄を有効化
-    const cardNumber = document.getElementById('cardNumber');
-    const cardExpiry = document.getElementById('cardExpiry');
-    const cardCVC = document.getElementById('cardCVC');
-    
-    if (cardNumber) {
-        cardNumber.removeAttribute('readonly');
-        cardNumber.removeAttribute('disabled');
-        cardNumber.placeholder = '1234 5678 9012 3456';
-        
+    <div style="padding: 4rem 0;">
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 1rem;">
+            <div style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border-radius: 25px; padding: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                
+                <!-- 商品サマリー -->
+                <div style="background: linear-gradient(135deg, #eff6ff 0%, #fef7ff 100%); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; text-align: center;">
+                    <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" alt="カリウムfor Beauty" style="width: 150px; height: auto; margin: 0 auto 1rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+                    <h2 style="font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem;">カリウムfor Beauty</h2>
+                    <p style="color: #6b7280;">15種類の厳選美容成分配合</p>
+                </div>
+
+                <form id="orderForm">
+                    <!-- 商品オプション選択 -->
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-shopping-bag" style="margin-right: 0.5rem; color: #667eea;"></i>
+                            商品プランを選択
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;" id="productOptions">
+                            <div class="option-card" data-plan="single" data-price="1600" data-shipping="500" data-total="2100" style="background: rgba(255, 255, 255, 0.8); border: 2px solid #e5e7eb; border-radius: 15px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                <div style="font-size: 1.1rem; font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">単品購入</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">¥1,600</div>
+                                <div style="color: #6b7280; font-size: 0.85rem;">送料別途¥500</div>
+                            </div>
+                            <div class="option-card" data-plan="double" data-price="2880" data-shipping="0" data-total="2880" style="background: rgba(255, 255, 255, 0.8); border: 2px solid #e5e7eb; border-radius: 15px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s ease; position: relative;">
+                                <div style="position: absolute; top: -8px; right: -8px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; font-weight: bold;">10%OFF</div>
+                                <div style="font-size: 1.1rem; font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">2個セット</div>
+                                <div style="text-decoration: line-through; color: #9ca3af; font-size: 0.9rem; margin-bottom: 0.25rem;">¥3,200</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">¥2,880</div>
+                                <div style="color: #6b7280; font-size: 0.85rem;">送料無料</div>
+                            </div>
+                            <div class="option-card" data-plan="triple" data-price="4080" data-shipping="0" data-total="4080" style="background: rgba(255, 255, 255, 0.8); border: 2px solid #e5e7eb; border-radius: 15px; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s ease; position: relative;">
+                                <div style="position: absolute; top: -8px; right: -8px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; font-weight: bold;">15%OFF</div>
+                                <div style="font-size: 1.1rem; font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">3個セット</div>
+                                <div style="text-decoration: line-through; color: #9ca3af; font-size: 0.9rem; margin-bottom: 0.25rem;">¥4,800</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">¥4,080</div>
+                                <div style="color: #6b7280; font-size: 0.85rem;">送料無料</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 配送情報 -->
+                    <div style="background: rgba(255, 255, 255, 0.5); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-truck" style="margin-right: 0.5rem; color: #667eea;"></i>
+                            配送情報
+                        </h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">お名前（姓）*</label>
+                                <input type="text" id="lastName" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">お名前（名）*</label>
+                                <input type="text" id="firstName" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">メールアドレス*</label>
+                                <input type="email" id="email" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">電話番号*</label>
+                                <input type="tel" id="phone" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">郵便番号*</label>
+                            <input type="text" id="zipCode" placeholder="例：123-4567" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">住所*</label>
+                            <input type="text" id="address" placeholder="都道府県市区町村番地建物名" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                        </div>
+                    </div>
+
+                    <!-- お支払い情報 -->
+                    <div style="background: rgba(255, 255, 255, 0.5); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem; display: flex; align-items: center;">
+                            <i class="fas fa-credit-card" style="margin-right: 0.5rem; color: #667eea;"></i>
+                            お支払い情報
+                        </h3>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">カード番号*</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">有効期限*</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">セキュリティコード*</label>
+                                <input type="text" id="cardCVC" placeholder="123" maxlength="4" required style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 注文サマリー -->
+                    <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 15px; padding: 2rem; margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #92400e; margin-bottom: 1rem;">ご注文内容</h3>
+                        <div id="orderSummaryContent">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                                <span>商品を選択してください</span>
+                                <span>¥0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 注文ボタン -->
+                    <button type="submit" id="orderButton" disabled style="width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.25rem 2rem; border: none; border-radius: 15px; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3); opacity: 0.5;">
+                        <i class="fas fa-credit-card" style="margin-right: 0.5rem;"></i>
+                        ご注文を確定する
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 商品選択機能
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.style.borderColor = '#e5e7eb';
+                    c.style.background = 'rgba(255, 255, 255, 0.8)';
+                });
+                this.style.borderColor = '#667eea';
+                this.style.background = 'linear-gradient(135deg, #667eea10 0%, #764ba210 100%)';
+                this.classList.add('selected');
+                updateOrderSummary();
+            });
+        });
+
+        // 注文サマリー更新
+        function updateOrderSummary() {
+            const selectedProduct = document.querySelector('.option-card.selected');
+            if (!selectedProduct) return;
+
+            const price = parseInt(selectedProduct.dataset.price);
+            const shipping = parseInt(selectedProduct.dataset.shipping);
+            const total = parseInt(selectedProduct.dataset.total);
+            const plan = selectedProduct.dataset.plan;
+
+            let summaryHTML = `<div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1);"><span>商品代金</span><span>¥${price.toLocaleString()}</span></div>`;
+            
+            if (shipping > 0) {
+                summaryHTML += `<div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1);"><span>送料</span><span>¥${shipping}</span></div>`;
+            }
+            
+            summaryHTML += `<div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem;"><span>合計金額</span><span>¥${total.toLocaleString()}</span></div>`;
+
+            document.getElementById('orderSummaryContent').innerHTML = summaryHTML;
+            
+            const orderButton = document.getElementById('orderButton');
+            orderButton.disabled = false;
+            orderButton.style.opacity = '1';
+            orderButton.style.cursor = 'pointer';
+        }
+
         // カード番号フォーマット
-        cardNumber.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\s/g, '');
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
             let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
             if (formattedValue.length <= 19) {
                 e.target.value = formattedValue;
             }
         });
-    }
-    
-    if (cardExpiry) {
-        cardExpiry.removeAttribute('readonly');
-        cardExpiry.removeAttribute('disabled');
-        cardExpiry.placeholder = 'MM/YY';
-        
+
         // 有効期限フォーマット
-        cardExpiry.addEventListener('input', function(e) {
+        document.getElementById('cardExpiry').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length >= 2) {
                 value = value.substring(0,2) + '/' + value.substring(2,4);
             }
             e.target.value = value;
         });
-    }
-    
-    if (cardCVC) {
-        cardCVC.removeAttribute('readonly');
-        cardCVC.removeAttribute('disabled');
-        cardCVC.placeholder = '123';
-        cardCVC.maxLength = 4;
-    }
-});
-</script>
+
+        // CVCは数字のみ
+        document.getElementById('cardCVC').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // フォーム送信
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const selectedProduct = document.querySelector('.option-card.selected');
+            if (!selectedProduct) {
+                alert('商品を選択してください');
+                return;
+            }
+
+            const formData = {
+                lastName: document.getElementById('lastName').value,
+                firstName: document.getElementById('firstName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                zipCode: document.getElementById('zipCode').value,
+                address: document.getElementById('address').value,
+                cardNumber: document.getElementById('cardNumber').value,
+                cardExpiry: document.getElementById('cardExpiry').value,
+                cardCVC: document.getElementById('cardCVC').value,
+                productPlan: selectedProduct.dataset.plan,
+                amount: parseInt(selectedProduct.dataset.total)
+            };
+
+            // 入力チェック
+            for (let field in formData) {
+                if (!formData[field]) {
+                    alert('全ての項目を入力してください');
+                    return;
+                }
+            }
+
+            alert(`テスト注文完了！\n\nお客様: ${formData.lastName} ${formData.firstName}\n商品: ${selectedProduct.querySelector('div').textContent}\n金額: ¥${formData.amount.toLocaleString()}\n\n※これはテスト画面です`);
+        });
+    </script>
+</body>
+</html>
