@@ -24,7 +24,6 @@ Thumbs.db
 *.log
 
 # API Keys and sensitive configuration
-js/config.js
 config.js
 email-config.js
 server-config.gs
