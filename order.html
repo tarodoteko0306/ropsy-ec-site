@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANDROPSY - カリウムfor Beauty ご注文</title>
+    <title>ご注文 - ANDROPSY</title>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="config.js"></script>
@@ -16,146 +16,96 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Kaku Gothic Pro', sans-serif;
             line-height: 1.6;
             color: #2c3e50;
             background-color: #f8f9fa;
             min-height: 100vh;
         }
         
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
         .header {
             background-color: #ffffff;
-            padding: 30px;
-            text-align: center;
-            border-bottom: 2px solid #e9ecef;
+            border-bottom: 1px solid #e9ecef;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
         }
         
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 8px;
-        }
-        
-        .subtitle {
-            color: #6c757d;
-            font-size: 14px;
-        }
-        
-        .product-overview {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 30px;
-            padding: 30px;
-            align-items: start;
-        }
-        
-        .product-image-container {
-            text-align: center;
-        }
-        
-        .product-image {
-            width: 100%;
-            max-width: 250px;
-            height: auto;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-        
-        .product-info {
-            padding-left: 20px;
-        }
-        
-        .product-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 12px;
-        }
-        
-        .product-description {
-            color: #495057;
-            font-size: 14px;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .feature {
-            text-align: center;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 6px;
-            border: 1px solid #e9ecef;
-        }
-        
-        .feature-number {
-            font-size: 24px;
-            font-weight: 700;
-            color: #495057;
-            margin-bottom: 4px;
-        }
-        
-        .feature-text {
-            font-size: 12px;
-            color: #6c757d;
-        }
-        
-        .benefits {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 6px;
-            border: 1px solid #e9ecef;
-        }
-        
-        .benefits-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #495057;
-        }
-        
-        .benefit-icon {
-            margin-right: 10px;
-            font-size: 16px;
-            color: #6c757d;
-        }
-        
-        .order-form-section {
-            padding: 30px;
-            background-color: #ffffff;
-            border-top: 1px solid #e9ecef;
-        }
-        
-        .section-title {
             font-size: 20px;
             font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 25px;
+            text-decoration: none;
+        }
+        
+        .back-to-top {
+            display: flex;
+            align-items: center;
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        .back-to-top:hover {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .back-to-top i {
+            margin-right: 6px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .page-header {
+            padding: 30px;
             text-align: center;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .page-subtitle {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .form-section {
+            padding: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
         }
         
         .form-row {
@@ -185,7 +135,7 @@
             width: 100%;
             padding: 12px;
             border: 1px solid #ced4da;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 14px;
             transition: border-color 0.2s;
             background-color: #ffffff;
@@ -194,9 +144,10 @@
         select:focus, input:focus {
             outline: none;
             border-color: #495057;
+            box-shadow: 0 0 0 2px rgba(73, 80, 87, 0.1);
         }
         
-        .price-summary {
+        .order-summary {
             background-color: #2c3e50;
             color: #ffffff;
             padding: 25px;
@@ -204,7 +155,7 @@
             border-radius: 6px;
         }
         
-        .price-row {
+        .summary-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -212,38 +163,39 @@
             font-size: 14px;
         }
         
-        .price-label {
+        .summary-label {
             font-weight: 500;
         }
         
-        .price-value {
+        .summary-value {
             font-weight: 600;
         }
         
-        .total-price {
-            font-size: 24px;
+        .total-row {
+            font-size: 20px;
             font-weight: 700;
             text-align: center;
             padding: 15px;
             background-color: rgba(255,255,255,0.1);
             border-radius: 4px;
-            margin: 15px 0 10px 0;
+            margin: 15px 0;
         }
         
-        .delivery-schedule {
+        .delivery-info {
             background-color: rgba(255,255,255,0.1);
             padding: 15px;
             border-radius: 4px;
             margin-top: 15px;
             font-size: 13px;
-            text-align: center;
         }
         
         .delivery-date {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
         }
         
-        .discount-notice {
+        .discount-info {
             background-color: rgba(255,255,255,0.1);
             padding: 12px;
             border-radius: 4px;
@@ -256,13 +208,12 @@
             background-color: #2c3e50;
             color: #ffffff;
             border: none;
-            padding: 15px 30px;
+            padding: 16px 30px;
             font-size: 16px;
             font-weight: 600;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             width: 100%;
-            margin-top: 20px;
             transition: background-color 0.2s;
         }
         
@@ -281,136 +232,98 @@
                 border-radius: 0;
             }
             
-            .product-overview {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 20px;
-            }
-            
-            .product-info {
-                padding-left: 0;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
-            
             .form-row {
                 grid-template-columns: 1fr;
             }
             
-            .order-form-section {
+            .form-section {
                 padding: 20px;
+            }
+            
+            .page-header {
+                padding: 20px;
+            }
+            
+            .header-content {
+                padding: 0 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- ヘッダー -->
-        <div class="header">
-            <div class="logo">ANDROPSY</div>
-            <div class="subtitle">カリウムfor Beauty ご注文フォーム</div>
+    <!-- ヘッダー -->
+    <div class="header">
+        <div class="header-content">
+            <a href="/" class="logo">ANDROPSY</a>
+            <a href="/" class="back-to-top">
+                <i class="fas fa-arrow-left"></i>
+                商品ページに戻る
+            </a>
         </div>
-        
-        <!-- 商品概要 -->
-        <div class="product-overview">
-            <div class="product-image-container">
-                <img src="https://via.placeholder.com/250x320/f8f9fa/2c3e50?text=ANDROPSY" alt="カリウムfor Beauty" class="product-image">
-            </div>
-            
-            <div class="product-info">
-                <h2 class="product-title">カリウムfor Beauty</h2>
-                <p class="product-description">
-                    女性の美と健康をサポートする15種類の厳選美容成分配合。<br>
-                    毎日の栄養バランスを整える栄養機能食品です。
-                </p>
-                
-                <div class="features">
-                    <div class="feature">
-                        <div class="feature-number">15</div>
-                        <div class="feature-text">種類の美容成分</div>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-number">1,320</div>
-                        <div class="feature-text">mgカリウム</div>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-number">121</div>
-                        <div class="feature-text">種類の野菜酵素</div>
-                    </div>
-                </div>
-                
-                <div class="benefits">
-                    <div class="benefits-title">期待できるサポート</div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">•</span>
-                        <span>体内の水分バランス維持をサポート</span>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">•</span>
-                        <span>美容面でのコンディション維持に寄与</span>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">•</span>
-                        <span>健康的な毎日の基盤づくりに貢献</span>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">•</span>
-                        <span>栄養バランスの調整をサポート</span>
-                    </div>
-                </div>
-            </div>
+    </div>
+    
+    <div class="container">
+        <!-- ページヘッダー -->
+        <div class="page-header">
+            <h1 class="page-title">ご注文</h1>
+            <p class="page-subtitle">カリウムfor Beauty</p>
         </div>
         
         <!-- 注文フォーム -->
-        <div class="order-form-section">
-            <div class="section-title">ご注文内容をお選びください</div>
-            
+        <div class="form-section">
             <form id="orderForm">
+                <!-- 商品選択 -->
+                <div class="section-title">商品・配送設定</div>
+                
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="quantity">商品・個数</label>
+                        <label for="quantity">個数</label>
                         <select id="quantity" name="quantity" required>
                             <option value="">選択してください</option>
                             <option value="single">1個（¥2,100）</option>
-                            <option value="double">2個セット（¥2,880）</option>
-                            <option value="triple">3個セット（¥4,080）</option>
+                            <option value="double">2個セット（¥2,880）お得</option>
+                            <option value="triple">3個セット（¥4,080）最もお得</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label for="frequency">お届け頻度</label>
+                        <label for="frequency">配送頻度</label>
                         <select id="frequency" name="frequency" required>
-                            <option value="">まず商品を選択してください</option>
+                            <option value="">まず個数を選択してください</option>
                         </select>
                     </div>
                 </div>
                 
-                <!-- 料金サマリー -->
-                <div class="price-summary" id="priceSummary" style="display: none;">
-                    <div class="price-row">
-                        <span class="price-label">商品価格</span>
-                        <span class="price-value" id="basePrice">¥0</span>
+                <!-- 注文サマリー -->
+                <div class="order-summary" id="orderSummary" style="display: none;">
+                    <div class="summary-row">
+                        <span class="summary-label">商品価格</span>
+                        <span class="summary-value" id="basePrice">¥0</span>
                     </div>
-                    <div class="price-row" id="discountRow" style="display: none;">
-                        <span class="price-label">割引</span>
-                        <span class="price-value" id="discountAmount">¥0</span>
+                    <div class="summary-row" id="discountRow" style="display: none;">
+                        <span class="summary-label">定期購入割引</span>
+                        <span class="summary-value" id="discountAmount">¥0</span>
                     </div>
-                    <div class="price-row" id="frequencyRow" style="display: none;">
-                        <span class="price-label">お届け頻度</span>
-                        <span class="price-value" id="frequencyText">-</span>
-                    </div>
-                    
-                    <div class="total-price" id="totalPrice">合計: ¥0</div>
-                    
-                    <!-- 配達スケジュール -->
-                    <div class="delivery-schedule" id="deliverySchedule" style="display: none;">
-                        <div class="delivery-date" id="firstDelivery">初回お届け: 2025年○月○日頃</div>
-                        <div class="delivery-date" id="nextDelivery" style="display: none;">次回お届け: 2025年○月○日頃</div>
+                    <div class="summary-row" id="frequencyRow" style="display: none;">
+                        <span class="summary-label">配送頻度</span>
+                        <span class="summary-value" id="frequencyText">-</span>
                     </div>
                     
-                    <div class="discount-notice" id="discountNotice" style="display: none;"></div>
+                    <div class="total-row" id="totalPrice">合計: ¥0</div>
+                    
+                    <!-- 配送スケジュール -->
+                    <div class="delivery-info" id="deliveryInfo" style="display: none;">
+                        <div class="delivery-date" id="firstDelivery">
+                            <span>初回お届け:</span>
+                            <span id="firstDate">-</span>
+                        </div>
+                        <div class="delivery-date" id="nextDelivery" style="display: none;">
+                            <span>次回お届け:</span>
+                            <span id="nextDate">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="discount-info" id="discountNotice" style="display: none;"></div>
                 </div>
                 
                 <!-- お客様情報 -->
@@ -445,6 +358,9 @@
         </div>
     </div>
 
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/your-kit-id.js"></script>
+
     <script>
         // 料金設定
         const pricing = {
@@ -455,17 +371,12 @@
         
         const frequencyOptions = {
             oneTime: '単品購入（1回のみ）',
-            monthly: '毎月お届け',
+            monthly: '毎月お届け（最大割引）',
             bimonthly: '2ヶ月に1回お届け',
             quarterly: '3ヶ月に1回お届け'
         };
         
-        let currentSelection = {
-            quantity: '',
-            frequency: '',
-            price: 0,
-            isSubscription: false
-        };
+        let currentSelection = { quantity: '', frequency: '', price: 0, isSubscription: false };
         
         // 配達日計算
         function calculateDeliveryDates(frequency) {
@@ -473,37 +384,29 @@
             const firstDelivery = new Date(today);
             const nextDelivery = new Date(today);
             
-            // 初回配達日（3-5営業日後）
             firstDelivery.setDate(today.getDate() + 5);
             
-            // 次回配達日
-            if (frequency === 'monthly') {
-                nextDelivery.setMonth(today.getMonth() + 1);
-            } else if (frequency === 'bimonthly') {
-                nextDelivery.setMonth(today.getMonth() + 2);
-            } else if (frequency === 'quarterly') {
-                nextDelivery.setMonth(today.getMonth() + 3);
-            }
+            if (frequency === 'monthly') nextDelivery.setMonth(today.getMonth() + 1);
+            else if (frequency === 'bimonthly') nextDelivery.setMonth(today.getMonth() + 2);
+            else if (frequency === 'quarterly') nextDelivery.setMonth(today.getMonth() + 3);
             
-            // 土日を平日に調整
             [firstDelivery, nextDelivery].forEach(date => {
                 const day = date.getDay();
-                if (day === 0) date.setDate(date.getDate() + 1); // 日曜→月曜
-                if (day === 6) date.setDate(date.getDate() + 2); // 土曜→月曜
+                if (day === 0) date.setDate(date.getDate() + 1);
+                if (day === 6) date.setDate(date.getDate() + 2);
             });
             
             return { firstDelivery, nextDelivery };
         }
         
-        // 日付フォーマット
         function formatDate(date) {
-            return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+            return `${date.getMonth() + 1}/${date.getDate()}`;
         }
         
         // 商品選択イベント
         document.getElementById('quantity').addEventListener('change', function() {
             const frequencySelect = document.getElementById('frequency');
-            frequencySelect.innerHTML = '<option value="">お届け頻度を選択してください</option>';
+            frequencySelect.innerHTML = '<option value="">配送頻度を選択してください</option>';
             
             if (this.value) {
                 Object.entries(frequencyOptions).forEach(([key, label]) => {
@@ -512,11 +415,10 @@
                     option.textContent = label;
                     frequencySelect.appendChild(option);
                 });
-                
                 currentSelection.quantity = this.value;
-                updatePriceDisplay();
+                updateOrderSummary();
             } else {
-                document.getElementById('priceSummary').style.display = 'none';
+                document.getElementById('orderSummary').style.display = 'none';
                 currentSelection.quantity = '';
             }
             validateForm();
@@ -526,14 +428,14 @@
         document.getElementById('frequency').addEventListener('change', function() {
             currentSelection.frequency = this.value;
             currentSelection.isSubscription = this.value !== 'oneTime';
-            updatePriceDisplay();
+            updateOrderSummary();
             validateForm();
         });
         
-        // 料金表示更新
-        function updatePriceDisplay() {
+        // 注文サマリー更新
+        function updateOrderSummary() {
             if (!currentSelection.quantity || !currentSelection.frequency) {
-                document.getElementById('priceSummary').style.display = 'none';
+                document.getElementById('orderSummary').style.display = 'none';
                 return;
             }
             
@@ -547,11 +449,9 @@
                 finalPrice = basePrice - discount;
             }
             
-            // 価格表示
             document.getElementById('basePrice').textContent = `¥${basePrice.toLocaleString()}`;
             document.getElementById('totalPrice').textContent = `合計: ¥${finalPrice.toLocaleString()}`;
             
-            // 割引情報
             const discountRow = document.getElementById('discountRow');
             const discountNotice = document.getElementById('discountNotice');
             const frequencyRow = document.getElementById('frequencyRow');
@@ -572,23 +472,21 @@
                 frequencyRow.style.display = 'none';
             }
             
-            // 配達スケジュール
-            const deliverySchedule = document.getElementById('deliverySchedule');
-            const firstDeliveryElem = document.getElementById('firstDelivery');
-            const nextDeliveryElem = document.getElementById('nextDelivery');
-            
+            // 配送スケジュール
+            const deliveryInfo = document.getElementById('deliveryInfo');
             const dates = calculateDeliveryDates(currentSelection.frequency);
-            firstDeliveryElem.textContent = `初回お届け: ${formatDate(dates.firstDelivery)}頃`;
+            
+            document.getElementById('firstDate').textContent = formatDate(dates.firstDelivery);
             
             if (currentSelection.isSubscription) {
-                nextDeliveryElem.style.display = 'block';
-                nextDeliveryElem.textContent = `次回お届け: ${formatDate(dates.nextDelivery)}頃`;
+                document.getElementById('nextDelivery').style.display = 'flex';
+                document.getElementById('nextDate').textContent = formatDate(dates.nextDelivery);
             } else {
-                nextDeliveryElem.style.display = 'none';
+                document.getElementById('nextDelivery').style.display = 'none';
             }
             
-            deliverySchedule.style.display = 'block';
-            document.getElementById('priceSummary').style.display = 'block';
+            deliveryInfo.style.display = 'block';
+            document.getElementById('orderSummary').style.display = 'block';
             currentSelection.price = finalPrice;
         }
         
@@ -599,57 +497,29 @@
                 const element = document.getElementById(field);
                 return element && element.value.trim() !== '';
             });
-            
             document.getElementById('submitBtn').disabled = !isValid;
         }
         
-        // 入力フィールド監視
         ['name', 'email', 'phone', 'address'].forEach(fieldId => {
             document.getElementById(fieldId).addEventListener('input', validateForm);
         });
         
         // フォーム送信
-        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.textContent = '処理中...';
             
-            try {
-                const customerInfo = {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    address: document.getElementById('address').value
-                };
-                
-                const dates = calculateDeliveryDates(currentSelection.frequency);
-                
-                console.log('注文情報:', {
-                    customer: customerInfo,
-                    product: currentSelection,
-                    price: currentSelection.price,
-                    deliveryDates: {
-                        first: formatDate(dates.firstDelivery),
-                        next: currentSelection.isSubscription ? formatDate(dates.nextDelivery) : null
-                    }
-                });
-                
+            setTimeout(() => {
                 const productName = currentSelection.quantity === 'single' ? '1個' : 
                                   currentSelection.quantity === 'double' ? '2個セット' : '3個セット';
                 
-                alert(`ご注文ありがとうございます！\n\n商品: カリウムfor Beauty ${productName}\nお届け: ${frequencyOptions[currentSelection.frequency]}\n料金: ¥${currentSelection.price.toLocaleString()}\n初回お届け: ${formatDate(dates.firstDelivery)}頃\n\n確認メールをお送りいたします。`);
+                alert(`ご注文ありがとうございます！\n\n商品: カリウムfor Beauty ${productName}\n配送: ${frequencyOptions[currentSelection.frequency]}\n料金: ¥${currentSelection.price.toLocaleString()}\n\n確認メールをお送りいたします。`);
                 
                 window.location.href = 'success.html';
-                
-            } catch (error) {
-                console.error('エラー:', error);
-                alert('エラーが発生しました。もう一度お試しください。');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'ご注文を確定する';
-            }
+            }, 1500);
         });
     </script>
 </body>

@@ -940,14 +940,14 @@
     <!-- Product Section -->
     <section class="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="product-section-unified">
-                <!-- 商品ヘッダー -->
-                <div class="text-center mb-8">
+            <div class="product-section-new">
+                <!-- ヘッダー部分 -->
+                <div class="product-header-new">
                     <div class="product-badge">人気No.1</div>
                     <h2 class="product-title">
                         カリウム<span class="brand-gradient">for Beauty</span>
                     </h2>
-                    <div class="flex justify-center space-x-4 mb-6">
+                    <div class="flex justify-center space-x-4 mb-8">
                         <span class="badge badge-gold">
                             <i class="fas fa-star mr-1"></i>
                             15種類の厳選美容成分配合
@@ -959,69 +959,66 @@
                     </div>
                 </div>
 
-                <!-- メインコンテンツ：2カラム -->
-                <div class="product-main-grid">
+                <!-- 2カラムレイアウト -->
+                <div class="product-content-grid">
                     <!-- 左側：商品画像 -->
-                    <div class="product-image-section-unified">
+                    <div class="product-image-side">
                         <img src="https://page.gensparksite.com/v1/base64_upload/c9d9d61a6f405486f6e4f0caefe21d81" 
-                             alt="カリウムfor Beauty商品画像" class="product-image-unified">
+                             alt="カリウムfor Beauty商品画像" class="product-image-main">
                     </div>
 
                     <!-- 右側：商品詳細 -->
-                    <div class="product-info-section">
-                        <!-- 商品説明 -->
-                        <div class="product-desc-unified">
-                            <p class="desc-text-unified">
+                    <div class="product-details-side">
+                        <div class="product-description-compact">
+                            <p class="description-text-main">
                                 女性の美と健康をサポートする<br>
-                                <span class="font-bold">15種類の厳選美容成分配合</span>
+                                <span class="font-bold text-blue-600">15種類の厳選美容成分配合</span>
                             </p>
                         </div>
 
-                        <!-- 数値情報 -->
-                        <div class="stats-unified">
-                            <div class="stat-unified">
+                        <div class="stats-grid-horizontal">
+                            <div class="stat-item-compact">
                                 <div class="stat-number">15</div>
                                 <div class="stat-label">種類の美容成分</div>
                             </div>
-                            <div class="stat-unified">
+                            <div class="stat-item-compact">
                                 <div class="stat-number">1,320</div>
                                 <div class="stat-label">mgカリウム</div>
                             </div>
-                            <div class="stat-unified">
+                            <div class="stat-item-compact">
                                 <div class="stat-number">121</div>
                                 <div class="stat-label">種類の野菜酵素</div>
                             </div>
                         </div>
 
-                        <!-- 効果・サポート -->
-                        <div class="benefits-unified">
-                            <h5 class="benefits-title-unified">
-                                <i class="fas fa-gem mr-2"></i>期待できるサポート
+                        <div class="benefits-section-compact">
+                            <h5 class="benefits-title-compact">
+                                <i class="fas fa-gem text-purple-600"></i>
+                                期待できるサポート
                             </h5>
-                            <div class="benefits-grid">
-                                <div class="benefit-unified">
-                                    <i class="fas fa-balance-scale"></i>
+                            <div class="benefits-list-compact">
+                                <div class="benefit-item-compact">
+                                    <i class="fas fa-balance-scale text-blue-500"></i>
                                     <span>体内の水分バランス維持をサポート</span>
                                 </div>
-                                <div class="benefit-unified">
-                                    <i class="fas fa-sparkles"></i>
+                                <div class="benefit-item-compact">
+                                    <i class="fas fa-sparkles text-purple-500"></i>
                                     <span>美容面でのコンディション維持に寄与</span>
                                 </div>
-                                <div class="benefit-unified">
-                                    <i class="fas fa-heart"></i>
+                                <div class="benefit-item-compact">
+                                    <i class="fas fa-heart text-red-500"></i>
                                     <span>健康的な毎日の基盤づくりに貢献</span>
                                 </div>
-                                <div class="benefit-unified">
-                                    <i class="fas fa-leaf"></i>
+                                <div class="benefit-item-compact">
+                                    <i class="fas fa-leaf text-green-500"></i>
                                     <span>栄養バランスの調整をサポート</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- CTA -->
-                        <div class="text-center">
-                            <a href="order.html" class="cta-unified">
-                                <i class="fas fa-shopping-cart mr-2"></i>
+                        <div class="cta-container">
+                            <a href="order.html" class="cta-primary-compact">
+                                <i class="fas fa-shopping-cart"></i>
                                 今すぐ注文する
                             </a>
                         </div>
@@ -1031,7 +1028,8 @@
         </div>
     </section>
 
-    <!-- Usage Scenes Section -->        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Usage Scenes Section -->    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h3 class="section-title mb-4">様々なシーンでご利用いただけます</h3>
             <p class="text-center text-lg text-gray-600 mb-8">毎日の習慣として、お好きなタイミングでお召し上がりください</p>
             
