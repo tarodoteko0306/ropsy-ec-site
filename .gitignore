@@ -1,6 +1,7 @@
 # 設定ファイル（機密情報）
 config.js
 email-config.js
+server-config.gs
 
 # Node.js
 node_modules/
