@@ -27,3 +27,6 @@ Thumbs.db
 config.js
 email-config.js
 server-config.gs
+
+# local secrets
+js/config.js
