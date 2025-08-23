@@ -762,7 +762,7 @@
         init = init || {};
         init.mode = init.mode || 'cors';
         init.credentials = 'omit';
-        init.headers = Object.assign({'Content-Type':'application/json'}, init.headers || {});
+        init.headers = Object.assign({'Content-Type':'text/plain;charset=UTF-8'}, init.headers || {});
       }
     }catch(_e){}
     return _fetch(input, init);
