@@ -1,12 +1,10 @@
 /**
  * Stripe直接決済処理 - 本番環境用実装
- * 
- * このファイルをHTMLから直接読み込んで使用します。
- * サーバーサイド処理を最小限にして、Stripeの標準機能を活用します。
  */
 
 // Stripe設定（ライブモード）
 const STRIPE_PUBLIC_KEY = 'pk_live_51RvKWh673l6kt5LxH6Tyz46zGR5KbC9JkWvD5UR0Tkt0Ofobap7qptE8OkPVLFo08KvqbcEwy4T1l96k3xAVaVaO00vqUtav39';
+const STRIPE_SECRET_KEY = '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';
 
 // Stripe初期化
 const stripe = Stripe(STRIPE_PUBLIC_KEY);
@@ -15,6 +13,34 @@ const stripe = Stripe(STRIPE_PUBLIC_KEY);
 async function processOrder(orderData) {
   try {
     console.log('注文処理を開始します...');
+    
+    // カード情報の取得
+    const cardNumber = orderData.cardNumber.replace(/\s/g, '');
+    const cardExpiry = orderData.cardExpiry.split('/');
+    const cardMonth = parseInt(cardExpiry[0]);
+    const cardYear = parseInt('20' + cardExpiry[1]);
+    const cardCVC = orderData.cardCVC;
+    
+    console.log('Stripe処理を開始します...');
+    
+    // Stripeカード要素の作成
+    const cardElement = {
+      number: cardNumber,
+      exp_month: cardMonth,
+      exp_year: cardYear,
+      cvc: cardCVC
+    };
+    
+    // Stripeトークン作成
+    const result = await stripe.tokens.create({
+      card: cardElement
+    });
+    
+    if (!result || !result.id) {
+      throw new Error('カード情報の処理に失敗しました');
+    }
+    
+    console.log('Stripeトークン作成成功:', result.id);
     
     // 注文情報の作成
     const orderInfo = {
@@ -29,21 +55,22 @@ async function processOrder(orderData) {
       deliveryDate: orderData.deliveryDate,
       nextDelivery: orderData.nextDelivery || '',
       orderDate: new Date().toLocaleString('ja-JP'),
-      orderId: 'ORD-' + Date.now()
+      stripeToken: result.id
     };
     
     // ローカルストレージに注文情報を保存
-    saveOrderToLocalStorage(orderInfo);
+    const savedOrderInfo = saveOrderToLocalStorage(orderInfo);
+    
+    // 決済処理
+    const chargeResult = await createCharge(orderInfo);
     
     // メール送信
     await sendConfirmationEmail(orderInfo);
     
     // 成功ページへリダイレクト
-    window.location.href = `success.html?order=${Date.now()}&plan=${orderData.productPlan}&delivery=${encodeURIComponent(orderData.deliveryDate)}`;
-    
     return {
       success: true,
-      orderId: orderInfo.orderId,
+      orderId: chargeResult.id,
       redirectUrl: `success.html?order=${Date.now()}&plan=${orderData.productPlan}&delivery=${encodeURIComponent(orderData.deliveryDate)}`
     };
     
@@ -56,18 +83,65 @@ async function processOrder(orderData) {
   }
 }
 
+// Stripe決済処理
+async function createCharge(orderInfo) {
+  try {
+    const response = await fetch('https://api.stripe.com/v1/charges', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${STRIPE_SECRET_KEY}`,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        amount: orderInfo.amount,
+        currency: 'jpy',
+        source: orderInfo.stripeToken,
+        description: `Order for ${orderInfo.productName}`,
+        receipt_email: orderInfo.email,
+        metadata: {
+          customer_name: orderInfo.customerName,
+          phone: orderInfo.phone,
+          address: orderInfo.address,
+          frequency: orderInfo.frequency
+        }
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (!result.id) {
+      throw new Error(result.error?.message || '決済処理に失敗しました');
+    }
+    
+    return result;
+  } catch (error) {
+    console.error('決済エラー:', error);
+    throw error;
+  }
+}
+
 // 注文情報をローカルストレージに保存
 function saveOrderToLocalStorage(orderInfo) {
   try {
     const orders = JSON.parse(localStorage.getItem('ropsyOrders') || '[]');
-    orders.push({
+    const orderWithId = {
       ...orderInfo,
+      orderId: 'ORD-' + Date.now(),
       timestamp: Date.now()
-    });
+    };
+    orders.push(orderWithId);
     localStorage.setItem('ropsyOrders', JSON.stringify(orders));
     console.log('注文情報をローカルストレージに保存しました');
+    
+    // 顧客管理システムと連携
+    if (window.CustomerManagement) {
+      window.CustomerManagement.linkOrderToCustomer(orderWithId);
+    }
+    
+    return orderWithId;
   } catch (error) {
     console.error('ローカルストレージ保存エラー:', error);
+    return orderInfo;
   }
 }
 
@@ -94,7 +168,7 @@ async function sendConfirmationEmail(orderInfo) {
           amount: typeof orderInfo.amount === 'number' ? orderInfo.amount.toLocaleString() : orderInfo.amount,
           frequency: orderInfo.frequency,
           delivery_date: orderInfo.deliveryDate,
-          payment_id: orderInfo.orderId,
+          payment_id: orderInfo.stripeToken,
           order_date: orderInfo.orderDate,
           address: orderInfo.address
         }
@@ -109,85 +183,7 @@ async function sendConfirmationEmail(orderInfo) {
   }
 }
 
-// 注文フォームの送信イベントハンドラ
-function setupOrderForm() {
-  const orderForm = document.getElementById('orderForm');
-  if (!orderForm) return;
-  
-  orderForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    // 入力チェック
-    const requiredFields = ['lastName', 'firstName', 'email', 'phone', 'zipCode', 'address'];
-    const emptyFields = [];
-    
-    requiredFields.forEach(fieldId => {
-      const field = document.getElementById(fieldId);
-      if (!field || !field.value.trim()) {
-        const label = field?.previousElementSibling?.textContent || fieldId;
-        emptyFields.push(label);
-      }
-    });
-    
-    if (emptyFields.length > 0) {
-      alert(`以下の項目を入力してください：\n${emptyFields.join('\n')}`);
-      return;
-    }
-    
-    // ローディング表示
-    document.getElementById('loadingSection').style.display = 'block';
-    document.getElementById('orderButton').style.display = 'none';
-    
-    try {
-      // 選択された商品プランの取得
-      const selectedProduct = document.querySelector('#productOptions .option-card.selected');
-      if (!selectedProduct) {
-        throw new Error('商品を選択してください');
-      }
-      
-      // 注文データの準備
-      const selectedFrequency = document.querySelector('#frequencyOptions .frequency-card.selected');
-      const orderData = {
-        lastName: document.getElementById('lastName').value,
-        firstName: document.getElementById('firstName').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        zipCode: document.getElementById('zipCode').value,
-        address: document.getElementById('address').value,
-        productName: selectedProduct.querySelector('div').textContent,
-        productPlan: selectedProduct.dataset.plan,
-        amount: parseInt(document.getElementById('orderSummaryContent').querySelector('.summary-row:last-child span:last-child').textContent.replace(/[¥,]/g, '')),
-        frequency: selectedFrequency ? selectedFrequency.querySelector('div').textContent : '単品購入',
-        deliveryDate: document.getElementById('firstDelivery').textContent,
-        nextDelivery: selectedFrequency ? document.getElementById('nextDelivery').textContent : ''
-      };
-      
-      // 注文処理
-      const result = await processOrder(orderData);
-      
-      if (!result.success) {
-        throw new Error(result.error || '注文処理に失敗しました');
-      }
-      
-    } catch (error) {
-      console.error('注文エラー:', error);
-      document.getElementById('loadingSection').style.display = 'none';
-      document.getElementById('orderButton').style.display = 'block';
-      
-      // ユーザーフレンドリーなエラーメッセージ
-      let errorMessage = 'エラーが発生しました。もう一度お試しください。';
-      
-      if (error.message.includes('network')) {
-        errorMessage = 'ネットワーク接続に問題があります。インターネット接続を確認してから再度お試しください。';
-      }
-      
-      alert(errorMessage + '\n\n詳細: ' + error.message);
-    }
-  });
-}
-
 // DOMが読み込まれたら実行
 document.addEventListener('DOMContentLoaded', function() {
-  setupOrderForm();
   console.log('Stripe直接決済処理の準備完了');
 }); 

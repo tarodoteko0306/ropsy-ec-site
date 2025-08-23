@@ -575,18 +575,21 @@
                         planElement.textContent = '3個セット（15%OFF）';
                         priceElement.textContent = '¥4,080';
                         break;
+                    default:
+                        planElement.textContent = '単品購入';
+                        priceElement.textContent = '¥2,100';
                 }
             }
             
             // 配送予定日
             const deliveryDate = urlParams.get('delivery');
             if (deliveryDate) {
-                document.getElementById('deliveryDate').textContent = deliveryDate;
+                document.getElementById('deliveryDate').textContent = decodeURIComponent(deliveryDate);
             }
             
             // 注文ID生成
-            const orderId = urlParams.get('orderId') || 'ROH-' + Date.now();
-            document.getElementById('orderId').textContent = orderId;
+            const orderId = urlParams.get('order') || 'ROH-' + Date.now();
+            document.getElementById('orderId').textContent = 'ROH-' + orderId;
         }
 
         // ページ読み込み時に実行

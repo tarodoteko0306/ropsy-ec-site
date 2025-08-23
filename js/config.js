@@ -3,6 +3,7 @@ window.ROPSY_CONFIG = {
         publishableKey: 'pk_live_51RvKWh673l6kt5LxH6Tyz46zGR5KbC9JkWvD5UR0Tkt0Ofobap7qptE8OkPVLFo08KvqbcEwy4T1l96k3xAVaVaO00vqUtav39'
     },
     api: {
+        // 新しいデプロイURLに更新する場合はここを変更
         endpoint: 'https://script.google.com/macros/s/AKfycbx6c1osjZpwtW2FZb6VoL1Cs5MyhWl-iXjJfbQfET6c7IQkv9ha-NJPpj531Cez5APS9g/exec'
     },
     emailjs: {
