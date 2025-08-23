@@ -3,7 +3,7 @@ window.ROPSY_CONFIG = {
         publishableKey: 'pk_test_51RvKWh673l6kt5LxMbqybBzwob98vno1yBNYcZxqEL6xxz0gJJCHwOPGa4FLfW7ICaCgqNvqvUjUBLISkDXGK6CA007vAI7Uuw'
     },
     api: {
-        endpoint: 'https://script.google.com/macros/s/AKfycbxXV1nEirZ_6XQaaVsjZx9m_bPkqnD3PMrwTKUboqcV_VsQNECvdO2PYfHEjDrBIb03qA/exec'
+        endpoint: 'https://script.google.com/macros/s/AKfycbx6c1osjZpwtW2FZb6VoL1Cs5MyhWl-iXjJfbQfET6c7IQkv9ha-NJPpj531Cez5APS9g/exec'
     },
     emailjs: {
         serviceId: 'service_l3e47bc',
