@@ -708,7 +708,7 @@
                 const spreadsheetResponse = await fetch(CONFIG.api.endpoint, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'text/plain;charset=UTF-8',
                     },
                     body: JSON.stringify(orderData)
                 });
