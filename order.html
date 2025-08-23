@@ -10,7 +10,6 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="js/config.js"></script>
-    <script src="js/config.js"></script>
     <style>
         :root {
             --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -457,8 +456,7 @@
     </div>
 
     <script>
-        // 設定
-        // config.jsから設定を読み込み
+        // config.jsから設定を読み込み、フォールバック付き
         const CONFIG = window.ROPSY_CONFIG || {
             stripe: {
                 publishableKey: 'pk_test_51RvKWh673l6kt5LxMbqybBzwob98vno1yBNYcZxqEL6xxz0gJJCHwOPGa4FLfW7ICaCgqNvqvUjUBLISkDXGK6CA007vAI7Uuw'
@@ -477,7 +475,7 @@
         const stripe = Stripe(CONFIG.stripe.publishableKey);
 
         // EmailJS初期化
-        emailjs.init(CONFIG.emailjs.userId);
+        emailjs.init(CONFIG.emailjs.publicKey);
 
         // 商品プラン選択
         document.querySelectorAll('#productOptions .option-card').forEach(card => {
@@ -707,7 +705,7 @@
                 };
 
                 // Google Spreadsheet記録
-                const spreadsheetResponse = await fetch(CONFIG.stripe.webhookEndpoint, {
+                const spreadsheetResponse = await fetch(CONFIG.api.endpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -754,12 +752,3 @@
     </script>
 </body>
 </html>
-    <script id="html_badge_script1">
-        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
-            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDs764nq0by4Vpg5xeoQctXCL0dW1JVflei8A4ClqErr9C9315nNJYw%2B7XVrDdt0FVw7Dc4zGfsYzyPIXqREnJ0INc2Hs72ZLYHAUAtvd3BF%2Fptj5SmvCF%2Fa49v4s5LxbnpokzpHoCzxBHcyRRK3DN0CwMdAdi%2B%2FWA2hQPVcF77Dd%2B085mVKF2HIMI4%2BusyFgo2WbkLwpkTGwYmulEdJosumsVvaOAlEbd3Igd59AnpH%2BlTdzf3PqUC4OpsVzOjC%2F0yMkOt2nh2I6zSD%2B3MTso4HLWcEtRohTj%2FOR9U8C4yLZt28fb0UiRaIY67LuuiYh1Ka0b6S%2BP6ixWgqppCB4OM7vnaok%2F4J5oxt7EIvb5rnV%2F%2FV1bs7Y9i%2FQKTj5UxLxNzmgrhuK3HDJochdueJT5V0GknpHg8duVxkPqDjOS1HtsIeuJZIqQfz6IYzvQCUi4%2BDgs5JV0AutxQLSaQnn9A95ZdSwu7TnfnQ8J40AJ1Mi8eJRt6mlTzSOtGlN%2FsjS%2Bycrx9zVG5l2V9BZ5U%2F%2B4OI%3D";
-        window.__genspark_locale = "ja-JP";
-        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDs764nq0by4Vpg5xeoQctXCL0dW1JVflei8A4ClqErr9C9315nNJYw+7XVrDdt0FVw7Dc4zGfsYzyPIXqREnJ0INc2Hs72ZLYHAUAtvd3BF/ptj5SmvCF/a49v4s5LxbnpokzpHoCzxBHcyRRK3DN0CwMdAdi+/WA2hQPVcF77Dd+085mVKF2HIMI4+usyFgo2WbkLwpkTGwYmulEdJosumsVvaOAlEbd3Igd59AnpH+lTdzf3PqUC4OpsVzOjC/0yMkOt2nh2I6zSD+3MTso4HLWcEtRohTj/OR9U8C4yLZt28fb0UiRaIY67LuuiYh1Ka0b6S+P6ixWgqppCB4OM7vnaok/4J5oxt7EIvb5rnV//V1bs7Y9i/QKTj5UxLxNzmgrhuK3HDJochdueJT5V0GknpHg8duVxkPqDjOS1HtsIeuJZIqQfz6IYzvQCUi4+Dgs5JV0AutxQLSaQnn9A95ZdSwu7TnfnQ8J40AJ1Mi8eJRt6mlTzSOtGlN/sjS+ycrx9zVG5l2V9BZ5U/+4OI=";
-    </script>
-    
-    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
-    
