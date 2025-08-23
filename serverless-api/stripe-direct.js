@@ -4,7 +4,6 @@
 
 // Stripe設定（ライブモード）
 const STRIPE_PUBLIC_KEY = 'pk_live_51RvKWh673l6kt5LxH6Tyz46zGR5KbC9JkWvD5UR0Tkt0Ofobap7qptE8OkPVLFo08KvqbcEwy4T1l96k3xAVaVaO00vqUtav39';
-const STRIPE_SECRET_KEY = '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';
 
 // Stripe初期化
 const stripe = Stripe(STRIPE_PUBLIC_KEY);
@@ -13,34 +12,6 @@ const stripe = Stripe(STRIPE_PUBLIC_KEY);
 async function processOrder(orderData) {
   try {
     console.log('注文処理を開始します...');
-    
-    // カード情報の取得
-    const cardNumber = orderData.cardNumber.replace(/\s/g, '');
-    const cardExpiry = orderData.cardExpiry.split('/');
-    const cardMonth = parseInt(cardExpiry[0]);
-    const cardYear = parseInt('20' + cardExpiry[1]);
-    const cardCVC = orderData.cardCVC;
-    
-    console.log('Stripe処理を開始します...');
-    
-    // Stripeカード要素の作成
-    const cardElement = {
-      number: cardNumber,
-      exp_month: cardMonth,
-      exp_year: cardYear,
-      cvc: cardCVC
-    };
-    
-    // Stripeトークン作成
-    const result = await stripe.tokens.create({
-      card: cardElement
-    });
-    
-    if (!result || !result.id) {
-      throw new Error('カード情報の処理に失敗しました');
-    }
-    
-    console.log('Stripeトークン作成成功:', result.id);
     
     // 注文情報の作成
     const orderInfo = {
@@ -55,23 +26,27 @@ async function processOrder(orderData) {
       deliveryDate: orderData.deliveryDate,
       nextDelivery: orderData.nextDelivery || '',
       orderDate: new Date().toLocaleString('ja-JP'),
-      stripeToken: result.id
+      orderId: 'ORD-' + Date.now()
     };
     
     // ローカルストレージに注文情報を保存
-    const savedOrderInfo = saveOrderToLocalStorage(orderInfo);
+    saveOrderToLocalStorage(orderInfo);
     
-    // 決済処理
-    const chargeResult = await createCharge(orderInfo);
+    // Stripe Checkoutセッションを作成
+    const session = await createCheckoutSession(orderInfo);
     
-    // メール送信
-    await sendConfirmationEmail(orderInfo);
+    // Stripe Checkoutにリダイレクト
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id
+    });
     
-    // 成功ページへリダイレクト
+    if (result.error) {
+      throw new Error(result.error.message);
+    }
+    
     return {
       success: true,
-      orderId: chargeResult.id,
-      redirectUrl: `success.html?order=${Date.now()}&plan=${orderData.productPlan}&delivery=${encodeURIComponent(orderData.deliveryDate)}`
+      sessionId: session.id
     };
     
   } catch (error) {
@@ -83,39 +58,52 @@ async function processOrder(orderData) {
   }
 }
 
-// Stripe決済処理
-async function createCharge(orderInfo) {
+// Stripe Checkoutセッション作成
+async function createCheckoutSession(orderInfo) {
   try {
-    const response = await fetch('https://api.stripe.com/v1/charges', {
+    const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${STRIPE_SECRET_KEY}`,
+        'Authorization': `Bearer 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`,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: new URLSearchParams({
-        amount: orderInfo.amount,
-        currency: 'jpy',
-        source: orderInfo.stripeToken,
-        description: `Order for ${orderInfo.productName}`,
-        receipt_email: orderInfo.email,
+        payment_method_types: 'card',
+        line_items: JSON.stringify([{
+          price_data: {
+            currency: 'jpy',
+            product_data: {
+              name: orderInfo.productName,
+              description: `${orderInfo.frequency} - ${orderInfo.deliveryDate}`
+            },
+            unit_amount: orderInfo.amount
+          },
+          quantity: 1
+        }]),
+        mode: 'payment',
+        success_url: `${window.location.origin}/success.html?order=${orderInfo.orderId}&plan=${encodeURIComponent(orderInfo.productName)}&delivery=${encodeURIComponent(orderInfo.deliveryDate)}`,
+        cancel_url: `${window.location.origin}/order.html`,
+        customer_email: orderInfo.email,
         metadata: {
           customer_name: orderInfo.customerName,
           phone: orderInfo.phone,
           address: orderInfo.address,
-          frequency: orderInfo.frequency
+          zip_code: orderInfo.zipCode,
+          frequency: orderInfo.frequency,
+          order_id: orderInfo.orderId
         }
       })
     });
     
-    const result = await response.json();
+    const session = await response.json();
     
-    if (!result.id) {
-      throw new Error(result.error?.message || '決済処理に失敗しました');
+    if (!session.id) {
+      throw new Error(session.error?.message || 'Checkoutセッションの作成に失敗しました');
     }
     
-    return result;
+    return session;
   } catch (error) {
-    console.error('決済エラー:', error);
+    console.error('Checkoutセッション作成エラー:', error);
     throw error;
   }
 }
@@ -168,7 +156,7 @@ async function sendConfirmationEmail(orderInfo) {
           amount: typeof orderInfo.amount === 'number' ? orderInfo.amount.toLocaleString() : orderInfo.amount,
           frequency: orderInfo.frequency,
           delivery_date: orderInfo.deliveryDate,
-          payment_id: orderInfo.stripeToken,
+          payment_id: orderInfo.orderId,
           order_date: orderInfo.orderDate,
           address: orderInfo.address
         }

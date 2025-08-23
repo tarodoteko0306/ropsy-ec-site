@@ -393,21 +393,19 @@
                     <div class="form-section">
                         <h3 class="section-title">
                             <i class="fas fa-credit-card"></i>
-                            お支払い情報
+                            お支払い方法
                         </h3>
-                        <div class="form-group">
-                            <label class="form-label">カード番号*</label>
-                            <input type="text" class="form-input" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-shield-alt text-white text-xs"></i>
+                                </div>
+                                <div class="font-medium text-blue-800">Stripe Checkout</div>
+                            </div>
+                            <p class="text-blue-600 text-sm mt-2 ml-9">安全な決済ページでクレジットカード情報を入力してください。</p>
                         </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="form-group">
-                                <label class="form-label">有効期限*</label>
-                                <input type="text" class="form-input" id="cardExpiry" placeholder="MM/YY" maxlength="5" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">セキュリティコード*</label>
-                                <input type="text" class="form-input" id="cardCVC" placeholder="123" maxlength="4" required>
-                            </div>
+                        <div class="text-sm text-gray-600 mt-2">
+                            <p><i class="fas fa-info-circle mr-1 text-blue-500"></i> 決済手数料: 無料</p>
                         </div>
                     </div>
 
@@ -617,35 +615,14 @@
             document.getElementById('orderButton').disabled = false;
         }
 
-        // カード番号フォーマット
-        document.getElementById('cardNumber').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
-            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
-            if (formattedValue.length <= 19) {
-                e.target.value = formattedValue;
-            }
-        });
 
-        // 有効期限フォーマット
-        document.getElementById('cardExpiry').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.substring(0,2) + '/' + value.substring(2,4);
-            }
-            e.target.value = value;
-        });
-
-        // CVCは数字のみ
-        document.getElementById('cardCVC').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
 
         // 注文フォームの送信イベントハンドラ
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // 入力チェック
-            const requiredFields = ['lastName', 'firstName', 'email', 'phone', 'zipCode', 'address', 'cardNumber', 'cardExpiry', 'cardCVC'];
+            const requiredFields = ['lastName', 'firstName', 'email', 'phone', 'zipCode', 'address'];
             const emptyFields = [];
             
             requiredFields.forEach(fieldId => {
@@ -687,19 +664,15 @@
                     frequency: selectedFrequency ? selectedFrequency.querySelector('div').textContent : '単品購入',
                     deliveryDate: document.getElementById('firstDelivery').textContent,
                     nextDelivery: selectedFrequency ? document.getElementById('nextDelivery').textContent : '',
-                    cardNumber: document.getElementById('cardNumber').value,
-                    cardExpiry: document.getElementById('cardExpiry').value,
-                    cardCVC: document.getElementById('cardCVC').value
+
                 };
                 
                 // 注文処理
                 const result = await processOrder(orderData);
                 
                 if (result.success) {
-                    // 成功ページへリダイレクト
-                    setTimeout(() => {
-                        window.location.href = result.redirectUrl;
-                    }, 2000);
+                    // Stripe Checkoutにリダイレクトされるため、ここでは何もしない
+                    console.log('Stripe Checkoutにリダイレクトします...');
                 } else {
                     throw new Error(result.error || '注文処理に失敗しました');
                 }
@@ -712,9 +685,7 @@
                 // ユーザーフレンドリーなエラーメッセージ
                 let errorMessage = 'エラーが発生しました。もう一度お試しください。';
                 
-                if (error.message.includes('card')) {
-                    errorMessage = 'クレジットカード情報に問題があります。カード番号、有効期限、セキュリティコードを確認してください。';
-                } else if (error.message.includes('network')) {
+                if (error.message.includes('network')) {
                     errorMessage = 'ネットワーク接続に問題があります。インターネット接続を確認してから再度お試しください。';
                 }
                 

@@ -7,6 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // EmailJS初期化
+        emailjs.init('bJTa6D-K4-MainZRn');
+    </script>
     <style>
         :root {
             --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -562,22 +567,16 @@
                 const planElement = document.getElementById('orderPlan');
                 const priceElement = document.getElementById('orderPrice');
                 
-                switch(plan) {
-                    case 'single':
-                        planElement.textContent = '単品購入';
-                        priceElement.textContent = '¥2,100';
-                        break;
-                    case 'double':
-                        planElement.textContent = '2個セット（10%OFF）';
-                        priceElement.textContent = '¥2,880';
-                        break;
-                    case 'triple':
-                        planElement.textContent = '3個セット（15%OFF）';
-                        priceElement.textContent = '¥4,080';
-                        break;
-                    default:
-                        planElement.textContent = '単品購入';
-                        priceElement.textContent = '¥2,100';
+                // プラン名をそのまま表示（Stripe Checkoutから渡される）
+                planElement.textContent = decodeURIComponent(plan);
+                
+                // ローカルストレージから注文情報を取得して価格を表示
+                const orders = JSON.parse(localStorage.getItem('ropsyOrders') || '[]');
+                const latestOrder = orders[orders.length - 1];
+                if (latestOrder) {
+                    priceElement.textContent = `¥${latestOrder.amount.toLocaleString()}`;
+                } else {
+                    priceElement.textContent = '¥2,100';
                 }
             }
             
@@ -589,7 +588,40 @@
             
             // 注文ID生成
             const orderId = urlParams.get('order') || 'ROH-' + Date.now();
-            document.getElementById('orderId').textContent = 'ROH-' + orderId;
+            document.getElementById('orderId').textContent = orderId;
+            
+            // 決済完了後のメール送信
+            sendConfirmationEmailAfterPayment();
+        }
+        
+        // 決済完了後のメール送信
+        async function sendConfirmationEmailAfterPayment() {
+            try {
+                const orders = JSON.parse(localStorage.getItem('ropsyOrders') || '[]');
+                const latestOrder = orders[orders.length - 1];
+                
+                if (latestOrder && typeof emailjs !== 'undefined') {
+                    await emailjs.send(
+                        'service_l3e47bc',
+                        'template_bzk9mpf',
+                        {
+                            to_name: latestOrder.customerName.split(' ')[1],
+                            email: latestOrder.email,
+                            customer_name: latestOrder.customerName,
+                            product_name: latestOrder.productName,
+                            amount: typeof latestOrder.amount === 'number' ? latestOrder.amount.toLocaleString() : latestOrder.amount,
+                            frequency: latestOrder.frequency,
+                            delivery_date: latestOrder.deliveryDate,
+                            payment_id: latestOrder.orderId,
+                            order_date: latestOrder.orderDate,
+                            address: latestOrder.address
+                        }
+                    );
+                    console.log('決済完了後のメール送信成功');
+                }
+            } catch (error) {
+                console.error('メール送信エラー:', error);
+            }
         }
 
         // ページ読み込み時に実行
