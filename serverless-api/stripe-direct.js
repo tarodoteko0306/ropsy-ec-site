@@ -8,6 +8,9 @@ const STRIPE_PUBLIC_KEY = 'pk_live_51RvKWh673l6kt5LxH6Tyz46zGR5KbC9JkWvD5UR0Tkt0
 // Stripe初期化
 const stripe = Stripe(STRIPE_PUBLIC_KEY);
 
+// Google Apps Scriptエンドポイント
+const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx6c1osjZpwtW2FZb6VoL1Cs5MyhWl-iXjJfbQfET6c7IQkv9ha-NJPpj531Cez5APS9g/exec';
+
 // 注文データの保存と決済処理
 async function processOrder(orderData) {
   try {
@@ -32,22 +35,22 @@ async function processOrder(orderData) {
     // ローカルストレージに注文情報を保存
     saveOrderToLocalStorage(orderInfo);
     
-    // Stripe Checkoutセッションを作成
-    const session = await createCheckoutSession(orderInfo);
+    // Google Apps Scriptに注文情報を送信
+    const saveResult = await saveOrderToServer(orderInfo);
     
-    // Stripe Checkoutにリダイレクト
-    const result = await stripe.redirectToCheckout({
-      sessionId: session.id
-    });
-    
-    if (result.error) {
-      throw new Error(result.error.message);
+    if (saveResult.success) {
+      // メール送信
+      await sendConfirmationEmail(orderInfo);
+      
+      // 成功ページへリダイレクト
+      return {
+        success: true,
+        orderId: orderInfo.orderId,
+        redirectUrl: `success.html?order=${orderInfo.orderId}&plan=${encodeURIComponent(orderData.productName)}&delivery=${encodeURIComponent(orderData.deliveryDate)}`
+      };
+    } else {
+      throw new Error(saveResult.error || '注文処理に失敗しました');
     }
-    
-    return {
-      success: true,
-      sessionId: session.id
-    };
     
   } catch (error) {
     console.error('処理エラー:', error);
@@ -58,53 +61,42 @@ async function processOrder(orderData) {
   }
 }
 
-// Stripe Checkoutセッション作成
-async function createCheckoutSession(orderInfo) {
+// Google Apps Scriptに注文情報を送信
+async function saveOrderToServer(orderInfo) {
   try {
-    const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+    const response = await fetch(GAS_ENDPOINT, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer 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`,
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json',
       },
-      body: new URLSearchParams({
-        payment_method_types: 'card',
-        line_items: JSON.stringify([{
-          price_data: {
-            currency: 'jpy',
-            product_data: {
-              name: orderInfo.productName,
-              description: `${orderInfo.frequency} - ${orderInfo.deliveryDate}`
-            },
-            unit_amount: orderInfo.amount
-          },
-          quantity: 1
-        }]),
-        mode: 'payment',
-        success_url: `${window.location.origin}/success.html?order=${orderInfo.orderId}&plan=${encodeURIComponent(orderInfo.productName)}&delivery=${encodeURIComponent(orderInfo.deliveryDate)}`,
-        cancel_url: `${window.location.origin}/order.html`,
-        customer_email: orderInfo.email,
-        metadata: {
-          customer_name: orderInfo.customerName,
-          phone: orderInfo.phone,
-          address: orderInfo.address,
-          zip_code: orderInfo.zipCode,
-          frequency: orderInfo.frequency,
-          order_id: orderInfo.orderId
-        }
+      body: JSON.stringify({
+        action: 'saveOrder',
+        orderId: orderInfo.orderId,
+        customerName: orderInfo.customerName,
+        email: orderInfo.email,
+        phone: orderInfo.phone,
+        address: orderInfo.address,
+        productName: orderInfo.productName,
+        amount: orderInfo.amount,
+        frequency: orderInfo.frequency,
+        deliveryDate: orderInfo.deliveryDate
       })
     });
     
-    const session = await response.json();
+    const result = await response.json();
     
-    if (!session.id) {
-      throw new Error(session.error?.message || 'Checkoutセッションの作成に失敗しました');
+    if (!result.success) {
+      throw new Error(result.error || 'サーバーとの通信に失敗しました');
     }
     
-    return session;
+    return result;
+    
   } catch (error) {
-    console.error('Checkoutセッション作成エラー:', error);
-    throw error;
+    console.error('サーバー通信エラー:', error);
+    return {
+      success: false,
+      error: error.message
+    };
   }
 }
 
@@ -115,7 +107,8 @@ function saveOrderToLocalStorage(orderInfo) {
     const orderWithId = {
       ...orderInfo,
       orderId: 'ORD-' + Date.now(),
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      status: 'completed'
     };
     orders.push(orderWithId);
     localStorage.setItem('ropsyOrders', JSON.stringify(orders));
