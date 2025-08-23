@@ -683,11 +683,57 @@
                 return;
             }
 
+            // カード番号の基本的な検証
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            if (!/^\d{13,19}$/.test(cardNumber)) {
+                alert('有効なカード番号を入力してください');
+                return;
+            }
+
+            // 有効期限の検証
+            const cardExpiry = document.getElementById('cardExpiry').value;
+            if (!/^\d{2}\/\d{2}$/.test(cardExpiry)) {
+                alert('有効期限は MM/YY 形式で入力してください');
+                return;
+            }
+
+            // CVCの検証
+            const cardCVC = document.getElementById('cardCVC').value;
+            if (!/^\d{3,4}$/.test(cardCVC)) {
+                alert('有効なセキュリティコードを入力してください');
+                return;
+            }
+
             // ローディング表示
             document.getElementById('loadingSection').style.display = 'block';
             document.getElementById('orderButton').style.display = 'none';
 
             try {
+                // カード情報からStripeトークンを作成
+                const cardExpirySplit = cardExpiry.split('/');
+                const cardMonth = cardExpirySplit[0];
+                const cardYear = '20' + cardExpirySplit[1];
+                
+                // Stripeカード要素の作成
+                const cardElement = {
+                    number: cardNumber,
+                    exp_month: parseInt(cardMonth),
+                    exp_year: parseInt(cardYear),
+                    cvc: cardCVC
+                };
+                
+                console.log('Stripe処理を開始します...');
+                
+                // Stripeトークン作成
+                const result = await stripe.createToken({card: cardElement});
+                
+                if (result.error) {
+                    console.error('Stripeエラー:', result.error);
+                    throw new Error(result.error.message);
+                }
+                
+                console.log('Stripeトークン作成成功:', result.token.id);
+                
                 // 注文データの準備
                 const selectedFrequency = document.querySelector('#frequencyOptions .frequency-card.selected');
                 const orderData = {
@@ -701,46 +747,87 @@
                     frequency: selectedFrequency ? selectedFrequency.querySelector('div').textContent : '単品購入',
                     deliveryDate: document.getElementById('firstDelivery').textContent,
                     nextDelivery: selectedFrequency ? document.getElementById('nextDelivery').textContent : '',
-                    orderDate: new Date().toLocaleString('ja-JP')
+                    orderDate: new Date().toLocaleString('ja-JP'),
+                    stripeToken: result.token.id
                 };
 
+                console.log('サーバーへのデータ送信を開始します...');
+                
                 // Google Spreadsheet記録
                 const spreadsheetResponse = await fetch(CONFIG.api.endpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'text/plain;charset=UTF-8',
                     },
-                    body: JSON.stringify(orderData)
+                    body: JSON.stringify(orderData),
+                    mode: 'cors',
+                    credentials: 'omit'
                 });
 
-                // EmailJS自動メール送信
-                await emailjs.send(
-                    CONFIG.emailjs.serviceId,
-                    CONFIG.emailjs.templateId,
-                    {
-                        to_name: orderData.customerName.split(' ')[1],
-                        email: orderData.email,
-                        customer_name: orderData.customerName,
-                        product_name: orderData.productName,
-                        amount: orderData.amount.toLocaleString(),
-                        frequency: orderData.frequency,
-                        delivery_date: orderData.deliveryDate,
-                        payment_id: 'TEST_' + Date.now(),
-                        order_date: orderData.orderDate,
-                        address: orderData.address
-                    }
-                );
+                if (!spreadsheetResponse.ok) {
+                    const errorData = await spreadsheetResponse.text();
+                    console.error('サーバーエラー:', errorData);
+                    throw new Error('サーバーとの通信に失敗しました');
+                }
 
+                const responseData = await spreadsheetResponse.json();
+                console.log('サーバー応答:', responseData);
+                
+                if (!responseData.success) {
+                    throw new Error(responseData.error || 'サーバー処理に失敗しました');
+                }
+
+                console.log('メール送信を開始します...');
+                
+                // EmailJS自動メール送信
+                try {
+                    await emailjs.send(
+                        CONFIG.emailjs.serviceId,
+                        CONFIG.emailjs.templateId,
+                        {
+                            to_name: orderData.customerName.split(' ')[1],
+                            email: orderData.email,
+                            customer_name: orderData.customerName,
+                            product_name: orderData.productName,
+                            amount: orderData.amount.toLocaleString(),
+                            frequency: orderData.frequency,
+                            delivery_date: orderData.deliveryDate,
+                            payment_id: result.token.id,
+                            order_date: orderData.orderDate,
+                            address: orderData.address
+                        }
+                    );
+                    console.log('メール送信成功');
+                } catch (emailError) {
+                    console.error('メール送信エラー:', emailError);
+                    // メール送信に失敗してもプロセスを続行
+                }
+
+                console.log('注文処理完了、リダイレクトします...');
+                
                 // サンクスページへリダイレクト
+                const selectedPlan = selectedProduct.dataset.plan;
                 setTimeout(() => {
-                    window.location.href = 'success.html?order=' + Date.now();
+                    window.location.href = `success.html?order=${Date.now()}&plan=${selectedPlan}&delivery=${encodeURIComponent(orderData.deliveryDate)}`;
                 }, 2000);
 
             } catch (error) {
-                console.error('Error:', error);
+                console.error('処理エラー:', error);
                 document.getElementById('loadingSection').style.display = 'none';
                 document.getElementById('orderButton').style.display = 'block';
-                alert('決済処理中にエラーが発生しました。もう一度お試しください。');
+                
+                // ユーザーフレンドリーなエラーメッセージ
+                let errorMessage = 'エラーが発生しました。もう一度お試しください。';
+                
+                if (error.message.includes('card')) {
+                    errorMessage = 'クレジットカード情報に問題があります。カード番号、有効期限、セキュリティコードを確認してください。';
+                } else if (error.message.includes('network')) {
+                    errorMessage = 'ネットワーク接続に問題があります。インターネット接続を確認してから再度お試しください。';
+                } else if (error.message.includes('サーバー')) {
+                    errorMessage = 'サーバーとの通信に問題が発生しました。しばらく経ってから再度お試しください。';
+                }
+                
+                alert(errorMessage + '\n\n詳細: ' + error.message);
             }
         });
 
@@ -748,6 +835,28 @@
         document.addEventListener('DOMContentLoaded', function() {
             updateDeliveryDates();
             updateOrderSummary();
+            
+            // Google Apps Script再デプロイ警告
+            const warningDiv = document.createElement('div');
+            warningDiv.style.backgroundColor = '#fff3cd';
+            warningDiv.style.color = '#856404';
+            warningDiv.style.padding = '1rem';
+            warningDiv.style.borderRadius = '0.5rem';
+            warningDiv.style.marginBottom = '1rem';
+            warningDiv.style.textAlign = 'center';
+            warningDiv.innerHTML = `
+                <p style="font-weight: bold; margin-bottom: 0.5rem;">
+                    <i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i>
+                    重要: Google Apps Scriptの再デプロイが必要です
+                </p>
+                <p style="font-size: 0.9rem;">
+                    CORS設定の変更を適用するには、Google Apps Scriptの再デプロイが必要です。
+                    管理者に連絡してください。
+                </p>
+            `;
+            
+            const orderContainer = document.querySelector('.order-container');
+            orderContainer.insertBefore(warningDiv, orderContainer.firstChild);
         });
     </script>
 </body>
