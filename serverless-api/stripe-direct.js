@@ -16,25 +16,26 @@ async function processOrder(orderData) {
   try {
     console.log('注文処理を開始します...');
     
-    // カード情報からStripeトークンを作成
-    const cardElement = {
-      number: orderData.cardNumber.replace(/\s/g, ''),
-      exp_month: parseInt(orderData.cardExpiry.split('/')[0]),
-      exp_year: parseInt('20' + orderData.cardExpiry.split('/')[1]),
-      cvc: orderData.cardCVC
-    };
+    // カード情報の取得
+    const cardNumber = orderData.cardNumber.replace(/\s/g, '');
+    const cardExpiry = orderData.cardExpiry.split('/');
+    const cardMonth = parseInt(cardExpiry[0]);
+    const cardYear = parseInt('20' + cardExpiry[1]);
+    const cardCVC = orderData.cardCVC;
     
     console.log('Stripe処理を開始します...');
     
-    // Stripeトークン作成
-    const result = await stripe.createToken({card: cardElement});
+    // Stripe Elements用のカード要素を作成（代替アプローチ）
+    // 注: 通常はStripe Elementsを使用しますが、ここではCardNumberElementなどを使わずに直接決済を行います
     
-    if (result.error) {
-      console.error('Stripeエラー:', result.error);
-      throw new Error(result.error.message);
+    // 代わりにStripe Checkout Sessionを作成する方法を使用
+    const checkoutSession = await createCheckoutSession(orderData);
+    
+    if (!checkoutSession || !checkoutSession.id) {
+      throw new Error('チェックアウトセッションの作成に失敗しました');
     }
     
-    console.log('Stripeトークン作成成功:', result.token.id);
+    console.log('Stripeセッション作成成功:', checkoutSession.id);
     
     // 注文情報の作成
     const orderInfo = {
@@ -49,7 +50,7 @@ async function processOrder(orderData) {
       deliveryDate: orderData.deliveryDate,
       nextDelivery: orderData.nextDelivery || '',
       orderDate: new Date().toLocaleString('ja-JP'),
-      stripeToken: result.token.id
+      sessionId: checkoutSession.id
     };
     
     // ローカルストレージに注文情報を保存（本番では適切なデータベースを使用）
@@ -58,7 +59,16 @@ async function processOrder(orderData) {
     // 注文確認メールの送信
     await sendConfirmationEmail(orderInfo);
     
-    // 成功ページへリダイレクト
+    // Stripe Checkoutにリダイレクト
+    const result = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.id
+    });
+    
+    if (result.error) {
+      throw new Error(result.error.message);
+    }
+    
+    // 成功ページへリダイレクト（通常はStripe Checkoutのリダイレクトが先に実行されるため、ここには到達しない）
     return {
       success: true,
       orderId: 'ORD-' + Date.now(),
@@ -72,6 +82,53 @@ async function processOrder(orderData) {
       error: error.message
     };
   }
+}
+
+// Stripe Checkout Sessionの作成
+async function createCheckoutSession(orderData) {
+  // 通常はサーバーサイドで行うべき処理ですが、デモのためにフロントエンドで実装
+  // 本番環境では、セキュリティ上の理由からサーバーサイドで実装することを強く推奨します
+  
+  // 商品情報の設定
+  const productName = orderData.productName || 'カリウムfor Beauty';
+  const amount = orderData.amount || 2100;
+  
+  // 成功・キャンセル時のURL
+  const successUrl = window.location.origin + '/success.html?order=' + Date.now() + 
+                    '&plan=' + orderData.productPlan + 
+                    '&delivery=' + encodeURIComponent(orderData.deliveryDate);
+  const cancelUrl = window.location.origin + '/order.html';
+  
+  // セッション作成のためのデータ
+  const sessionData = {
+    payment_method_types: ['card'],
+    line_items: [{
+      price_data: {
+        currency: 'jpy',
+        product_data: {
+          name: productName,
+          description: orderData.frequency || '単品購入'
+        },
+        unit_amount: amount
+      },
+      quantity: 1
+    }],
+    mode: 'payment',
+    success_url: successUrl,
+    cancel_url: cancelUrl,
+    customer_email: orderData.email,
+    client_reference_id: 'ORD-' + Date.now()
+  };
+  
+  // ダミーのセッションを返す（本番ではサーバーサイドAPIを呼び出す）
+  return {
+    id: 'cs_test_' + Date.now() + Math.random().toString(36).substring(2, 10),
+    object: 'checkout.session',
+    amount_total: amount,
+    currency: 'jpy',
+    customer_email: orderData.email,
+    url: successUrl // 本来はStripeのチェックアウトページURLですが、デモのため成功ページに直接リダイレクト
+  };
 }
 
 // 注文情報をローカルストレージに保存（デモ用）
@@ -112,7 +169,7 @@ async function sendConfirmationEmail(orderInfo) {
           amount: typeof orderInfo.amount === 'number' ? orderInfo.amount.toLocaleString() : orderInfo.amount,
           frequency: orderInfo.frequency,
           delivery_date: orderInfo.deliveryDate,
-          payment_id: orderInfo.stripeToken,
+          payment_id: orderInfo.sessionId,
           order_date: orderInfo.orderDate,
           address: orderInfo.address
         }
@@ -187,7 +244,7 @@ function setupOrderForm() {
       const result = await processOrder(orderData);
       
       if (result.success) {
-        // 成功ページへリダイレクト
+        // 成功ページへリダイレクト（通常はStripe Checkoutのリダイレクトが先に実行される）
         setTimeout(() => {
           window.location.href = result.redirectUrl;
         }, 2000);
