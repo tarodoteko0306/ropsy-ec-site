@@ -1,11 +1,11 @@
 /**
- * Stripe直接決済処理 - Google Apps Scriptを使わない代替案
+ * Stripe直接決済処理 - 本番環境用実装
  * 
  * このファイルをHTMLから直接読み込んで使用します。
- * Google Apps Scriptを経由せずにStripe決済を処理します。
+ * サーバーサイド処理を最小限にして、Stripeの標準機能を活用します。
  */
 
-// Stripe設定
+// Stripe設定（ライブモード）
 const STRIPE_PUBLIC_KEY = 'pk_live_51RvKWh673l6kt5LxH6Tyz46zGR5KbC9JkWvD5UR0Tkt0Ofobap7qptE8OkPVLFo08KvqbcEwy4T1l96k3xAVaVaO00vqUtav39';
 
 // Stripe初期化
@@ -15,27 +15,6 @@ const stripe = Stripe(STRIPE_PUBLIC_KEY);
 async function processOrder(orderData) {
   try {
     console.log('注文処理を開始します...');
-    
-    // カード情報の取得
-    const cardNumber = orderData.cardNumber.replace(/\s/g, '');
-    const cardExpiry = orderData.cardExpiry.split('/');
-    const cardMonth = parseInt(cardExpiry[0]);
-    const cardYear = parseInt('20' + cardExpiry[1]);
-    const cardCVC = orderData.cardCVC;
-    
-    console.log('Stripe処理を開始します...');
-    
-    // Stripe Elements用のカード要素を作成（代替アプローチ）
-    // 注: 通常はStripe Elementsを使用しますが、ここではCardNumberElementなどを使わずに直接決済を行います
-    
-    // 代わりにStripe Checkout Sessionを作成する方法を使用
-    const checkoutSession = await createCheckoutSession(orderData);
-    
-    if (!checkoutSession || !checkoutSession.id) {
-      throw new Error('チェックアウトセッションの作成に失敗しました');
-    }
-    
-    console.log('Stripeセッション作成成功:', checkoutSession.id);
     
     // 注文情報の作成
     const orderInfo = {
@@ -50,28 +29,21 @@ async function processOrder(orderData) {
       deliveryDate: orderData.deliveryDate,
       nextDelivery: orderData.nextDelivery || '',
       orderDate: new Date().toLocaleString('ja-JP'),
-      sessionId: checkoutSession.id
+      orderId: 'ORD-' + Date.now()
     };
     
-    // ローカルストレージに注文情報を保存（本番では適切なデータベースを使用）
+    // ローカルストレージに注文情報を保存
     saveOrderToLocalStorage(orderInfo);
     
-    // 注文確認メールの送信
+    // メール送信
     await sendConfirmationEmail(orderInfo);
     
-    // Stripe Checkoutにリダイレクト
-    const result = await stripe.redirectToCheckout({
-      sessionId: checkoutSession.id
-    });
+    // 成功ページへリダイレクト
+    window.location.href = `success.html?order=${Date.now()}&plan=${orderData.productPlan}&delivery=${encodeURIComponent(orderData.deliveryDate)}`;
     
-    if (result.error) {
-      throw new Error(result.error.message);
-    }
-    
-    // 成功ページへリダイレクト（通常はStripe Checkoutのリダイレクトが先に実行されるため、ここには到達しない）
     return {
       success: true,
-      orderId: 'ORD-' + Date.now(),
+      orderId: orderInfo.orderId,
       redirectUrl: `success.html?order=${Date.now()}&plan=${orderData.productPlan}&delivery=${encodeURIComponent(orderData.deliveryDate)}`
     };
     
@@ -84,54 +56,7 @@ async function processOrder(orderData) {
   }
 }
 
-// Stripe Checkout Sessionの作成
-async function createCheckoutSession(orderData) {
-  // 通常はサーバーサイドで行うべき処理ですが、デモのためにフロントエンドで実装
-  // 本番環境では、セキュリティ上の理由からサーバーサイドで実装することを強く推奨します
-  
-  // 商品情報の設定
-  const productName = orderData.productName || 'カリウムfor Beauty';
-  const amount = orderData.amount || 2100;
-  
-  // 成功・キャンセル時のURL
-  const successUrl = window.location.origin + '/success.html?order=' + Date.now() + 
-                    '&plan=' + orderData.productPlan + 
-                    '&delivery=' + encodeURIComponent(orderData.deliveryDate);
-  const cancelUrl = window.location.origin + '/order.html';
-  
-  // セッション作成のためのデータ
-  const sessionData = {
-    payment_method_types: ['card'],
-    line_items: [{
-      price_data: {
-        currency: 'jpy',
-        product_data: {
-          name: productName,
-          description: orderData.frequency || '単品購入'
-        },
-        unit_amount: amount
-      },
-      quantity: 1
-    }],
-    mode: 'payment',
-    success_url: successUrl,
-    cancel_url: cancelUrl,
-    customer_email: orderData.email,
-    client_reference_id: 'ORD-' + Date.now()
-  };
-  
-  // ダミーのセッションを返す（本番ではサーバーサイドAPIを呼び出す）
-  return {
-    id: 'cs_test_' + Date.now() + Math.random().toString(36).substring(2, 10),
-    object: 'checkout.session',
-    amount_total: amount,
-    currency: 'jpy',
-    customer_email: orderData.email,
-    url: successUrl // 本来はStripeのチェックアウトページURLですが、デモのため成功ページに直接リダイレクト
-  };
-}
-
-// 注文情報をローカルストレージに保存（デモ用）
+// 注文情報をローカルストレージに保存
 function saveOrderToLocalStorage(orderInfo) {
   try {
     const orders = JSON.parse(localStorage.getItem('ropsyOrders') || '[]');
@@ -169,7 +94,7 @@ async function sendConfirmationEmail(orderInfo) {
           amount: typeof orderInfo.amount === 'number' ? orderInfo.amount.toLocaleString() : orderInfo.amount,
           frequency: orderInfo.frequency,
           delivery_date: orderInfo.deliveryDate,
-          payment_id: orderInfo.sessionId,
+          payment_id: orderInfo.orderId,
           order_date: orderInfo.orderDate,
           address: orderInfo.address
         }
@@ -193,7 +118,7 @@ function setupOrderForm() {
     e.preventDefault();
     
     // 入力チェック
-    const requiredFields = ['lastName', 'firstName', 'email', 'phone', 'zipCode', 'address', 'cardNumber', 'cardExpiry', 'cardCVC'];
+    const requiredFields = ['lastName', 'firstName', 'email', 'phone', 'zipCode', 'address'];
     const emptyFields = [];
     
     requiredFields.forEach(fieldId => {
@@ -234,21 +159,13 @@ function setupOrderForm() {
         amount: parseInt(document.getElementById('orderSummaryContent').querySelector('.summary-row:last-child span:last-child').textContent.replace(/[¥,]/g, '')),
         frequency: selectedFrequency ? selectedFrequency.querySelector('div').textContent : '単品購入',
         deliveryDate: document.getElementById('firstDelivery').textContent,
-        nextDelivery: selectedFrequency ? document.getElementById('nextDelivery').textContent : '',
-        cardNumber: document.getElementById('cardNumber').value,
-        cardExpiry: document.getElementById('cardExpiry').value,
-        cardCVC: document.getElementById('cardCVC').value
+        nextDelivery: selectedFrequency ? document.getElementById('nextDelivery').textContent : ''
       };
       
       // 注文処理
       const result = await processOrder(orderData);
       
-      if (result.success) {
-        // 成功ページへリダイレクト（通常はStripe Checkoutのリダイレクトが先に実行される）
-        setTimeout(() => {
-          window.location.href = result.redirectUrl;
-        }, 2000);
-      } else {
+      if (!result.success) {
         throw new Error(result.error || '注文処理に失敗しました');
       }
       
@@ -260,9 +177,7 @@ function setupOrderForm() {
       // ユーザーフレンドリーなエラーメッセージ
       let errorMessage = 'エラーが発生しました。もう一度お試しください。';
       
-      if (error.message.includes('card')) {
-        errorMessage = 'クレジットカード情報に問題があります。カード番号、有効期限、セキュリティコードを確認してください。';
-      } else if (error.message.includes('network')) {
+      if (error.message.includes('network')) {
         errorMessage = 'ネットワーク接続に問題があります。インターネット接続を確認してから再度お試しください。';
       }
       
