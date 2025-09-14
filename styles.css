@@ -161,43 +161,66 @@ body {
     padding: 0 20px;
 }
 
+.text-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333333;
+    margin-bottom: 25px;
+    text-align: justify;
+}
+
 .highlight-text {
     background: linear-gradient(transparent 60%, #D4AF37 60%);
     font-weight: 600;
     color: #000000;
 }
 
-.problem-check {
+.symptom-check {
     background: #F8F9FA;
     padding: 30px;
     border-radius: 10px;
-    border-left: 4px solid #E74C3C;
+    margin: 40px 0;
 }
 
-.problem-check h3 {
-    color: #E74C3C;
+.symptom-check h3 {
+    color: #333333;
     font-size: 1.3rem;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: 700;
 }
 
-.check-list {
-    list-style: none;
+.check-intro {
+    font-size: 1rem;
+    color: #666666;
+    margin-bottom: 20px;
 }
 
-.check-list li {
+.symptom-list {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.symptom-list li {
     position: relative;
     padding: 8px 0 8px 25px;
     color: #333333;
     font-size: 1rem;
 }
 
-.check-list li::before {
-    content: '✓';
+.symptom-list li::before {
+    content: '•';
     position: absolute;
     left: 0;
-    color: #E74C3C;
+    color: #D4AF37;
     font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.check-result {
+    font-size: 1rem;
+    color: #E74C3C;
+    font-weight: 600;
+    margin: 0;
 }
 
 /* 記事セクション共通 */
@@ -398,7 +421,7 @@ body {
 
 .product-overview {
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 50% 50%;
     gap: 40px;
     align-items: center;
     margin-top: 30px;
@@ -406,7 +429,7 @@ body {
 
 .product-image {
     width: 100%;
-    height: 300px;
+    height: 350px;
     object-fit: contain;
     border-radius: 15px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
@@ -502,13 +525,13 @@ body {
 
 .ingredient-info {
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 50% 50%;
     gap: 40px;
     align-items: center;
 }
 
 .ingredient-content.reverse .ingredient-info {
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 50% 50%;
 }
 
 .ingredient-text h4 {
@@ -527,34 +550,13 @@ body {
 
 .content-image {
     width: 100%;
-    height: 250px;
+    height: 280px;
     object-fit: cover;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.research-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
-.research-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-}
-
-.research-icon {
-    font-size: 1.2rem;
-}
-
-.research-name {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #333333;
-}
 
 .note-text {
     font-size: 0.9rem;
@@ -570,44 +572,9 @@ body {
     margin-bottom: 20px;
 }
 
-.enzyme-showcase {
-    margin-top: 25px;
-}
 
-.showcase-title {
-    color: #D4AF37;
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
 
-.ingredient-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.tag {
-    background: #D4AF37;
-    color: #000000;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: transform 0.3s ease;
-}
-
-.tag:hover {
-    transform: translateY(-2px);
-}
-
-.tag.special {
-    background: #FFFFFF;
-    color: #000000;
-    font-weight: 700;
-}
-
-/* 全成分一覧 */
+/* 全成分一覧 - シンプルなテキスト形式 */
 .all-ingredients {
     margin-top: 50px;
     padding: 40px;
@@ -631,76 +598,30 @@ body {
     margin-bottom: 40px;
 }
 
-.ingredients-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+.ingredients-content {
+    max-width: 700px;
+    margin: 0 auto;
 }
 
-.ingredient-category {
-    background: #FFFFFF;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-    border-top: 4px solid #D4AF37;
-}
-
-.category-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #000000;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.ingredient-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.ingredient-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    background: #F8F9FA;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.ingredient-item:hover {
-    background: #E8F4FD;
-    transform: translateX(3px);
-}
-
-.ingredient-item.main-item {
-    background: linear-gradient(135deg, #D4AF37, #B8941F);
-    color: #FFFFFF;
-    font-weight: 700;
-    padding: 15px;
-}
-
-.ingredient-item.plus-item {
-    background: linear-gradient(135deg, #3498DB, #2980B9);
-    color: #FFFFFF;
-    font-weight: 600;
-}
-
-.ingredient-name {
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-.ingredient-amount {
+.ingredient-category-title {
+    font-size: 1.3rem;
     font-weight: 700;
     color: #D4AF37;
-    font-size: 1rem;
+    margin: 30px 0 15px 0;
+    border-bottom: 2px solid #D4AF37;
+    padding-bottom: 8px;
+}
+
+.ingredient-category-title:first-child {
+    margin-top: 0;
 }
 
 .ingredient-desc {
-    font-size: 0.85rem;
-    color: #666666;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333333;
+    margin-bottom: 25px;
+    text-align: justify;
 }
 
 /* お客様の声 */
@@ -1083,8 +1004,8 @@ body {
         gap: 15px;
     }
     
-    .ingredients-grid {
-        grid-template-columns: 1fr;
+    .ingredients-content {
+        padding: 0 15px;
     }
     
     .testimonials-grid {
