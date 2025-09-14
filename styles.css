@@ -1,4 +1,4 @@
-/* Apple風デザイン：4色パレット - 黒(#000), 白(#fff), 青(#007AFF), 金(#FFD700) */
+/* 4色パレット: 黒(#000000), 白(#FFFFFF), 青(#007AFF), 金(#FFD700) */
 
 * {
     margin: 0;
@@ -7,11 +7,11 @@
 }
 
 body {
-    font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     line-height: 1.6;
-    color: #000;
-    background: #fff;
-    -webkit-font-smoothing: antialiased;
+    color: #000000;
+    background: #FFFFFF;
+    overflow-x: hidden;
 }
 
 .container {
@@ -23,8 +23,8 @@ body {
 /* ヘッダー */
 .header {
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;
     top: 0;
@@ -39,32 +39,40 @@ body {
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #000;
-    letter-spacing: -0.02em;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.accent {
+    color: #FFD700;
 }
 
 .header-btn {
-    background: #007AFF;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 22px;
+    background: linear-gradient(135deg, #007AFF, #0056CC);
+    color: #FFFFFF;
+    padding: 15px 30px;
+    border-radius: 30px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-weight: 700;
+    font-size: 1rem;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
 }
 
 .header-btn:hover {
-    background: #0056CC;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
 }
 
 /* ヒーローセクション */
 .hero {
-    background: #fff;
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
     padding: 140px 0 100px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 .hero-content {
@@ -74,472 +82,779 @@ body {
     align-items: center;
 }
 
-.hero-title {
+.main-title {
+    font-family: 'Noto Serif JP', serif;
     font-size: 3.5rem;
     font-weight: 700;
-    line-height: 1.1;
-    color: #000;
+    line-height: 1.2;
+    color: #000000;
     margin-bottom: 30px;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
 }
 
 .highlight {
     color: #FFD700;
+    position: relative;
 }
 
-.hero-subtitle {
-    font-size: 1.5rem;
+.sub-title {
+    font-size: 1.8rem;
     color: #007AFF;
     font-weight: 600;
+    margin-bottom: 20px;
+    font-family: 'Noto Serif JP', serif;
+}
+
+.message {
+    font-size: 1.3rem;
+    color: #000000;
     margin-bottom: 50px;
-}
-
-.hero-stats {
-    display: flex;
-    gap: 40px;
-    margin-bottom: 50px;
-}
-
-.stat {
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #007AFF;
-    margin-bottom: 8px;
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    color: #000;
     font-weight: 500;
 }
 
-.hero-btn {
-    background: #000;
-    color: #fff;
-    padding: 18px 40px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 600;
+.accent-text {
+    color: #FFD700;
+    font-weight: 700;
+    background: #000000;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.problem-list {
+    background: #000000;
+    color: #FFFFFF;
+    padding: 40px 30px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+}
+
+.problem-list h3 {
+    color: #FFD700;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.problem-list ul {
+    list-style: none;
+}
+
+.problem-list li {
     font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    color: #FFFFFF;
+}
+
+.hero-btn {
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    color: #000000;
+    padding: 20px 50px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
     display: inline-block;
     transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
 }
 
 .hero-btn:hover {
-    background: #333;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 215, 0, 0.4);
 }
 
-.hero-image img {
+.hero-image {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+}
+
+/* セクションタイトル共通 */
+.section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    color: #000000;
+}
+
+.section-title.white {
+    color: #FFFFFF;
+}
+
+.section-subtitle {
+    font-size: 1.3rem;
+    text-align: center;
+    color: #666666;
+    margin-bottom: 60px;
+    font-weight: 500;
+}
+
+/* 問題提起セクション */
+.problem {
+    background: #000000;
+    color: #FFFFFF;
+    padding: 100px 0;
+}
+
+.limitation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 80px;
+}
+
+.limitation-item {
+    background: #FFFFFF;
+    color: #000000;
+    padding: 50px 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.limitation-item:hover {
+    transform: translateY(-10px);
+    border-color: #FFD700;
+}
+
+.limitation-number {
+    display: inline-block;
+    background: #007AFF;
+    color: #FFFFFF;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    line-height: 60px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.limitation-item h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.limitation-item p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #333333;
+}
+
+/* 解決策セクション */
+.solution {
+    background: linear-gradient(135deg, #007AFF, #0056CC);
+    color: #FFFFFF;
+    padding: 120px 0;
+}
+
+.solution-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.product-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #FFFFFF;
+}
+
+.product-description {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    margin-bottom: 50px;
+    color: #FFFFFF;
+}
+
+.key-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.feature-item {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 25px 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.feature-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #FFD700;
+    min-width: 80px;
+    text-align: center;
+}
+
+.feature-text h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+}
+
+.feature-text p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.product-image {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+}
+
+/* 成分詳細セクション */
+.ingredients {
+    background: #FFFFFF;
+    padding: 120px 0;
+}
+
+.ingredients-detail {
+    margin-top: 80px;
+}
+
+.ingredient-section {
+    margin-bottom: 100px;
+    position: relative;
+}
+
+.stage-number {
+    display: inline-block;
+    background: #FFD700;
+    color: #000000;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.ingredient-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.ingredient-content h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #000000;
+}
+
+.main-ingredient {
+    background: #000000;
+    color: #FFFFFF;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.main-ingredient.nmn {
+    background: linear-gradient(135deg, #007AFF, #0056CC);
+}
+
+.ingredient-amount {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+.ingredient-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.ingredient-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    color: #333333;
+}
+
+.supporting-ingredients {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.support-tag {
+    background: #007AFF;
+    color: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.research-institutions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.institution {
+    background: #FFD700;
+    color: #000000;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.ingredient-image {
     width: 100%;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
 
-/* 商品セクション */
-.product {
-    background: #f8f9fa;
-    padding: 100px 0;
-}
-
-.product-content {
+.beauty-components {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-.product-image img {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    display: block;
-}
-
-.product-title {
-    font-size: 2.8rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: #000;
-    margin-bottom: 20px;
-    letter-spacing: -0.02em;
-}
-
-.product-subtitle {
-    font-size: 1.3rem;
-    color: #007AFF;
-    font-weight: 600;
-    margin-bottom: 40px;
-}
-
-.ingredients {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-}
-
-.ingredient {
-    background: #007AFF;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.product-btn {
-    background: #FFD700;
-    color: #000;
-    padding: 16px 35px;
-    border-radius: 22px;
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-block;
-    transition: all 0.3s ease;
-}
-
-.product-btn:hover {
-    background: #FFC107;
-    transform: translateY(-1px);
-}
-
-/* 効果セクション */
-.benefits {
-    background: #fff;
-    padding: 100px 0;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-align: center;
-    color: #000;
-    margin-bottom: 80px;
-    letter-spacing: -0.02em;
-}
-
-.benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-}
-
-.benefit-card {
-    background: #fff;
-    border: 2px solid #f0f0f0;
-    border-radius: 20px;
-    padding: 40px 30px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.benefit-card:hover {
-    border-color: #007AFF;
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 122, 255, 0.1);
-}
-
-.benefit-number {
-    display: inline-block;
-    background: #007AFF;
-    color: #fff;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    line-height: 50px;
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin-bottom: 25px;
-}
-
-.benefit-card h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #000;
-    margin-bottom: 15px;
-}
-
-.benefit-card p {
-    color: #666;
-    line-height: 1.6;
-}
-
-/* 研究セクション */
-.research {
-    background: #000;
-    color: #fff;
-    padding: 100px 0;
-}
-
-.research .section-title {
-    color: #fff;
-    text-align: left;
-    margin-bottom: 30px;
-}
-
-.research-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-.research-subtitle {
-    font-size: 1.2rem;
-    color: #ccc;
-    margin-bottom: 50px;
-    line-height: 1.6;
-}
-
-.quality-points {
-    display: flex;
-    flex-direction: column;
     gap: 30px;
 }
 
-.quality-point {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-}
-
-.point-icon {
-    font-size: 2rem;
-    width: 60px;
+.component-group {
+    background: #F8F9FA;
+    padding: 30px;
+    border-radius: 15px;
     text-align: center;
 }
 
-.point-text h4 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #FFD700;
-    margin-bottom: 8px;
+.component-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #007AFF;
+    margin-bottom: 10px;
 }
 
-.point-text p {
-    color: #ccc;
+.component-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 15px;
 }
 
-.research-image img {
-    width: 100%;
+.component-group p {
+    font-size: 0.95rem;
+    color: #666666;
+    line-height: 1.6;
+}
+
+.value-proposition {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.value-box {
+    background: linear-gradient(135deg, #000000, #333333);
+    color: #FFFFFF;
+    padding: 50px 40px;
     border-radius: 20px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* お客様の声 */
+.value-box h4 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #FFD700;
+    margin-bottom: 20px;
+}
+
+.value-box p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* お客様の声セクション */
 .testimonials {
-    background: #f8f9fa;
-    padding: 100px 0;
+    background: #F8F9FA;
+    padding: 120px 0;
 }
 
 .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
+    margin-top: 80px;
 }
 
 .testimonial {
-    background: #fff;
-    border-radius: 20px;
+    background: #FFFFFF;
     padding: 40px 30px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #FFD700;
+}
+
+.testimonial-header {
+    margin-bottom: 25px;
 }
 
 .stars {
     color: #FFD700;
     font-size: 1.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-.testimonial p {
-    color: #333;
-    margin-bottom: 25px;
-    line-height: 1.6;
-    font-style: italic;
+.customer-info {
+    color: #007AFF;
+    font-weight: 700;
+    font-size: 1rem;
 }
 
-.author {
-    color: #666;
-    font-weight: 600;
-    font-size: 0.9rem;
+.testimonial-content h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 15px;
 }
 
-/* 注文セクション */
-.order {
-    background: #007AFF;
-    color: #fff;
-    padding: 100px 0;
+.testimonial-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #333333;
 }
 
-.order-title {
-    font-size: 3rem;
+.quality-section {
+    margin-top: 100px;
+}
+
+.quality-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2.2rem;
     font-weight: 700;
     text-align: center;
-    margin-bottom: 20px;
-    letter-spacing: -0.02em;
-}
-
-.order-subtitle {
-    font-size: 1.3rem;
-    text-align: center;
+    color: #000000;
     margin-bottom: 60px;
-    opacity: 0.9;
 }
 
-.price-box {
-    background: #fff;
-    color: #000;
-    border-radius: 30px;
-    padding: 60px 50px;
+.quality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.quality-item {
     text-align: center;
-    max-width: 600px;
+    padding: 40px 30px;
+    background: #FFFFFF;
+    border-radius: 15px;
+    border: 2px solid #E5E5E5;
+    transition: all 0.3s ease;
+}
+
+.quality-item:hover {
+    border-color: #007AFF;
+    transform: translateY(-5px);
+}
+
+.quality-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.quality-item h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.quality-item p {
+    font-size: 1rem;
+    color: #666666;
+    line-height: 1.6;
+}
+
+/* キャンペーンセクション */
+.campaign {
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    padding: 120px 0;
+}
+
+.campaign-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.campaign-subtitle {
+    font-size: 1.4rem;
+    text-align: center;
+    color: #333333;
+    margin-bottom: 60px;
+    font-weight: 600;
+}
+
+.campaign-box {
+    background: #FFFFFF;
+    padding: 60px 50px;
+    border-radius: 30px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 .price-comparison {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .regular-price {
-    text-align: center;
+    margin-bottom: 30px;
 }
 
 .price-label {
     display: block;
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 8px;
-    font-weight: 500;
+    font-size: 1.2rem;
+    color: #666666;
+    margin-bottom: 10px;
+    font-weight: 600;
 }
 
-.price-value {
+.price-amount {
     display: block;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    color: #000;
+    color: #000000;
 }
 
-.special-price .price-value {
-    font-size: 3.5rem;
+.crossed {
+    text-decoration: line-through;
+    color: #999999;
+}
+
+.arrow-down {
+    font-size: 3rem;
+    color: #007AFF;
+    font-weight: 700;
+    margin: 20px 0;
+}
+
+.special-price .price-amount {
+    font-size: 4rem;
     color: #007AFF;
 }
 
-.discount {
-    background: #FFD700;
-    color: #000;
-    padding: 8px 20px;
-    border-radius: 15px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    margin-top: 10px;
+.discount-badge {
     display: inline-block;
+    background: #000000;
+    color: #FFFFFF;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 15px;
 }
 
-.benefits-list {
+.benefit-list {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
     margin: 40px 0;
     flex-wrap: wrap;
 }
 
 .benefit-item {
     color: #007AFF;
-    font-weight: 600;
-    font-size: 1.1rem;
+    font-weight: 700;
+    font-size: 1.2rem;
 }
 
-.order-btn {
-    background: #000;
-    color: #fff;
-    padding: 20px 60px;
-    border-radius: 30px;
+.cta-button {
+    background: linear-gradient(135deg, #000000, #333333);
+    color: #FFFFFF;
+    padding: 25px 60px;
+    border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: 1.3rem;
     display: inline-block;
     margin: 30px 0 20px;
     transition: all 0.3s ease;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
-.order-btn:hover {
-    background: #333;
-    transform: translateY(-2px);
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
-.order-note {
-    font-size: 0.85rem;
-    color: #666;
+.cta-main {
+    display: block;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.cta-sub {
+    display: block;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.urgency-message {
+    margin-top: 30px;
+}
+
+.urgency-text {
+    font-size: 1rem;
+    color: #007AFF;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.limitation-text {
+    font-size: 0.9rem;
+    color: #666666;
 }
 
 /* フッター */
 .footer {
-    background: #000;
-    color: #fff;
+    background: #000000;
+    color: #FFFFFF;
+    padding: 60px 0 30px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.company-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #FFD700;
+    margin-bottom: 15px;
+}
+
+.footer-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #CCCCCC;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-links a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #FFD700;
+}
+
+.copyright {
     text-align: center;
-    padding: 50px 0;
+    padding-top: 30px;
+    border-top: 1px solid #333333;
+}
+
+.copyright p {
+    font-size: 0.9rem;
+    color: #999999;
 }
 
 /* レスポンシブデザイン */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .hero-content,
-    .product-content,
-    .research-content {
+    .solution-content,
+    .ingredient-content {
         grid-template-columns: 1fr;
         gap: 50px;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
         text-align: center;
     }
     
-    .product-title {
-        font-size: 2rem;
-        text-align: center;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .order-title {
-        font-size: 2.2rem;
-    }
-    
-    .benefits-grid {
+    .limitation-grid,
+    .quality-grid {
         grid-template-columns: 1fr;
+        gap: 30px;
     }
     
     .testimonials-grid {
         grid-template-columns: 1fr;
+        gap: 30px;
     }
     
-    .hero-stats {
-        justify-content: center;
+    .key-features {
+        grid-template-columns: 1fr;
     }
     
-    .price-comparison {
+    .beauty-components {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .campaign-title {
+        font-size: 2.5rem;
+    }
+    
+    .product-name {
+        font-size: 2.2rem;
+    }
+    
+    .benefit-list {
         flex-direction: column;
         gap: 20px;
     }
     
-    .benefits-list {
-        flex-direction: column;
-        gap: 15px;
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
     }
     
-    .research .section-title {
-        text-align: center;
+    .header .container {
+        flex-direction: column;
+        gap: 20px;
     }
 }
 
@@ -548,24 +863,43 @@ body {
         padding: 0 15px;
     }
     
-    .hero-title {
+    .main-title {
         font-size: 2rem;
     }
     
-    .hero-stats {
-        gap: 20px;
+    .section-title {
+        font-size: 1.8rem;
     }
     
-    .stat-number {
-        font-size: 2rem;
-    }
-    
-    .price-box {
+    .campaign-box {
         padding: 40px 25px;
     }
     
-    .order-btn {
-        padding: 16px 40px;
-        font-size: 1.1rem;
+    .hero {
+        padding: 120px 0 60px;
     }
+    
+    .cta-button {
+        padding: 20px 40px;
+    }
+    
+    .cta-main {
+        font-size: 1.2rem;
+    }
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
 }
