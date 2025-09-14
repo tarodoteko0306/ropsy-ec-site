@@ -1,0 +1,1334 @@
+/* 4色パレット: 黒(#000000), 白(#FFFFFF), 青(#007AFF), ゴールド(#D4AF37) */
+/* 北の達人・サントリー風LPデザイン構造 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.7;
+    color: #000000;
+    background: #FFFFFF;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ヘッダー */
+.header {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    padding: 18px 0;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.accent {
+    color: #D4AF37;
+}
+
+.header-btn {
+    background: linear-gradient(135deg, #D4AF37, #B8941F);
+    color: #FFFFFF;
+    padding: 14px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.header-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+/* ヒーローセクション - 北の達人風大型レイアウト */
+.hero {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F9F9F9 100%);
+    padding: 120px 0 80px;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    gap: 60px;
+    align-items: center;
+}
+
+.main-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 4.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #000000;
+    margin-bottom: 35px;
+    letter-spacing: -0.03em;
+}
+
+.highlight {
+    color: #D4AF37;
+    text-shadow: 1px 1px 2px rgba(212, 175, 55, 0.2);
+}
+
+.problem-list {
+    background: #000000;
+    color: #FFFFFF;
+    padding: 45px 40px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.problem-list h3 {
+    color: #D4AF37;
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.problem-list ul {
+    list-style: none;
+}
+
+.problem-list li {
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+    padding-left: 15px;
+    color: #FFFFFF;
+    position: relative;
+}
+
+.problem-list li::before {
+    content: "✗";
+    color: #D4AF37;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.hero-btn {
+    background: linear-gradient(135deg, #D4AF37, #B8941F);
+    color: #FFFFFF;
+    padding: 22px 55px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.3rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+.hero-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+}
+
+.hero-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+}
+
+/* セクションタイトル共通 - サントリー風 */
+.section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 25px;
+    line-height: 1.2;
+    color: #000000;
+    letter-spacing: -0.02em;
+}
+
+.section-title.white {
+    color: #FFFFFF;
+}
+
+.section-subtitle {
+    font-size: 1.4rem;
+    text-align: center;
+    color: #666666;
+    margin-bottom: 70px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* カリウム説明セクション */
+.potassium-intro {
+    background: #FFFFFF;
+    padding: 120px 0;
+}
+
+.balance-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    margin: 80px 0;
+}
+
+.mineral-item {
+    text-align: center;
+    flex: 1;
+    max-width: 280px;
+}
+
+.mineral-icon {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin: 0 auto 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.sodium .mineral-icon {
+    background: linear-gradient(135deg, #FF6B6B, #EE5A52);
+}
+
+.potassium .mineral-icon {
+    background: linear-gradient(135deg, #007AFF, #0056CC);
+}
+
+.mineral-item h4 {
+    font-size: 1.6rem;
+    margin-bottom: 18px;
+    color: #000000;
+    font-weight: 700;
+}
+
+.mineral-item p {
+    color: #666666;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.vs-text {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #D4AF37;
+    text-shadow: 2px 2px 4px rgba(212, 175, 55, 0.3);
+}
+
+.balance-text {
+    background: linear-gradient(135deg, #F8F9FA, #F0F0F0);
+    padding: 60px 50px;
+    border-radius: 25px;
+    text-align: center;
+    margin-top: 80px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.balance-text h3 {
+    font-size: 2.4rem;
+    color: #000000;
+    margin-bottom: 35px;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+}
+
+.balance-text p {
+    font-size: 1.2rem;
+    color: #333333;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 価値転換セクション - インパクト重視 */
+.value-shift {
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    color: #FFFFFF;
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.value-shift::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(212,175,55,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(212,175,55,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.shift-content {
+    position: relative;
+    z-index: 2;
+}
+
+.question-box {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    padding: 70px 60px;
+    border-radius: 30px;
+    text-align: center;
+    border: 2px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.big-question {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 3.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 45px;
+    letter-spacing: -0.02em;
+}
+
+.highlight-gold {
+    color: #D4AF37;
+    text-shadow: 2px 2px 4px rgba(212, 175, 55, 0.5);
+}
+
+.new-standard {
+    font-size: 2rem;
+    color: #D4AF37;
+    font-weight: 600;
+    margin-bottom: 25px;
+    font-family: 'Noto Serif JP', serif;
+}
+
+.message {
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.accent-text {
+    color: #D4AF37;
+    font-weight: 700;
+    background: rgba(212, 175, 55, 0.2);
+    padding: 4px 12px;
+    border-radius: 6px;
+}
+
+/* 商品紹介セクション - 大型商品画像 */
+.product-intro {
+    background: linear-gradient(135deg, #007AFF, #0056CC);
+    color: #FFFFFF;
+    padding: 120px 0;
+    position: relative;
+}
+
+.product-content {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 80px;
+    align-items: center;
+}
+
+.product-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.product-catchcopy {
+    font-size: 1.7rem;
+    color: #D4AF37;
+    font-weight: 600;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.product-description {
+    font-size: 1.4rem;
+    line-height: 1.7;
+    margin-bottom: 60px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.key-points {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.point-item {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    padding: 35px 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.point-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #D4AF37;
+    min-width: 120px;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.point-text h4 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+}
+
+.point-text p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+.main-product-image {
+    width: 100%;
+    max-width: 600px;
+    height: 600px;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+    border-radius: 25px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+    background: #FFFFFF;
+    padding: 20px;
+}
+
+/* NMN詳細セクション */
+.nmn-detail {
+    background: #FFFFFF;
+    padding: 120px 0;
+}
+
+.nmn-content {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    gap: 80px;
+    align-items: center;
+}
+
+.nmn-explanation {
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    color: #FFFFFF;
+    padding: 50px 40px;
+    border-radius: 20px;
+    text-align: center;
+    margin: 50px 0;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.nmn-explanation h3 {
+    color: #D4AF37;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.nmn-explanation p {
+    font-size: 1.3rem;
+    line-height: 1.7;
+}
+
+.research-section h4 {
+    font-size: 1.6rem;
+    margin-bottom: 35px;
+    color: #000000;
+    font-weight: 700;
+    text-align: center;
+}
+
+.institution-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.institution-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #F8F9FA, #F0F0F0);
+    padding: 25px 30px;
+    border-radius: 15px;
+    border-left: 6px solid #D4AF37;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.institution-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.institution-item .icon {
+    font-size: 2rem;
+}
+
+.institution-item .name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.nmn-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+}
+
+/* ビタミンCセクション */
+.vitamin-c {
+    background: linear-gradient(135deg, #F8F9FA, #F0F0F0);
+    padding: 120px 0;
+}
+
+.vitamin-content {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    gap: 80px;
+    align-items: center;
+}
+
+.vitamin-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+}
+
+.feature-box {
+    background: #FFFFFF;
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border-left: 8px solid #D4AF37;
+    margin-top: 50px;
+}
+
+.feature-box h3 {
+    font-size: 1.8rem;
+    color: #000000;
+    margin-bottom: 25px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.feature-box p {
+    font-size: 1.2rem;
+    color: #333333;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.note {
+    font-size: 1rem;
+    color: #666666;
+    font-style: italic;
+}
+
+/* 酵素セクション */
+.enzyme-detail {
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    color: #FFFFFF;
+    padding: 120px 0;
+}
+
+.enzyme-content {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    gap: 80px;
+    align-items: center;
+}
+
+.enzyme-subtitle {
+    font-size: 1.8rem;
+    color: #D4AF37;
+    margin: 30px 0 50px;
+    font-weight: 600;
+    font-style: italic;
+    text-align: center;
+}
+
+.enzyme-description {
+    margin-bottom: 50px;
+}
+
+.enzyme-description p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #FFFFFF;
+}
+
+.ingredient-showcase h4 {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    color: #D4AF37;
+    font-weight: 700;
+    text-align: center;
+}
+
+.ingredient-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.tag {
+    background: #007AFF;
+    color: #FFFFFF;
+    padding: 12px 22px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+}
+
+.tag.special {
+    background: #D4AF37;
+    color: #000000;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.enzyme-image img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+}
+
+/* 全成分まとめセクション */
+.comprehensive-benefits {
+    background: #FFFFFF;
+    padding: 120px 0;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    margin-top: 100px;
+}
+
+.benefit-card {
+    background: #FFFFFF;
+    border-radius: 25px;
+    padding: 50px 35px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    border: 4px solid transparent;
+    transition: all 0.3s ease;
+    min-height: 400px;
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.15);
+}
+
+.benefit-card.main {
+    border-color: #D4AF37;
+    background: linear-gradient(135deg, #FFF9E6, #FFFFFF);
+}
+
+.benefit-card.beauty {
+    border-color: #007AFF;
+    background: linear-gradient(135deg, #F0F7FF, #FFFFFF);
+}
+
+.benefit-card.enzyme {
+    border-color: #000000;
+    background: linear-gradient(135deg, #F5F5F5, #FFFFFF);
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #F0F0F0;
+}
+
+.card-header h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.ingredient-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #F8F9FA;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.ingredient-item:hover {
+    background: #E8F4FD;
+    transform: translateX(5px);
+}
+
+.ingredient-item.main-ingredient {
+    background: linear-gradient(135deg, #D4AF37, #B8941F);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 20px;
+}
+
+.ingredient-item.plus {
+    background: linear-gradient(135deg, #007AFF, #0056CC);
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.ingredient-item .name {
+    font-weight: 600;
+    color: #000000;
+    font-size: 1rem;
+}
+
+.ingredient-item .amount {
+    font-weight: 700;
+    color: #D4AF37;
+    font-size: 1.1rem;
+}
+
+.ingredient-item .desc {
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+/* お客様の声セクション */
+.testimonials {
+    background: linear-gradient(135deg, #F8F9FA, #F0F0F0);
+    padding: 120px 0;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    margin-top: 100px;
+}
+
+.testimonial {
+    background: #FFFFFF;
+    padding: 50px 40px;
+    border-radius: 25px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    border-left: 8px solid #D4AF37;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.testimonial::before {
+    content: '"';
+    font-size: 4rem;
+    color: #D4AF37;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-family: serif;
+    opacity: 0.3;
+}
+
+.testimonial:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-header {
+    margin-bottom: 30px;
+}
+
+.stars {
+    color: #D4AF37;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.customer-info {
+    color: #007AFF;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.testimonial-content h4 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.testimonial-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333333;
+}
+
+.quality-section {
+    margin-top: 120px;
+}
+
+.quality-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 80px;
+}
+
+.quality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+}
+
+.quality-item {
+    text-align: center;
+    padding: 50px 35px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 3px solid #E5E5E5;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.quality-item:hover {
+    border-color: #D4AF37;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.quality-icon {
+    font-size: 4rem;
+    margin-bottom: 25px;
+}
+
+.quality-item h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.quality-item p {
+    font-size: 1.1rem;
+    color: #666666;
+    line-height: 1.7;
+}
+
+/* キャンペーンセクション - 北の達人風大型CTA */
+.campaign {
+    background: linear-gradient(135deg, #D4AF37, #B8941F);
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.campaign::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+    opacity: 0.5;
+}
+
+.campaign-content {
+    position: relative;
+    z-index: 2;
+}
+
+.campaign-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.campaign-subtitle {
+    font-size: 1.6rem;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 80px;
+    font-weight: 600;
+}
+
+.campaign-box {
+    background: #FFFFFF;
+    padding: 80px 60px;
+    border-radius: 35px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+}
+
+.price-comparison {
+    margin-bottom: 60px;
+}
+
+.regular-price {
+    margin-bottom: 35px;
+}
+
+.price-label {
+    display: block;
+    font-size: 1.4rem;
+    color: #666666;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.price-amount {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.crossed {
+    text-decoration: line-through;
+    color: #999999;
+}
+
+.arrow-down {
+    font-size: 4rem;
+    color: #007AFF;
+    font-weight: 700;
+    margin: 25px 0;
+}
+
+.special-price .price-amount {
+    font-size: 5rem;
+    color: #007AFF;
+    text-shadow: 2px 2px 4px rgba(0, 122, 255, 0.2);
+}
+
+.discount-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #000000, #333333);
+    color: #FFFFFF;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.benefit-list {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin: 50px 0;
+    flex-wrap: wrap;
+}
+
+.benefit-item {
+    color: #007AFF;
+    font-weight: 700;
+    font-size: 1.4rem;
+    position: relative;
+}
+
+.benefit-item::before {
+    content: "✓";
+    color: #D4AF37;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, #000000, #333333);
+    color: #FFFFFF;
+    padding: 30px 80px;
+    border-radius: 60px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    margin: 40px 0 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    font-size: 1.1rem;
+}
+
+.cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+}
+
+.cta-main {
+    display: block;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.cta-sub {
+    display: block;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.additional-info {
+    margin-top: 40px;
+}
+
+.usage-note,
+.disclaimer {
+    font-size: 1rem;
+    color: #666666;
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.limitation-text {
+    font-size: 1.1rem;
+    color: #007AFF;
+    font-weight: 600;
+}
+
+/* フッター */
+.footer {
+    background: #000000;
+    color: #FFFFFF;
+    padding: 80px 0 40px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 50px;
+}
+
+.company-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #D4AF37;
+    margin-bottom: 20px;
+}
+
+.footer-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #CCCCCC;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.footer-links a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #D4AF37;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid #333333;
+}
+
+.copyright p {
+    font-size: 1rem;
+    color: #999999;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 1024px) {
+    .hero-content,
+    .product-content,
+    .nmn-content,
+    .vitamin-content,
+    .enzyme-content {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        text-align: center;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .quality-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .balance-visual {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .vs-text {
+        transform: rotate(90deg);
+        font-size: 3rem;
+    }
+    
+    .main-product-image {
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 3rem;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .campaign-title {
+        font-size: 3rem;
+    }
+    
+    .product-name {
+        font-size: 2.8rem;
+    }
+    
+    .big-question {
+        font-size: 2.8rem;
+    }
+    
+    .benefit-list {
+        flex-direction: column;
+        gap: 25px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+    
+    .header .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .key-points {
+        gap: 25px;
+    }
+    
+    .point-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 30px 25px;
+    }
+    
+    .hero-image,
+    .nmn-image img,
+    .vitamin-image img,
+    .enzyme-image img {
+        height: 350px;
+    }
+    
+    .main-product-image {
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .main-title {
+        font-size: 2.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .campaign-box {
+        padding: 50px 30px;
+    }
+    
+    .hero {
+        padding: 120px 0 70px;
+    }
+    
+    .cta-button {
+        padding: 25px 50px;
+    }
+    
+    .cta-main {
+        font-size: 1.4rem;
+    }
+    
+    .question-box {
+        padding: 50px 30px;
+    }
+    
+    .balance-text {
+        padding: 40px 30px;
+    }
+    
+    .special-price .price-amount {
+        font-size: 4rem;
+    }
+    
+    .hero-image,
+    .nmn-image img,
+    .vitamin-image img,
+    .enzyme-image img {
+        height: 300px;
+    }
+    
+    .main-product-image {
+        height: 350px;
+    }
+}
+
+/* アニメーション強化 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+}
+
+/* ホバーエフェクト強化 */
+.benefit-card:hover .card-header h3 {
+    color: #D4AF37;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+.testimonial:hover .testimonial-content h4 {
+    color: #D4AF37;
+    transition: all 0.3s ease;
+}
+
+.quality-item:hover .quality-icon {
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
