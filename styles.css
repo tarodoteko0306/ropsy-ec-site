@@ -1,5 +1,5 @@
-/* 4色パレット: 黒(#000000), 白(#FFFFFF), 青(#007AFF), ゴールド(#D4AF37) */
-/* 北の達人・サントリー風LPデザイン構造 */
+/* 記事風デザイン: 黒(#000000), 白(#FFFFFF), ゴールド(#D4AF37) */
+/* シンプルで読みやすい記事レイアウト */
 
 * {
     margin: 0;
@@ -8,15 +8,15 @@
 }
 
 body {
-    font-family: 'Noto Sans JP', sans-serif;
-    line-height: 1.7;
+    font-family: "Noto Sans JP", sans-serif;
+    line-height: 1.8;
     color: #000000;
     background: #FFFFFF;
     overflow-x: hidden;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -40,7 +40,7 @@ body {
 }
 
 .logo {
-    font-family: 'Noto Serif JP', serif;
+    font-family: "Noto Serif JP", serif;
     font-size: 2rem;
     font-weight: 700;
     color: #000000;
@@ -67,9 +67,9 @@ body {
     box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
 }
 
-/* ヒーローセクション - 北の達人風大型レイアウト */
+/* ヒーローセクション - 記事風レイアウト */
 .hero {
-    background: linear-gradient(135deg, #FFFFFF 0%, #F9F9F9 100%);
+    background: #FFFFFF;
     padding: 120px 0 80px;
     min-height: 90vh;
     display: flex;
@@ -78,41 +78,43 @@ body {
 
 .hero-content {
     display: grid;
-    grid-template-columns: 55% 45%;
+    grid-template-columns: 60% 40%;
     gap: 60px;
     align-items: center;
 }
 
 .main-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 4.2rem;
+    font-family: "Noto Serif JP", serif;
+    font-size: 3.8rem;
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1.2;
     color: #000000;
     margin-bottom: 35px;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
 }
 
 .highlight {
     color: #D4AF37;
-    text-shadow: 1px 1px 2px rgba(212, 175, 55, 0.2);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 8px;
 }
 
 .problem-list {
-    background: #000000;
-    color: #FFFFFF;
-    padding: 45px 40px;
-    border-radius: 20px;
+    background: #F8F9FA;
+    color: #000000;
+    padding: 40px 35px;
+    border-radius: 15px;
     margin-bottom: 40px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-left: 5px solid #D4AF37;
 }
 
 .problem-list h3 {
     color: #D4AF37;
-    font-size: 1.6rem;
-    margin-bottom: 30px;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
     font-weight: 700;
-    text-align: center;
+    text-align: left;
 }
 
 .problem-list ul {
@@ -120,10 +122,10 @@ body {
 }
 
 .problem-list li {
-    font-size: 1.2rem;
-    margin-bottom: 18px;
-    padding-left: 15px;
-    color: #FFFFFF;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    color: #000000;
     position: relative;
 }
 
@@ -138,39 +140,39 @@ body {
 .hero-btn {
     background: linear-gradient(135deg, #D4AF37, #B8941F);
     color: #FFFFFF;
-    padding: 22px 55px;
+    padding: 20px 50px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     display: inline-block;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
 }
 
 .hero-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4);
 }
 
 .hero-image {
     width: 100%;
-    height: 500px;
+    height: 450px;
     object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
 }
 
-/* セクションタイトル共通 - サントリー風 */
+/* セクションタイトル共通 - 記事風 */
 .section-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 3.2rem;
+    font-family: "Noto Serif JP", serif;
+    font-size: 2.8rem;
     font-weight: 700;
-    text-align: center;
-    margin-bottom: 25px;
-    line-height: 1.2;
+    text-align: left;
+    margin-bottom: 30px;
+    line-height: 1.3;
     color: #000000;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
 }
 
 .section-title.white {
@@ -178,46 +180,46 @@ body {
 }
 
 .section-subtitle {
-    font-size: 1.4rem;
-    text-align: center;
+    font-size: 1.3rem;
+    text-align: left;
     color: #666666;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
     font-weight: 500;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 /* カリウム説明セクション */
 .potassium-intro {
     background: #FFFFFF;
-    padding: 120px 0;
+    padding: 100px 0;
 }
 
 .balance-visual {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 80px;
-    margin: 80px 0;
+    gap: 60px;
+    margin: 60px 0;
 }
 
 .mineral-item {
     text-align: center;
     flex: 1;
-    max-width: 280px;
+    max-width: 250px;
 }
 
 .mineral-icon {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: bold;
     color: #FFFFFF;
-    margin: 0 auto 25px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    margin: 0 auto 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .sodium .mineral-icon {
@@ -225,115 +227,98 @@ body {
 }
 
 .potassium .mineral-icon {
-    background: linear-gradient(135deg, #007AFF, #0056CC);
+    background: linear-gradient(135deg, #D4AF37, #B8941F);
 }
 
 .mineral-item h4 {
-    font-size: 1.6rem;
-    margin-bottom: 18px;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
     color: #000000;
     font-weight: 700;
 }
 
 .mineral-item p {
     color: #666666;
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.5;
 }
 
 .vs-text {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 700;
     color: #D4AF37;
     text-shadow: 2px 2px 4px rgba(212, 175, 55, 0.3);
 }
 
 .balance-text {
-    background: linear-gradient(135deg, #F8F9FA, #F0F0F0);
-    padding: 60px 50px;
-    border-radius: 25px;
-    text-align: center;
-    margin-top: 80px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    background: #F8F9FA;
+    padding: 50px 40px;
+    border-radius: 20px;
+    text-align: left;
+    margin-top: 60px;
+    border-left: 5px solid #D4AF37;
 }
 
 .balance-text h3 {
-    font-size: 2.4rem;
+    font-size: 2rem;
     color: #000000;
-    margin-bottom: 35px;
-    font-family: 'Noto Serif JP', serif;
+    margin-bottom: 25px;
+    font-family: "Noto Serif JP", serif;
     font-weight: 700;
 }
 
 .balance-text p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #333333;
     line-height: 1.8;
-    margin-bottom: 25px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 20px;
 }
 
-/* 価値転換セクション - インパクト重視 */
+/* 価値転換セクション - 記事風 */
 .value-shift {
-    background: linear-gradient(135deg, #000000, #1a1a1a);
+    background: #000000;
     color: #FFFFFF;
-    padding: 120px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.value-shift::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(212,175,55,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(212,175,55,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    opacity: 0.3;
+    padding: 100px 0;
 }
 
 .shift-content {
-    position: relative;
-    z-index: 2;
+    text-align: center;
 }
 
 .question-box {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px);
-    padding: 70px 60px;
-    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 60px 50px;
+    border-radius: 20px;
     text-align: center;
-    border: 2px solid rgba(212, 175, 55, 0.4);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(212, 175, 55, 0.3);
 }
 
 .big-question {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 3.8rem;
+    font-family: "Noto Serif JP", serif;
+    font-size: 3.2rem;
     font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 45px;
-    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 35px;
+    letter-spacing: -0.01em;
 }
 
 .highlight-gold {
     color: #D4AF37;
-    text-shadow: 2px 2px 4px rgba(212, 175, 55, 0.5);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 8px;
 }
 
 .new-standard {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #D4AF37;
     font-weight: 600;
-    margin-bottom: 25px;
-    font-family: 'Noto Serif JP', serif;
+    margin-bottom: 20px;
+    font-family: "Noto Serif JP", serif;
 }
 
 .message {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #FFFFFF;
     font-weight: 500;
     line-height: 1.6;
@@ -342,99 +327,97 @@ body {
 .accent-text {
     color: #D4AF37;
     font-weight: 700;
-    background: rgba(212, 175, 55, 0.2);
-    padding: 4px 12px;
-    border-radius: 6px;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
 }
 
-/* 商品紹介セクション - 大型商品画像 */
+/* 商品紹介セクション - 記事風 */
 .product-intro {
-    background: linear-gradient(135deg, #007AFF, #0056CC);
-    color: #FFFFFF;
-    padding: 120px 0;
-    position: relative;
+    background: #FFFFFF;
+    color: #000000;
+    padding: 100px 0;
 }
 
 .product-content {
     display: grid;
-    grid-template-columns: 50% 50%;
-    gap: 80px;
+    grid-template-columns: 55% 45%;
+    gap: 60px;
     align-items: center;
 }
 
 .product-name {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 3.5rem;
+    font-family: "Noto Serif JP", serif;
+    font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 25px;
-    color: #FFFFFF;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    color: #000000;
 }
 
 .product-catchcopy {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     color: #D4AF37;
     font-weight: 600;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     line-height: 1.4;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
 }
 
 .product-description {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     line-height: 1.7;
-    margin-bottom: 60px;
-    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 50px;
+    color: #333333;
 }
 
 .key-points {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 25px;
 }
 
 .point-item {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(10px);
-    padding: 35px 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #F8F9FA;
+    padding: 30px 25px;
+    border-radius: 15px;
+    border-left: 5px solid #D4AF37;
     display: flex;
     align-items: center;
-    gap: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    gap: 20px;
 }
 
 .point-number {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #D4AF37;
-    min-width: 120px;
+    min-width: 100px;
     text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .point-text h4 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    margin-bottom: 10px;
-    color: #FFFFFF;
+    margin-bottom: 8px;
+    color: #000000;
 }
 
 .point-text p {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    color: #333333;
     line-height: 1.6;
 }
 
 .main-product-image {
     width: 100%;
-    max-width: 600px;
-    height: 600px;
+    max-width: 500px;
+    height: 500px;
     object-fit: contain;
     margin: 0 auto;
     display: block;
-    border-radius: 25px;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
     background: #FFFFFF;
     padding: 20px;
 }
@@ -442,268 +425,267 @@ body {
 /* NMN詳細セクション */
 .nmn-detail {
     background: #FFFFFF;
-    padding: 120px 0;
+    padding: 100px 0;
 }
 
 .nmn-content {
     display: grid;
-    grid-template-columns: 55% 45%;
-    gap: 80px;
+    grid-template-columns: 60% 40%;
+    gap: 60px;
     align-items: center;
 }
 
 .nmn-explanation {
-    background: linear-gradient(135deg, #000000, #1a1a1a);
-    color: #FFFFFF;
-    padding: 50px 40px;
-    border-radius: 20px;
-    text-align: center;
-    margin: 50px 0;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    background: #F8F9FA;
+    color: #000000;
+    padding: 40px 35px;
+    border-radius: 15px;
+    text-align: left;
+    margin: 40px 0;
+    border-left: 5px solid #D4AF37;
 }
 
 .nmn-explanation h3 {
     color: #D4AF37;
-    font-size: 2.2rem;
-    margin-bottom: 20px;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
     font-weight: 700;
 }
 
 .nmn-explanation p {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     line-height: 1.7;
 }
 
 .research-section h4 {
-    font-size: 1.6rem;
-    margin-bottom: 35px;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
     color: #000000;
     font-weight: 700;
-    text-align: center;
+    text-align: left;
 }
 
 .institution-list {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
 }
 
 .institution-item {
     display: flex;
     align-items: center;
-    gap: 20px;
-    background: linear-gradient(135deg, #F8F9FA, #F0F0F0);
-    padding: 25px 30px;
-    border-radius: 15px;
-    border-left: 6px solid #D4AF37;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    gap: 15px;
+    background: #F8F9FA;
+    padding: 20px 25px;
+    border-radius: 10px;
+    border-left: 4px solid #D4AF37;
     transition: all 0.3s ease;
 }
 
 .institution-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .institution-item .icon {
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 .institution-item .name {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: #000000;
 }
 
 .nmn-image img {
     width: 100%;
-    height: 400px;
+    height: 350px;
     object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
 }
 
 /* ビタミンCセクション */
 .vitamin-c {
-    background: linear-gradient(135deg, #F8F9FA, #F0F0F0);
-    padding: 120px 0;
+    background: #F8F9FA;
+    padding: 100px 0;
 }
 
 .vitamin-content {
     display: grid;
-    grid-template-columns: 45% 55%;
-    gap: 80px;
+    grid-template-columns: 40% 60%;
+    gap: 60px;
     align-items: center;
 }
 
 .vitamin-image img {
     width: 100%;
-    height: 400px;
+    height: 350px;
     object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
 }
 
 .feature-box {
     background: #FFFFFF;
-    padding: 50px 40px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-    border-left: 8px solid #D4AF37;
-    margin-top: 50px;
+    padding: 40px 35px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #D4AF37;
+    margin-top: 40px;
 }
 
 .feature-box h3 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: #000000;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     font-weight: 700;
     line-height: 1.4;
 }
 
 .feature-box p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #333333;
-    line-height: 1.8;
-    margin-bottom: 15px;
+    line-height: 1.7;
+    margin-bottom: 12px;
 }
 
 .note {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #666666;
     font-style: italic;
 }
 
 /* 酵素セクション */
 .enzyme-detail {
-    background: linear-gradient(135deg, #000000, #1a1a1a);
+    background: #000000;
     color: #FFFFFF;
-    padding: 120px 0;
+    padding: 100px 0;
 }
 
 .enzyme-content {
     display: grid;
-    grid-template-columns: 55% 45%;
-    gap: 80px;
+    grid-template-columns: 60% 40%;
+    gap: 60px;
     align-items: center;
 }
 
 .enzyme-subtitle {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: #D4AF37;
-    margin: 30px 0 50px;
+    margin: 25px 0 40px;
     font-weight: 600;
     font-style: italic;
-    text-align: center;
+    text-align: left;
 }
 
 .enzyme-description {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 .enzyme-description p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     line-height: 1.8;
     color: #FFFFFF;
 }
 
 .ingredient-showcase h4 {
-    font-size: 1.6rem;
-    margin-bottom: 30px;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
     color: #D4AF37;
     font-weight: 700;
-    text-align: center;
+    text-align: left;
 }
 
 .ingredient-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
+    gap: 12px;
+    justify-content: flex-start;
 }
 
 .tag {
-    background: #007AFF;
-    color: #FFFFFF;
-    padding: 12px 22px;
-    border-radius: 25px;
-    font-size: 1rem;
+    background: #D4AF37;
+    color: #000000;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.3s ease;
 }
 
 .tag:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
 }
 
 .tag.special {
-    background: #D4AF37;
+    background: #FFFFFF;
     color: #000000;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .enzyme-image img {
     width: 100%;
-    height: 450px;
+    height: 400px;
     object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
 }
 
 /* 全成分まとめセクション */
 .comprehensive-benefits {
     background: #FFFFFF;
-    padding: 120px 0;
+    padding: 100px 0;
 }
 
 .benefits-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-    margin-top: 100px;
+    gap: 40px;
+    margin-top: 80px;
 }
 
 .benefit-card {
     background: #FFFFFF;
-    border-radius: 25px;
-    padding: 50px 35px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-    border: 4px solid transparent;
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    border: 3px solid transparent;
     transition: all 0.3s ease;
-    min-height: 400px;
+    min-height: 350px;
 }
 
 .benefit-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
 }
 
 .benefit-card.main {
     border-color: #D4AF37;
-    background: linear-gradient(135deg, #FFF9E6, #FFFFFF);
+    background: #FFF9E6;
 }
 
 .benefit-card.beauty {
-    border-color: #007AFF;
-    background: linear-gradient(135deg, #F0F7FF, #FFFFFF);
+    border-color: #D4AF37;
+    background: #FFF9E6;
 }
 
 .benefit-card.enzyme {
-    border-color: #000000;
-    background: linear-gradient(135deg, #F5F5F5, #FFFFFF);
+    border-color: #D4AF37;
+    background: #FFF9E6;
 }
 
 .card-header {
     text-align: center;
-    margin-bottom: 35px;
-    padding-bottom: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
     border-bottom: 2px solid #F0F0F0;
 }
 
 .card-header h3 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #000000;
 }
@@ -711,34 +693,34 @@ body {
 .ingredient-list {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 15px;
 }
 
 .ingredient-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 12px 15px;
     background: #F8F9FA;
-    border-radius: 10px;
+    border-radius: 8px;
     transition: all 0.3s ease;
 }
 
 .ingredient-item:hover {
     background: #E8F4FD;
-    transform: translateX(5px);
+    transform: translateX(3px);
 }
 
 .ingredient-item.main-ingredient {
     background: linear-gradient(135deg, #D4AF37, #B8941F);
     color: #FFFFFF;
     font-weight: 700;
-    font-size: 1.2rem;
-    padding: 20px;
+    font-size: 1.1rem;
+    padding: 15px;
 }
 
 .ingredient-item.plus {
-    background: linear-gradient(135deg, #007AFF, #0056CC);
+    background: linear-gradient(135deg, #D4AF37, #B8941F);
     color: #FFFFFF;
     font-weight: 600;
 }
@@ -746,158 +728,158 @@ body {
 .ingredient-item .name {
     font-weight: 600;
     color: #000000;
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .ingredient-item .amount {
     font-weight: 700;
     color: #D4AF37;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .ingredient-item .desc {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #666666;
 }
 
 /* お客様の声セクション */
 .testimonials {
-    background: linear-gradient(135deg, #F8F9FA, #F0F0F0);
-    padding: 120px 0;
+    background: #F8F9FA;
+    padding: 100px 0;
 }
 
 .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-    margin-top: 100px;
+    gap: 40px;
+    margin-top: 80px;
 }
 
 .testimonial {
     background: #FFFFFF;
-    padding: 50px 40px;
-    border-radius: 25px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-    border-left: 8px solid #D4AF37;
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #D4AF37;
     transition: all 0.3s ease;
     position: relative;
 }
 
 .testimonial::before {
-    content: '"';
-    font-size: 4rem;
+    content: "\"";
+    font-size: 3rem;
     color: #D4AF37;
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: 10px;
+    left: 10px;
     font-family: serif;
     opacity: 0.3;
 }
 
 .testimonial:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
 }
 
 .testimonial-header {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .stars {
     color: #D4AF37;
-    font-size: 1.8rem;
-    margin-bottom: 15px;
+    font-size: 1.6rem;
+    margin-bottom: 12px;
 }
 
 .customer-info {
-    color: #007AFF;
+    color: #D4AF37;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .testimonial-content h4 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #000000;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     line-height: 1.4;
 }
 
 .testimonial-content p {
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: 1rem;
+    line-height: 1.7;
     color: #333333;
 }
 
 .quality-section {
-    margin-top: 120px;
+    margin-top: 100px;
 }
 
 .quality-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 2.8rem;
+    font-family: "Noto Serif JP", serif;
+    font-size: 2.4rem;
     font-weight: 700;
     text-align: center;
     color: #000000;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
 }
 
 .quality-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
+    gap: 40px;
 }
 
 .quality-item {
     text-align: center;
-    padding: 50px 35px;
+    padding: 40px 30px;
     background: #FFFFFF;
-    border-radius: 20px;
-    border: 3px solid #E5E5E5;
+    border-radius: 15px;
+    border: 2px solid #E5E5E5;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 .quality-item:hover {
     border-color: #D4AF37;
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
 
 .quality-icon {
-    font-size: 4rem;
-    margin-bottom: 25px;
-}
-
-.quality-item h4 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #000000;
+    font-size: 3.5rem;
     margin-bottom: 20px;
 }
 
-.quality-item p {
-    font-size: 1.1rem;
-    color: #666666;
-    line-height: 1.7;
+.quality-item h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 15px;
 }
 
-/* キャンペーンセクション - 北の達人風大型CTA */
+.quality-item p {
+    font-size: 1rem;
+    color: #666666;
+    line-height: 1.6;
+}
+
+/* キャンペーンセクション - 記事風CTA */
 .campaign {
     background: linear-gradient(135deg, #D4AF37, #B8941F);
-    padding: 120px 0;
+    padding: 100px 0;
     position: relative;
     overflow: hidden;
 }
 
 .campaign::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+    background: url("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"20\" cy=\"20\" r=\"2\" fill=\"rgba(255,255,255,0.1)\"/><circle cx=\"80\" cy=\"80\" r=\"2\" fill=\"rgba(255,255,255,0.1)\"/></svg>");
     opacity: 0.5;
 }
 
@@ -907,53 +889,53 @@ body {
 }
 
 .campaign-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 4rem;
+    font-family: "Noto Serif JP", serif;
+    font-size: 3.2rem;
     font-weight: 700;
     text-align: center;
     color: #000000;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .campaign-subtitle {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     text-align: center;
     color: #000000;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
     font-weight: 600;
 }
 
 .campaign-box {
     background: #FFFFFF;
-    padding: 80px 60px;
-    border-radius: 35px;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.2);
+    padding: 60px 50px;
+    border-radius: 25px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
     text-align: center;
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    border: 3px solid rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 .price-comparison {
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
 .regular-price {
-    margin-bottom: 35px;
+    margin-bottom: 25px;
 }
 
 .price-label {
     display: block;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #666666;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-weight: 600;
 }
 
 .price-amount {
     display: block;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: #000000;
 }
@@ -964,98 +946,98 @@ body {
 }
 
 .arrow-down {
-    font-size: 4rem;
-    color: #007AFF;
+    font-size: 3rem;
+    color: #D4AF37;
     font-weight: 700;
-    margin: 25px 0;
+    margin: 20px 0;
 }
 
 .special-price .price-amount {
-    font-size: 5rem;
-    color: #007AFF;
-    text-shadow: 2px 2px 4px rgba(0, 122, 255, 0.2);
+    font-size: 4rem;
+    color: #D4AF37;
+    text-shadow: 2px 2px 4px rgba(212, 175, 55, 0.2);
 }
 
 .discount-badge {
     display: inline-block;
     background: linear-gradient(135deg, #000000, #333333);
     color: #FFFFFF;
-    padding: 15px 35px;
-    border-radius: 30px;
-    font-size: 1.3rem;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1.1rem;
     font-weight: 700;
-    margin-top: 20px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    margin-top: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .benefit-list {
     display: flex;
     justify-content: center;
-    gap: 50px;
-    margin: 50px 0;
+    gap: 40px;
+    margin: 40px 0;
     flex-wrap: wrap;
 }
 
 .benefit-item {
-    color: #007AFF;
+    color: #D4AF37;
     font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     position: relative;
 }
 
 .benefit-item::before {
     content: "✓";
     color: #D4AF37;
-    margin-right: 8px;
+    margin-right: 6px;
     font-weight: bold;
 }
 
 .cta-button {
     background: linear-gradient(135deg, #000000, #333333);
     color: #FFFFFF;
-    padding: 30px 80px;
-    border-radius: 60px;
+    padding: 25px 60px;
+    border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
     display: inline-block;
-    margin: 40px 0 25px;
+    margin: 30px 0 20px;
     transition: all 0.3s ease;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-    font-size: 1.1rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
 }
 
 .cta-button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 .cta-main {
     display: block;
-    font-size: 1.6rem;
-    margin-bottom: 10px;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
 }
 
 .cta-sub {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     opacity: 0.9;
 }
 
 .additional-info {
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .usage-note,
 .disclaimer {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #666666;
-    margin-bottom: 12px;
-    line-height: 1.6;
+    margin-bottom: 10px;
+    line-height: 1.5;
 }
 
 .limitation-text {
-    font-size: 1.1rem;
-    color: #007AFF;
+    font-size: 1rem;
+    color: #D4AF37;
     font-weight: 600;
 }
 
@@ -1063,40 +1045,40 @@ body {
 .footer {
     background: #000000;
     color: #FFFFFF;
-    padding: 80px 0 40px;
+    padding: 60px 0 30px;
 }
 
 .footer-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    margin-bottom: 50px;
+    gap: 50px;
+    margin-bottom: 40px;
 }
 
 .company-name {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 1.8rem;
+    font-family: "Noto Serif JP", serif;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #D4AF37;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .footer-text {
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1rem;
+    line-height: 1.6;
     color: #CCCCCC;
 }
 
 .footer-links {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 15px;
 }
 
 .footer-links a {
     color: #FFFFFF;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: color 0.3s ease;
 }
 
@@ -1106,12 +1088,12 @@ body {
 
 .copyright {
     text-align: center;
-    padding-top: 40px;
+    padding-top: 30px;
     border-top: 1px solid #333333;
 }
 
 .copyright p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #999999;
 }
 
@@ -1123,93 +1105,33 @@ body {
     .vitamin-content,
     .enzyme-content {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: 50px;
         text-align: center;
     }
     
     .benefits-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30px;
     }
     
     .testimonials-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30px;
     }
     
     .quality-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30px;
     }
     
     .balance-visual {
         flex-direction: column;
-        gap: 40px;
+        gap: 30px;
     }
     
     .vs-text {
         transform: rotate(90deg);
-        font-size: 3rem;
-    }
-    
-    .main-product-image {
-        height: 500px;
-    }
-}
-
-@media (max-width: 768px) {
-    .main-title {
-        font-size: 3rem;
-    }
-    
-    .section-title {
         font-size: 2.5rem;
-    }
-    
-    .campaign-title {
-        font-size: 3rem;
-    }
-    
-    .product-name {
-        font-size: 2.8rem;
-    }
-    
-    .big-question {
-        font-size: 2.8rem;
-    }
-    
-    .benefit-list {
-        flex-direction: column;
-        gap: 25px;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 40px;
-    }
-    
-    .header .container {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .key-points {
-        gap: 25px;
-    }
-    
-    .point-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-        padding: 30px 25px;
-    }
-    
-    .hero-image,
-    .nmn-image img,
-    .vitamin-image img,
-    .enzyme-image img {
-        height: 350px;
     }
     
     .main-product-image {
@@ -1217,45 +1139,52 @@ body {
     }
 }
 
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-    
+@media (max-width: 768px) {
     .main-title {
-        font-size: 2.2rem;
+        font-size: 2.8rem;
     }
     
     .section-title {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     
-    .campaign-box {
-        padding: 50px 30px;
+    .campaign-title {
+        font-size: 2.5rem;
     }
     
-    .hero {
-        padding: 120px 0 70px;
+    .product-name {
+        font-size: 2.4rem;
     }
     
-    .cta-button {
-        padding: 25px 50px;
+    .big-question {
+        font-size: 2.4rem;
     }
     
-    .cta-main {
-        font-size: 1.4rem;
+    .benefit-list {
+        flex-direction: column;
+        gap: 20px;
     }
     
-    .question-box {
-        padding: 50px 30px;
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
     }
     
-    .balance-text {
-        padding: 40px 30px;
+    .header .container {
+        flex-direction: column;
+        gap: 15px;
     }
     
-    .special-price .price-amount {
-        font-size: 4rem;
+    .key-points {
+        gap: 20px;
+    }
+    
+    .point-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 25px 20px;
     }
     
     .hero-image,
@@ -1270,11 +1199,64 @@ body {
     }
 }
 
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .main-title {
+        font-size: 2.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .campaign-box {
+        padding: 40px 25px;
+    }
+    
+    .hero {
+        padding: 100px 0 60px;
+    }
+    
+    .cta-button {
+        padding: 20px 40px;
+    }
+    
+    .cta-main {
+        font-size: 1.2rem;
+    }
+    
+    .question-box {
+        padding: 40px 25px;
+    }
+    
+    .balance-text {
+        padding: 30px 25px;
+    }
+    
+    .special-price .price-amount {
+        font-size: 3rem;
+    }
+    
+    .hero-image,
+    .nmn-image img,
+    .vitamin-image img,
+    .enzyme-image img {
+        height: 250px;
+    }
+    
+    .main-product-image {
+        height: 300px;
+    }
+}
+
 /* アニメーション強化 */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(50px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -1285,7 +1267,7 @@ body {
 @keyframes slideInLeft {
     from {
         opacity: 0;
-        transform: translateX(-50px);
+        transform: translateX(-30px);
     }
     to {
         opacity: 1;
@@ -1296,7 +1278,7 @@ body {
 @keyframes slideInRight {
     from {
         opacity: 0;
-        transform: translateX(50px);
+        transform: translateX(30px);
     }
     to {
         opacity: 1;
@@ -1305,21 +1287,21 @@ body {
 }
 
 .fade-in-up {
-    animation: fadeInUp 0.8s ease-out;
+    animation: fadeInUp 0.6s ease-out;
 }
 
 .slide-in-left {
-    animation: slideInLeft 0.8s ease-out;
+    animation: slideInLeft 0.6s ease-out;
 }
 
 .slide-in-right {
-    animation: slideInRight 0.8s ease-out;
+    animation: slideInRight 0.6s ease-out;
 }
 
 /* ホバーエフェクト強化 */
 .benefit-card:hover .card-header h3 {
     color: #D4AF37;
-    transform: scale(1.05);
+    transform: scale(1.02);
     transition: all 0.3s ease;
 }
 
@@ -1329,6 +1311,6 @@ body {
 }
 
 .quality-item:hover .quality-icon {
-    transform: scale(1.1);
+    transform: scale(1.05);
     transition: all 0.3s ease;
 }
