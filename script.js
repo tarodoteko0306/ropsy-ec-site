@@ -44,17 +44,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // アニメーション対象要素
     const animateElements = document.querySelectorAll(
-        '.limitation-item, .feature-item, .testimonial, .quality-item, .ingredient-section'
+        '.mineral-item, .point-item, .testimonial, .quality-item, .benefit-card, .institution-item'
     );
     
     animateElements.forEach(el => {
         observer.observe(el);
     });
 
-    // 価格のカウントアップアニメーション
-    const priceElements = document.querySelectorAll('.ingredient-amount');
+    // 数字のカウントアップアニメーション
+    const numberElements = document.querySelectorAll('.point-number');
     
-    const priceObserver = new IntersectionObserver(function(entries) {
+    const numberObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const element = entry.target;
@@ -68,13 +68,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     animateNumber(element, 121, '種');
                 }
                 
-                priceObserver.unobserve(element);
+                numberObserver.unobserve(element);
             }
         });
     }, { threshold: 0.5 });
 
-    priceElements.forEach(el => {
-        priceObserver.observe(el);
+    numberElements.forEach(el => {
+        numberObserver.observe(el);
     });
 
     // 数字アニメーション関数
@@ -104,15 +104,52 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 this.style.transform = '';
             }, 150);
+            
+            // アナリティクス（必要に応じて）
+            console.log('Button clicked:', this.textContent.trim());
         });
     });
 
-    // モバイルメニューの調整
+    // カードホバー効果の強化
+    document.querySelectorAll('.benefit-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    // パララックス効果（軽微）
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.hero-image');
+        
+        parallaxElements.forEach(element => {
+            const speed = 0.5;
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+
+    // モバイル対応
     function adjustForMobile() {
-        if (window.innerWidth <= 768) {
-            document.body.classList.add('mobile');
-        } else {
-            document.body.classList.remove('mobile');
+        const isMobile = window.innerWidth <= 768;
+        document.body.classList.toggle('mobile', isMobile);
+        
+        // モバイルでのタッチ効果
+        if (isMobile) {
+            document.querySelectorAll('.benefit-card, .testimonial').forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                
+                element.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
         }
     }
 
