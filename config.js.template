@@ -1,3 +1,0 @@
-// Stripe設定ファイル
-// 実際のキーを入力してconfig.js作成してください
-window.STRIPE_PUBLIC_KEY = 'pk_live_your_public_key_here';
