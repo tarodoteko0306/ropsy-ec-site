@@ -785,6 +785,12 @@ body {
         font-size: 0.5rem; /* モバイルで極小 */
         opacity: 0.5;
     }
+    
+    .disclaimer {
+        font-size: 0.6rem; /* モバイルで商品紹介部分の注意書きを小さく */
+        opacity: 0.6;
+        color: #CCCCCC;
+    }
 }
 
 .testimonial-header {
