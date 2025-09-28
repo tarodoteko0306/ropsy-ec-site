@@ -156,6 +156,28 @@ body {
     margin-bottom: 60px;
 }
 
+.intro-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.problem-analysis,
+.solution-preview {
+    background: #F8F9FA;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+    border-left: 4px solid #D4AF37;
+}
+
+.analysis-title,
+.preview-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
 .intro-image {
     margin-bottom: 30px;
     text-align: center;
