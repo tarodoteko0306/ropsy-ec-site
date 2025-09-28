@@ -970,6 +970,25 @@ body {
     font-weight: 700;
 }
 
+/* 悩む女性の画像セクション */
+.concern-image-section {
+    text-align: center;
+    margin: 40px 0;
+    padding: 20px 0;
+}
+
+.concern-image-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.concern-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
 .purchase-subtitle {
     font-size: 1.1rem;
     color: #666666;
