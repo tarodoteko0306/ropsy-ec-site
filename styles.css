@@ -289,7 +289,8 @@ body {
     line-height: 1.6;
 }
 
-.article-section p {
+.article-section p,
+.unified-text {
     font-size: 1.1rem;
     line-height: 1.8;
     color: #333333;
