@@ -693,6 +693,15 @@ body {
     text-align: left;
 }
 
+/* サプリ選択セクション */
+.supplement-choice-section {
+    margin-top: 40px;
+    padding: 30px;
+    background: #F8F9FA;
+    border-radius: 15px;
+    border-left: 4px solid #D4AF37;
+}
+
 /* 商品購入セクション */
 .products-section {
     background: #FFFFFF;
