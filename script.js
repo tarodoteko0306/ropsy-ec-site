@@ -202,18 +202,14 @@ function initReviewCarousel() {
         dot.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            clearInterval(autoPlayInterval);
             showSlide(index);
-            startAutoPlay();
         });
         
         // タッチイベントも追加
         dot.addEventListener('touchend', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            clearInterval(autoPlayInterval);
             showSlide(index);
-            startAutoPlay();
         });
     });
     
@@ -231,7 +227,6 @@ function initReviewCarousel() {
             startX = e.touches[0].clientX;
             startY = e.touches[0].clientY;
             isDragging = true;
-            clearInterval(autoPlayInterval);
         }, { passive: true });
         
         carousel.addEventListener('touchmove', (e) => {
@@ -257,7 +252,6 @@ function initReviewCarousel() {
             isDragging = false;
             
             handleSwipe();
-            startAutoPlay();
         }, { passive: true });
         
         // マウスイベント（デスクトップ）
@@ -265,7 +259,6 @@ function initReviewCarousel() {
             startX = e.clientX;
             startY = e.clientY;
             isDragging = true;
-            clearInterval(autoPlayInterval);
             e.preventDefault();
         });
         
@@ -282,14 +275,12 @@ function initReviewCarousel() {
             isDragging = false;
             
             handleSwipe();
-            startAutoPlay();
         });
         
         // マウスが要素外に出た場合
         carousel.addEventListener('mouseleave', () => {
             if (isDragging) {
                 isDragging = false;
-                startAutoPlay();
             }
         });
     }
@@ -323,15 +314,6 @@ function initReviewCarousel() {
         }, 5000);
     }
     
-    // 自動再生開始
-    startAutoPlay();
-    
-    // カルーセルにフォーカスしたときは自動再生停止
-    carousel.addEventListener('mouseenter', () => {
-        clearInterval(autoPlayInterval);
-    });
-    
-    carousel.addEventListener('mouseleave', () => {
-        startAutoPlay();
-    });
+    // 自動再生は無効（ユーザー操作のみで切り替え）
+    // startAutoPlay(); // コメントアウトして自動再生を無効化
 }
