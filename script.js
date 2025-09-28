@@ -156,5 +156,94 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', adjustForMobile);
     adjustForMobile();
 
+    // レビューカルーセル初期化
+    initReviewCarousel();
+
     console.log('カリウム for Beauty LP loaded successfully!');
 });
+
+// レビューカルーセル機能
+function initReviewCarousel() {
+    const slides = document.querySelectorAll('.review-slide');
+    const dots = document.querySelectorAll('.nav-dot');
+    let currentSlide = 0;
+    
+    if (slides.length === 0) return;
+    
+    // 最初のスライドを表示
+    slides[0].classList.add('active');
+    
+    function showSlide(index) {
+        // 全てのスライドを非表示
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+        });
+        
+        // 全てのドットを非アクティブ
+        dots.forEach(dot => {
+            dot.classList.remove('active');
+        });
+        
+        // 指定のスライドとドットをアクティブ
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        
+        currentSlide = index;
+    }
+    
+    // ドットクリックイベント
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showSlide(index);
+        });
+    });
+    
+    // スワイプ対応
+    let startX = 0;
+    let endX = 0;
+    
+    const carousel = document.querySelector('.reviews-carousel');
+    if (carousel) {
+        carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+        
+        carousel.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const threshold = 50;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    // 左スワイプ - 次のスライド
+                    const nextSlide = (currentSlide + 1) % slides.length;
+                    showSlide(nextSlide);
+                } else {
+                    // 右スワイプ - 前のスライド
+                    const prevSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+                    showSlide(prevSlide);
+                }
+            }
+        }
+        
+        // マウス対応（デスクトップ）
+        carousel.addEventListener('mousedown', (e) => {
+            startX = e.clientX;
+        });
+        
+        carousel.addEventListener('mouseup', (e) => {
+            endX = e.clientX;
+            handleSwipe();
+        });
+    }
+    
+    // 自動再生
+    setInterval(() => {
+        const nextSlide = (currentSlide + 1) % slides.length;
+        showSlide(nextSlide);
+    }, 5000);
+}
