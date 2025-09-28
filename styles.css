@@ -957,6 +957,19 @@ body {
     text-align: center;
 }
 
+.purchase-recommendation {
+    font-size: 1rem;
+    color: #666666;
+    text-align: center;
+    margin: 15px 0 30px 0;
+    font-style: italic;
+}
+
+.purchase-recommendation strong {
+    color: #D4AF37;
+    font-weight: 700;
+}
+
 .purchase-subtitle {
     font-size: 1.1rem;
     color: #666666;
