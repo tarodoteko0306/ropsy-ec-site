@@ -166,7 +166,9 @@ document.addEventListener('DOMContentLoaded', function() {
 function initReviewCarousel() {
     const slides = document.querySelectorAll('.review-slide');
     const dots = document.querySelectorAll('.nav-dot');
+    const carousel = document.querySelector('.reviews-carousel');
     let currentSlide = 0;
+    let autoPlayInterval;
     
     if (slides.length === 0) return;
     
@@ -174,6 +176,8 @@ function initReviewCarousel() {
     slides[0].classList.add('active');
     
     function showSlide(index) {
+        console.log('Showing slide:', index); // デバッグ用
+        
         // 全てのスライドを非表示
         slides.forEach(slide => {
             slide.classList.remove('active');
@@ -185,65 +189,149 @@ function initReviewCarousel() {
         });
         
         // 指定のスライドとドットをアクティブ
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
+        if (slides[index] && dots[index]) {
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
         
         currentSlide = index;
     }
     
     // ドットクリックイベント
     dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
+        dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            clearInterval(autoPlayInterval);
             showSlide(index);
+            startAutoPlay();
+        });
+        
+        // タッチイベントも追加
+        dot.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            clearInterval(autoPlayInterval);
+            showSlide(index);
+            startAutoPlay();
         });
     });
     
-    // スワイプ対応
+    // スワイプ対応の改善
     let startX = 0;
+    let startY = 0;
     let endX = 0;
+    let endY = 0;
+    let isDragging = false;
     
-    const carousel = document.querySelector('.reviews-carousel');
     if (carousel) {
+        // タッチイベント
         carousel.addEventListener('touchstart', (e) => {
+            console.log('Touch start'); // デバッグ用
             startX = e.touches[0].clientX;
-        });
+            startY = e.touches[0].clientY;
+            isDragging = true;
+            clearInterval(autoPlayInterval);
+        }, { passive: true });
+        
+        carousel.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            
+            const currentX = e.touches[0].clientX;
+            const currentY = e.touches[0].clientY;
+            const diffX = Math.abs(currentX - startX);
+            const diffY = Math.abs(currentY - startY);
+            
+            // 横方向の移動が縦方向より大きい場合のみスクロールを防ぐ
+            if (diffX > diffY && diffX > 10) {
+                e.preventDefault();
+            }
+        }, { passive: false });
         
         carousel.addEventListener('touchend', (e) => {
-            endX = e.changedTouches[0].clientX;
-            handleSwipe();
-        });
-        
-        function handleSwipe() {
-            const threshold = 50;
-            const diff = startX - endX;
+            console.log('Touch end'); // デバッグ用
+            if (!isDragging) return;
             
-            if (Math.abs(diff) > threshold) {
-                if (diff > 0) {
-                    // 左スワイプ - 次のスライド
-                    const nextSlide = (currentSlide + 1) % slides.length;
-                    showSlide(nextSlide);
-                } else {
-                    // 右スワイプ - 前のスライド
-                    const prevSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
-                    showSlide(prevSlide);
-                }
-            }
-        }
+            endX = e.changedTouches[0].clientX;
+            endY = e.changedTouches[0].clientY;
+            isDragging = false;
+            
+            handleSwipe();
+            startAutoPlay();
+        }, { passive: true });
         
-        // マウス対応（デスクトップ）
+        // マウスイベント（デスクトップ）
         carousel.addEventListener('mousedown', (e) => {
             startX = e.clientX;
+            startY = e.clientY;
+            isDragging = true;
+            clearInterval(autoPlayInterval);
+            e.preventDefault();
+        });
+        
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
         });
         
         carousel.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            
             endX = e.clientX;
+            endY = e.clientY;
+            isDragging = false;
+            
             handleSwipe();
+            startAutoPlay();
+        });
+        
+        // マウスが要素外に出た場合
+        carousel.addEventListener('mouseleave', () => {
+            if (isDragging) {
+                isDragging = false;
+                startAutoPlay();
+            }
         });
     }
     
+    function handleSwipe() {
+        const threshold = 50;
+        const diffX = startX - endX;
+        const diffY = Math.abs(startY - endY);
+        
+        console.log('Swipe diff:', diffX, 'threshold:', threshold); // デバッグ用
+        
+        // 横方向の移動が縦方向より大きく、閾値を超えている場合のみ処理
+        if (Math.abs(diffX) > threshold && Math.abs(diffX) > diffY) {
+            if (diffX > 0) {
+                // 左スワイプ - 次のスライド
+                const nextSlide = (currentSlide + 1) % slides.length;
+                showSlide(nextSlide);
+            } else {
+                // 右スワイプ - 前のスライド
+                const prevSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+                showSlide(prevSlide);
+            }
+        }
+    }
+    
     // 自動再生
-    setInterval(() => {
-        const nextSlide = (currentSlide + 1) % slides.length;
-        showSlide(nextSlide);
-    }, 5000);
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            const nextSlide = (currentSlide + 1) % slides.length;
+            showSlide(nextSlide);
+        }, 5000);
+    }
+    
+    // 自動再生開始
+    startAutoPlay();
+    
+    // カルーセルにフォーカスしたときは自動再生停止
+    carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoPlayInterval);
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+        startAutoPlay();
+    });
 }
