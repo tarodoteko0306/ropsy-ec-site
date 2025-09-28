@@ -805,6 +805,50 @@ body {
     margin: 0;
 }
 
+/* 法的ページ用スタイル */
+.legal-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.legal-content h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #000000;
+    margin: 30px 0 15px 0;
+    border-bottom: 2px solid #D4AF37;
+    padding-bottom: 10px;
+}
+
+.legal-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+.legal-content ul {
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+.legal-content li {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #333333;
+    margin-bottom: 8px;
+}
+
+.update-date {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #999999;
+    margin-top: 40px;
+    border-top: 1px solid #E5E5E5;
+    padding-top: 20px;
+}
+
 .quality-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
