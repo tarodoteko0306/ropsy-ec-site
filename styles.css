@@ -16,7 +16,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -70,7 +70,7 @@ body {
 }
 
 .article-content {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 40px 20px;
 }
@@ -375,65 +375,6 @@ body {
     color: #000000;
 }
 
-/* 視点転換セクション */
-.perspective-shift {
-    background: #FFFFFF;
-    color: #000000;
-    padding: 60px 40px;
-    border-radius: 20px;
-    margin: 60px 0;
-    text-align: center;
-    border: 2px solid #D4AF37;
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
-}
-
-.perspective-box {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.perspective-heading {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: #000000;
-}
-
-.big-question h3 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 25px;
-}
-
-.gold-underline {
-    color: #D4AF37;
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 8px;
-}
-
-.question-subtitle {
-    font-size: 1.4rem;
-    color: #D4AF37;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.new-concept {
-    font-size: 1.2rem;
-    line-height: 1.6;
-}
-
-.concept-highlight {
-    color: #D4AF37;
-    font-weight: 700;
-    background: rgba(212, 175, 55, 0.2);
-    padding: 3px 8px;
-    border-radius: 5px;
-}
 
 /* 商品セクション */
 .product-section {
@@ -530,11 +471,6 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-.ingredient-detail.dark-bg {
-    background: #F8F9FA;
-    color: #000000;
-    border-left: 5px solid #D4AF37;
-}
 
 .ingredient-title {
     font-family: 'Noto Serif JP', serif;
@@ -544,9 +480,6 @@ body {
     margin-bottom: 25px;
 }
 
-.light-text {
-    color: #000000 !important;
-}
 
 .ingredient-info {
     display: grid;
@@ -624,7 +557,7 @@ body {
 }
 
 .ingredients-content {
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -1084,9 +1017,6 @@ body {
         font-size: 1.1rem;
     }
     
-    .big-question h3 {
-        font-size: 2rem;
-    }
     
     .campaign-title {
         font-size: 1.8rem;
