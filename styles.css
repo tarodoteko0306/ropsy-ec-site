@@ -280,6 +280,15 @@ body {
     text-align: left;
 }
 
+.problem-heading {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
 .article-section p {
     font-size: 1.1rem;
     line-height: 1.8;
