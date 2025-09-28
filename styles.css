@@ -856,6 +856,51 @@ body {
     font-weight: 600;
 }
 
+/* 結びの文章 */
+.conclusion-section {
+    background: linear-gradient(135deg, #FFF9E6 0%, #FFFFFF 100%);
+    padding: 60px 40px;
+    margin: 60px 0;
+    border-radius: 20px;
+    border: 2px solid #D4AF37;
+}
+
+.conclusion-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.conclusion-title {
+    font-size: 1.8rem;
+    color: #000000;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.final-message {
+    background: #FFFFFF;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+    border: 2px solid #D4AF37;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+}
+
+.strong-text {
+    font-size: 1.2rem;
+    color: #B8941F;
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+.closing-text {
+    font-size: 1.1rem;
+    color: #333333;
+    font-weight: 500;
+    margin-top: 25px;
+}
+
 /* 商品購入セクション */
 .products-section {
     background: #FFFFFF;
