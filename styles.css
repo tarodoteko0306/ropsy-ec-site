@@ -844,6 +844,15 @@ body {
     font-weight: 600;
 }
 
+.legal-notice {
+    font-size: 0.75rem;
+    color: #999999;
+    text-align: center;
+    margin: 5px 0 0 0;
+    line-height: 1.3;
+    font-weight: normal;
+}
+
 /* 結びの文章 */
 .conclusion-section {
     background: linear-gradient(135deg, #FFF9E6 0%, #FFFFFF 100%);
