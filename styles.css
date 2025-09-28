@@ -152,26 +152,52 @@ body {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-.lead-text {
-    font-size: 1.2rem;
+.lead-text-large {
+    font-size: 1.5rem;
     line-height: 1.8;
     color: #333333;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
     text-align: justify;
     padding: 0 20px;
+    font-weight: 500;
 }
 
-.text-content {
-    font-size: 1.1rem;
+.text-content-large {
+    font-size: 1.3rem;
     line-height: 1.8;
     color: #333333;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     text-align: justify;
+    font-weight: 500;
 }
 
 .highlight-text {
     background: linear-gradient(transparent 60%, #D4AF37 60%);
-    font-weight: 600;
+    font-weight: 700;
+    color: #000000;
+}
+
+.highlight-gold {
+    background: linear-gradient(transparent 60%, #D4AF37 60%);
+    font-weight: 700;
+    color: #000000;
+}
+
+.highlight-important {
+    background: linear-gradient(transparent 60%, #E74C3C 60%);
+    font-weight: 700;
+    color: #000000;
+}
+
+.highlight-blue {
+    background: linear-gradient(transparent 60%, #3498DB 60%);
+    font-weight: 700;
+    color: #000000;
+}
+
+.highlight-green {
+    background: linear-gradient(transparent 60%, #27AE60 60%);
+    font-weight: 700;
     color: #000000;
 }
 
@@ -184,15 +210,9 @@ body {
 
 .symptom-check h3 {
     color: #333333;
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.check-intro {
-    font-size: 1rem;
-    color: #666666;
+    font-size: 1.4rem;
     margin-bottom: 20px;
+    font-weight: 700;
 }
 
 .symptom-list {
@@ -202,9 +222,10 @@ body {
 
 .symptom-list li {
     position: relative;
-    padding: 8px 0 8px 25px;
+    padding: 10px 0 10px 25px;
     color: #333333;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 .symptom-list li::before {
@@ -217,9 +238,9 @@ body {
 }
 
 .check-result {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #E74C3C;
-    font-weight: 600;
+    font-weight: 700;
     margin: 0;
 }
 
@@ -1048,6 +1069,15 @@ body {
     
     .section-heading {
         font-size: 1.4rem;
+    }
+    
+    .lead-text-large {
+        font-size: 1.2rem;
+        padding: 0 10px;
+    }
+    
+    .text-content-large {
+        font-size: 1.1rem;
     }
     
     .big-question h3 {
