@@ -295,6 +295,12 @@ body {
     line-height: 1.5;
 }
 
+.criteria-heading strong {
+    border-bottom: 2px solid #D4AF37;
+    padding-bottom: 2px;
+    display: inline-block;
+}
+
 .recommendation-heading {
     font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.5rem;
@@ -798,6 +804,13 @@ body {
     strong {
         color: #000000 !important;
         font-weight: 700 !important;
+    }
+    
+    /* モバイルでの見出し下線（ゴールド） */
+    .criteria-heading strong {
+        border-bottom: 2px solid #D4AF37 !important;
+        padding-bottom: 2px !important;
+        display: inline-block !important;
     }
 }
 
