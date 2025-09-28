@@ -201,25 +201,6 @@ body {
     color: #000000;
 }
 
-.light-text .highlight-gold {
-    background: linear-gradient(transparent 60%, #D4AF37 60%);
-    color: #FFFFFF;
-}
-
-.light-text .highlight-blue {
-    background: linear-gradient(transparent 60%, #3498DB 60%);
-    color: #FFFFFF;
-}
-
-.light-text .highlight-important {
-    background: linear-gradient(transparent 60%, #E74C3C 60%);
-    color: #FFFFFF;
-}
-
-.light-text .highlight-green {
-    background: linear-gradient(transparent 60%, #27AE60 60%);
-    color: #FFFFFF;
-}
 
 .symptom-check {
     background: #F8F9FA;
@@ -396,12 +377,14 @@ body {
 
 /* 視点転換セクション */
 .perspective-shift {
-    background: linear-gradient(135deg, #000000, #333333);
-    color: #FFFFFF;
+    background: #FFFFFF;
+    color: #000000;
     padding: 60px 40px;
     border-radius: 20px;
     margin: 60px 0;
     text-align: center;
+    border: 2px solid #D4AF37;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
 }
 
 .perspective-box {
@@ -414,7 +397,7 @@ body {
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 30px;
-    color: #FFFFFF;
+    color: #000000;
 }
 
 .big-question h3 {
@@ -548,8 +531,9 @@ body {
 }
 
 .ingredient-detail.dark-bg {
-    background: linear-gradient(135deg, #000000, #333333);
-    color: #FFFFFF;
+    background: #F8F9FA;
+    color: #000000;
+    border-left: 5px solid #D4AF37;
 }
 
 .ingredient-title {
@@ -561,7 +545,7 @@ body {
 }
 
 .light-text {
-    color: #FFFFFF !important;
+    color: #000000 !important;
 }
 
 .ingredient-info {
