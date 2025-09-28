@@ -733,19 +733,102 @@ body {
     margin: 0;
 }
 
-/* キャンペーンセクション */
-.campaign-section {
-    background: linear-gradient(135deg, #D4AF37, #B8941F);
-    color: #000000;
-    padding: 60px 40px;
-    border-radius: 20px;
+/* 商品購入セクション */
+.purchase-section {
+    background: #F8F9FA;
+    padding: 60px 0;
     margin: 60px 0;
+}
+
+.purchase-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
     text-align: center;
 }
 
-.campaign-container {
-    max-width: 600px;
-    margin: 0 auto;
+.purchase-subtitle {
+    font-size: 1.1rem;
+    color: #666666;
+    margin-bottom: 50px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.product-card {
+    position: relative;
+    background: #FFFFFF;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #D4AF37;
+    color: #FFFFFF;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 10;
+}
+
+.product-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.product-card-content {
+    padding: 30px 25px;
+}
+
+.product-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.product-card-desc {
+    font-size: 0.9rem;
+    color: #666666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.product-price {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #D4AF37;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.price-note {
+    font-size: 0.8rem;
+    color: #999999;
 }
 
 .campaign-title {
