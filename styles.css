@@ -791,6 +791,14 @@ body {
         opacity: 0.6;
         color: #CCCCCC;
     }
+    
+    /* モバイルでのstrongタグ強調表示 */
+    .article-section strong,
+    .criteria-heading strong,
+    strong {
+        color: #000000 !important;
+        font-weight: 700 !important;
+    }
 }
 
 .testimonial-header {
