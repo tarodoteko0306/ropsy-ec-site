@@ -448,39 +448,41 @@ body {
 .key-features {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
 }
 
 .feature-item {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     background: #FFFFFF;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    border-left: 4px solid #D4AF37;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-left: 3px solid #D4AF37;
 }
 
 .feature-number {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: #D4AF37;
-    min-width: 80px;
+    min-width: 70px;
     text-align: center;
 }
 
 .feature-content h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 600;
     color: #000000;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
+    line-height: 1.3;
 }
 
 .feature-content p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #666666;
     margin: 0;
+    line-height: 1.4;
 }
 
 /* 成分詳細セクション */
