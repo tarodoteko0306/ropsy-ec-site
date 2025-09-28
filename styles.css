@@ -740,36 +740,45 @@ body {
 /* モバイル対応 */
 @media (max-width: 768px) {
     .reviews-carousel {
-        padding: 15px 5px;
+        padding: 15px 10px;
+        max-width: 95%;
     }
     
     .review-track {
-        min-height: 220px; /* モバイルで高さを増加 */
+        min-height: 240px; /* さらに高さを増加 */
     }
     
     .review-content {
         padding: 25px 20px;
-        min-height: 180px; /* モバイルで高さを増加 */
+        min-height: 200px; /* さらに高さを増加 */
+        border-radius: 12px;
     }
     
     .review-text {
-        font-size: 0.95rem;
-        line-height: 1.6; /* 行間を少し広く */
+        font-size: 0.9rem;
+        line-height: 1.7; /* 行間をさらに広く */
         margin-bottom: 20px;
+        text-align: left; /* モバイルでは左寄せ */
     }
     
     .reviewer-info {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        text-align: center; /* 名前は中央寄せ */
     }
     
     .nav-dot {
-        width: 16px;
-        height: 16px;
+        width: 18px;
+        height: 18px;
     }
     
     .carousel-nav {
-        gap: 20px;
-        margin-top: 20px;
+        gap: 25px;
+        margin-top: 25px;
+    }
+    
+    .disclosure-text,
+    .legal-notice {
+        font-size: 0.6rem; /* モバイルでさらに小さく */
     }
 }
 
@@ -837,19 +846,19 @@ body {
 }
 
 .disclosure-text {
-    font-size: 0.9rem;
-    color: #B8941F;
+    font-size: 0.7rem;
+    color: #CCCCCC;
     margin: 0;
     text-align: center;
-    font-weight: 600;
+    font-weight: normal;
 }
 
 .legal-notice {
-    font-size: 0.75rem;
-    color: #999999;
+    font-size: 0.65rem;
+    color: #CCCCCC;
     text-align: center;
-    margin: 5px 0 0 0;
-    line-height: 1.3;
+    margin: 3px 0 0 0;
+    line-height: 1.2;
     font-weight: normal;
 }
 
